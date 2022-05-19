@@ -1,19 +1,21 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'pages#home'
+  root to: "pages#home"
 
   # Show a food item
-  resources :items, only: :show
+  resources :items
 
-  resources :chatrooms, only: :show do
-    get 'messages', to: 'messages#create'
+  get "my-items", to: "items#my_items"
+  patch "my-items/set_status", to: "items#set_status", as: :set_item_status
+
+  resources :chatrooms, only: %i[show index] do
+    post "messages", to: "messages#create"
   end
 
-  resources :profiles, only: %i[show edit]
+  resources :messages, only: %i[new create] do
+    get "feedbacks/new", to: "feedbacks#new"
+    post "feedbacks", to: "feedbacks#create"
+  end
+
+  resources :profiles, only: %i[show edit update]
 end
-
-  # resources :bookings do
-  #   resources :pokemon_reviews, only: [ :new, :create ]
-  # end
-
-  # resources :bookings, only: [:index, :edit, :update]
