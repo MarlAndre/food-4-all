@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_001826) do
+ActiveRecord::Schema.define(version: 2022_05_19_004616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,58 @@ ActiveRecord::Schema.define(version: 2022_05_18_001826) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "allergens", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "diets", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "status", default: 0
+    t.string "type"
+    t.text "description"
+    t.date "expiration_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "items_allergens", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "allergen_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["allergen_id"], name: "index_items_allergens_on_allergen_id"
+    t.index ["item_id"], name: "index_items_allergens_on_item_id"
+  end
+
+  create_table "items_diets", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "diet_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["diet_id"], name: "index_items_diets_on_diet_id"
+    t.index ["item_id"], name: "index_items_diets_on_item_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "giver_id", null: false
+    t.bigint "receiver_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["giver_id"], name: "index_transactions_on_giver_id"
+    t.index ["item_id"], name: "index_transactions_on_item_id"
+    t.index ["receiver_id"], name: "index_transactions_on_receiver_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -51,10 +103,20 @@ ActiveRecord::Schema.define(version: 2022_05_18_001826) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "users"
+  add_foreign_key "items_allergens", "allergens"
+  add_foreign_key "items_allergens", "items"
+  add_foreign_key "items_diets", "diets"
+  add_foreign_key "items_diets", "items"
+  add_foreign_key "transactions", "items"
+  add_foreign_key "transactions", "users", column: "giver_id"
+  add_foreign_key "transactions", "users", column: "receiver_id"
 end
