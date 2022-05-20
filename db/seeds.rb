@@ -34,7 +34,23 @@ justin = User.create!(
 puts "#{'✓'.green} Demo persona: #{justin.username.light_cyan} has been created."
 puts '-'.light_black
 
+#############################################################################
+#----------------------------SEED DB WITH ITEMS-----------------------------#
+#############################################################################
+
+# Creates users with items to show.
+justin = User.create!(
+  email: 'justin@foodfor.all',
+  username: 'Justin',
+  password: '123456',
+  address: '5333 Av. Casgrain'
+)
+puts "#{'✓'.green} Demo persona: #{justin.username.light_cyan} has been created."
+puts '-'.light_black
+
+print '♡ '.light_red
+print "Finished sharing food".light_green
+puts ' ♡'.light_red
+
 # start_date: Faker::Date.between(from: 3.days.ago, to: 2.days.ago),
 # end_date: Faker::Date.between(from: 2.days.from_now, to: 3.days.from_now)
-
-puts "Finished sharing food ♡".light_green
