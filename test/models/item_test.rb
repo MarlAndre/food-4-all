@@ -6,6 +6,10 @@
 #  description     :text
 #  expiration_date :date
 #  item_type       :string
+<<<<<<< HEAD
+=======
+#  name            :string
+>>>>>>> master
 #  status          :integer          default("available")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

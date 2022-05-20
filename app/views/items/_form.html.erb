@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 shadow">
+      <%= simple_form_for @item do |f| %>
+        <%= f.input :name %>
+        <%= f.select :item_type, collection: Item::TYPES %>
+        <%= f.association :status %>
+        <%= f.input :expiration_date, as: :date, html5: true %>
+        <%= f.input :description %>
+        <%= f.submit %>
+      <% end %>
+      <%= link_to "Back", item_path(@item) %>
+    </div>
+  </div>
+</div>
