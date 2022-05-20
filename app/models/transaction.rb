@@ -11,7 +11,7 @@
 #
 class Transaction < ApplicationRecord
   belongs_to :item
-  belongs_to :giver
-  belongs_to :receiver
+  belongs_to :giver, class_name: "User"
+  belongs_to :receiver, class_name: "User"
   validates_presence_of :giver_id, :item_id, :receiver_id
 end
