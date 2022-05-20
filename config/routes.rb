@@ -8,9 +8,6 @@ Rails.application.routes.draw do
   # Shows user's food/ingredient items
   get "my-items", to: "items#my_items"
 
-  # Edits status of food/ingredient item
-  patch "my-items/set_status", to: "items#set_status", as: :set_item_status
-
   # Creates chatroom for giver and receiver to send messages
   resources :chatrooms, only: %i[show index] do
     post "messages", to: "messages#create"
