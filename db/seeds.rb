@@ -25,6 +25,13 @@ locations = JSON.parse(locations_file)
 
 # Clears screen and wipes database
 system('clear')
+puts "
+#{'███████╗░█████╗░░█████╗░██████╗░'.magenta}  #{'░░██╗██╗'.magenta}  ░█████╗░██╗░░░░░██╗░░░░░
+#{'██╔════╝██╔══██╗██╔══██╗██╔══██╗'.magenta}  #{'░██╔╝██║'.magenta}  ██╔══██╗██║░░░░░██║░░░░░
+#{'█████╗░░██║░░██║██║░░██║██║░░██║'.magenta}  #{'██╔╝░██║'.magenta}  ███████║██║░░░░░██║░░░░░
+#{'██╔══╝░░██║░░██║██║░░██║██║░░██║'.magenta}  #{'███████║'.magenta}  ██╔══██║██║░░░░░██║░░░░░
+#{'██║░░░░░╚█████╔╝╚█████╔╝██████╔╝'.magenta}  #{'╚════██║'.magenta}  ██║░░██║███████╗███████╗
+#{'╚═╝░░░░░░╚════╝░░╚════╝░╚═════╝░'.magenta}  #{'░░░░░╚═╝'.magenta}  ╚═╝░░╚═╝╚══════╝╚══════╝"
 puts "Donating the food and resetting the database".red.blink
 puts ''
 # With proper dependencies, deleting the users should delete the entire db.
@@ -41,33 +48,7 @@ justin = User.create!(
   password: '123456',
   address: '5333 Av. Casgrain'
 )
-puts "#{'✓'.green} Demo persona: #{justin.username.light_cyan} has been created."
-puts '------------------------------------------------------------------------'.light_black
-
-#############################################################################
-#----------------------------SEED DB WITH ITEMS-----------------------------#
-#############################################################################
-
-# Creates users with items to fill DB.
-user = User.create!(
-  email: Faker::Internet.email,
-  username: Faker::Name.first_name + Faker::Creature::Dog.name,
-  password: '123456',
-  address: locations.sample
-)
-puts "#{'✓'.green} Demo persona: #{user.username.light_cyan} has been created."
-
-5.times do
-  item = Item.create!(
-    user_id: user.id,
-    # name: Faker::Food.dish,
-    status: @status_list.sample,
-    item_type: @item_types.sample,
-    description: Faker::Food.description,
-    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
-  )
-end
-puts "#{'5'.blue} items created for #{user.username.light_cyan} "
+puts "#{'✓'.light_green} Demo persona: #{justin.username.light_cyan} has been created."
 puts '------------------------------------------------------------------------'.light_black
 
 #############################################################################
@@ -79,9 +60,9 @@ allergen_counter = 0
   allergen = Allergen.create!(name: @allergens_list[allergen_counter])
   allergen_counter += 1
   print "#{allergen.id}. "
-  puts allergen.name.light_magenta
+  puts allergen.name.light_blue
 end
-puts "#{'✓'.green} #{'Allergens'.light_magenta} created"
+puts "#{'✓ Allergens '.light_green}created"
 puts '------------------------------------------------------------------------'.light_black
 
 #############################################################################
@@ -93,9 +74,90 @@ diet_counter = 0
   diet = Diet.create!(name: @diets_list[diet_counter])
   diet_counter += 1
   print "#{diet.id}. "
-  puts diet.name.magenta
+  puts diet.name.light_blue
 end
-puts "#{'✓'.green} #{'Diets'.magenta} created"
+puts "#{'✓ Diets '.light_green}created"
+puts '------------------------------------------------------------------------'.light_black
+
+#############################################################################
+#-----------------------SEED DB WITH INGREDIENT ITEMS-----------------------#
+#-------!These items do not have any allergens or dietary restrictions!-----#
+#############################################################################
+
+# Creates users with ingredient items to fill DB.
+user = User.create!(
+  email: Faker::Internet.email,
+  username: Faker::Name.first_name + Faker::Creature::Dog.name,
+  password: '123456',
+  address: locations.sample
+)
+puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
+
+5.times do
+  ingredient = Item.create!(
+    user_id: user.id,
+    # name: Faker::Food.dish,
+    status: @status_list.sample,
+    item_type: 'ingredient',
+    description: Faker::Food.description,
+    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+  )
+end
+puts "#{'5'.blue} ingredient items created for #{user.username.light_cyan} "
+puts '------------------------------------------------------------------------'.light_black
+
+#############################################################################
+#-------------------------SEED DB WITH MEAL ITEMS---------------------------#
+#-------!These items DO NOT have any allergens or dietary restrictions!-----#
+#############################################################################
+
+# Creates users with meal items to fill DB.
+user = User.create!(
+  email: Faker::Internet.email,
+  username: Faker::Name.first_name + Faker::Creature::Dog.name,
+  password: '123456',
+  address: locations.sample
+)
+puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
+
+5.times do
+  meal = Item.create!(
+    user_id: user.id,
+    # name: Faker::Food.dish,
+    status: @status_list.sample,
+    item_type: 'meal',
+    description: Faker::Food.description,
+    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+  )
+end
+puts "#{'5'.blue} meal items created for #{user.username.light_cyan} "
+puts '------------------------------------------------------------------------'.light_black
+
+#############################################################################
+#-------------------------SEED DB WITH MEAL ITEMS---------------------------#
+#----------------------------!WITH ALLERGENS!-------------------------------#
+#############################################################################
+
+# Creates users with meal items to fill DB.
+user = User.create!(
+  email: Faker::Internet.email,
+  username: Faker::Name.first_name + Faker::Creature::Dog.name,
+  password: '123456',
+  address: locations.sample
+)
+puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
+
+5.times do
+  meal = Item.create!(
+    user_id: user.id,
+    # name: Faker::Food.dish,
+    status: @status_list.sample,
+    item_type: 'meal',
+    description: Faker::Food.description,
+    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+  )
+end
+puts "#{'5'.blue} meal items created for #{user.username.light_cyan} "
 puts '------------------------------------------------------------------------'.light_black
 
 #---------------------------------END---------------------------------------#
