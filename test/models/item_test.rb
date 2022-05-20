@@ -5,6 +5,7 @@
 #  id              :bigint           not null, primary key
 #  description     :text
 #  expiration_date :date
+#  name            :string
 #  status          :integer          default("available")
 #  type            :string
 #  created_at      :datetime         not null
