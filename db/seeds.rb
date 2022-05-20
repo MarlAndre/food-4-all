@@ -20,7 +20,7 @@ locations = JSON.parse(locations_file)
 @item_types = %w[meal ingredient]
 @status_list = %w[available reserved donated]
 @allergens_list = %w[peanuts eggs milk soy]
-@diets_list = %w[vegan vegetarian 'lactose intolerant' 'gluten free' pescatarian]
+@diets_list = ['vegan', 'vegetarian', 'lactose intolerant', 'gluten free', 'pescatarian']
 #---------------------------------------------------------------------------#
 
 # Clears screen and wipes database
@@ -42,12 +42,11 @@ justin = User.create!(
   address: '5333 Av. Casgrain'
 )
 puts "#{'✓'.green} Demo persona: #{justin.username.light_cyan} has been created."
-puts '-'.light_black
+puts '------------------------------------------------------------------------'.light_black
 
 #############################################################################
 #----------------------------SEED DB WITH ITEMS-----------------------------#
 #############################################################################
-
 
 # Creates users with items to fill DB.
 user = User.create!(
@@ -56,21 +55,52 @@ user = User.create!(
   password: '123456',
   address: locations.sample
 )
+puts "#{'✓'.green} Demo persona: #{user.username.light_cyan} has been created."
 
 5.times do
-  Item.create!(
+  item = Item.create!(
     user_id: user.id,
+    # name: Faker::Food.dish,
     status: @status_list.sample,
     item_type: @item_types.sample,
-    description: 'Description here',
-    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now),
+    description: Faker::Food.description,
+    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
 end
-puts "#{'✓'.green} Demo persona: #{user.username.light_cyan} has been created."
-puts '-'.light_black
+puts "#{'5'.blue} items created for #{user.username.light_cyan} "
+puts '------------------------------------------------------------------------'.light_black
+
+#############################################################################
+#-------------------------SEED DB WITH ALLERGENS----------------------------#
+#############################################################################
+
+allergen_counter = 0
+@allergens_list.length.times do
+  allergen = Allergen.create!(name: @allergens_list[allergen_counter])
+  allergen_counter += 1
+  print "#{allergen.id}. "
+  puts allergen.name.light_magenta
+end
+puts "#{'✓'.green} #{'Allergens'.light_magenta} created"
+puts '------------------------------------------------------------------------'.light_black
+
+#############################################################################
+#---------------------------SEED DB WITH DIETS------------------------------#
+#############################################################################
+
+diet_counter = 0
+@diets_list.length.times do
+  diet = Diet.create!(name: @diets_list[diet_counter])
+  diet_counter += 1
+  print "#{diet.id}. "
+  puts diet.name.magenta
+end
+puts "#{'✓'.green} #{'Diets'.magenta} created"
+puts '------------------------------------------------------------------------'.light_black
 
 #---------------------------------END---------------------------------------#
 print '♡ '.light_red
 print "Finished sharing food".light_green
 puts ' ♡'.light_red
 #---------------------------------------------------------------------------#
+# Faker::Food.vegetables #=> "Broccolini"
