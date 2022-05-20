@@ -96,7 +96,7 @@ puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been creat
 5.times do
   ingredient = Item.create!(
     user_id: user.id,
-    # name: Faker::Food.vegetables,
+    name: Faker::Food.vegetables,
     status: @status_list.sample,
     item_type: 'ingredient',
     description: Faker::Food.description,
@@ -123,7 +123,7 @@ puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been creat
 5.times do
   meal = Item.create!(
     user_id: user.id,
-    # name: Faker::Food.dish,
+    name: Faker::Food.dish,
     status: @status_list.sample,
     item_type: 'meal',
     description: Faker::Food.description,
@@ -150,7 +150,7 @@ puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been creat
 5.times do
   meal = Item.create!(
     user_id: user.id,
-    # name: Faker::Food.dish,
+    name: Faker::Food.dish,
     status: @status_list.sample,
     item_type: 'meal',
     description: Faker::Food.description,
@@ -181,7 +181,7 @@ puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been creat
 5.times do
   meal = Item.create!(
     user_id: user.id,
-    # name: Faker::Food.dish,
+    name: Faker::Food.dish,
     status: @status_list.sample,
     item_type: 'meal',
     description: Faker::Food.description,
@@ -220,7 +220,7 @@ puts '--------------------------------------------------------------------'.ligh
 
   meal = Item.create!(
     user_id: giver.id,
-    # name: Faker::Food.dish,
+    name: Faker::Food.dish,
     status: 'reserved',
     item_type: @item_types.sample,
     description: Faker::Food.description,
