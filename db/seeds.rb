@@ -248,7 +248,7 @@ puts '--------------------------------------------------------------------'.ligh
       item_id: meal.id
     )
   end
-  puts "#{'✓'.light_green} #{giver.username.light_cyan} just gave #{receiver.username.light_cyan} a meal."
+  puts "#{'✓'.light_green} #{giver.username.light_cyan} just gave #{receiver.username.light_cyan} a #{meal.name.cyan} meal."
   puts '--------------------------------------------------------------------'.light_black
 end
 
