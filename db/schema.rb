@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 2022_05_24_035539) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "diets", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -98,6 +104,16 @@ ActiveRecord::Schema.define(version: 2022_05_24_035539) do
     t.index ["item_id"], name: "index_items_diets_on_item_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.bigint "giver_id", null: false
@@ -132,6 +148,8 @@ ActiveRecord::Schema.define(version: 2022_05_24_035539) do
   add_foreign_key "items_allergens", "items"
   add_foreign_key "items_diets", "diets"
   add_foreign_key "items_diets", "items"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "transactions", "items"
   add_foreign_key "transactions", "users", column: "giver_id"
   add_foreign_key "transactions", "users", column: "receiver_id"
