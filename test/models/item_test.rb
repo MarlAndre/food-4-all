@@ -12,12 +12,6 @@
 #  updated_at      :datetime         not null
 #  user_id         :bigint           not null
 #
-#  name            :string
-#  status          :integer          default("available")
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  user_id         :bigint           not null
-#
 require "test_helper"
 
 class ItemTest < ActiveSupport::TestCase
