@@ -20,6 +20,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items, dependent: :destroy
+  has_many :feedbacks
   has_many :transactions_as_giver, class_name: "Transaction", foreign_key: :giver_id
   has_many :transactions_as_receiver, class_name: "Transaction", foreign_key: :receiver_id
   # has_one_attached :photo # cloudinary to be installed

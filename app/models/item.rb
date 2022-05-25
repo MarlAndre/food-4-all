@@ -24,7 +24,7 @@ class Item < ApplicationRecord
 
   # has_many_attached :photos, :maximum => 5 # cloudinary to be installed
 
-  # READ instance using `item.reserved?`(boolean) and WRITE using `item.donated!`
+  # Ex: READ instance using `item.reserved?`(boolean) and WRITE using `item.donated!`
   enum status: {
     available: 0,
     reserved: 1,
