@@ -11,3 +11,9 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+a:-webkit-any-link {
+  text-decoration: none;
+  cursor: auto;
+}
