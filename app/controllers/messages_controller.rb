@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.chatroom = @chatroom
     if @message.save
-      redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
+      ActionCable.server.broadcast("everyone", "We are watching you@@")
     else
       render 'chatrooms/show'
     end
