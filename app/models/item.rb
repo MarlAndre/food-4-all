@@ -6,6 +6,8 @@
 #  description     :text
 #  expiration_date :date
 #  item_type       :string
+#  latitude        :float
+#  longitude       :float
 #  name            :string
 #  status          :integer          default("available")
 #  created_at      :datetime         not null
@@ -13,6 +15,9 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
+  # geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
+
   belongs_to :user
   has_and_belongs_to_many :allergens
   has_and_belongs_to_many :diets

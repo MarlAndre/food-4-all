@@ -6,6 +6,8 @@
 #  description     :text
 #  expiration_date :date
 #  item_type       :string
+#  latitude        :float
+#  longitude       :float
 #  name            :string
 #  status          :integer          default("available")
 #  created_at      :datetime         not null
