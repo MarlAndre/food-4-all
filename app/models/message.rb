@@ -12,4 +12,8 @@
 class Message < ApplicationRecord
   belongs_to :chatroom
   belongs_to :user
+
+  def sender?(the_user)
+    user.id == the_user.id
+  end
 end
