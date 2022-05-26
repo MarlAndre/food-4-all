@@ -6,11 +6,20 @@
 }
 
 /* The alert message box */
+.special-alert-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .special-alert {
-  position: fixed;
   z-index: 1000;
   padding: 8px;
-  width: 80vw;
+  width: 100%;
 }
 .alert-sucess {
   padding: 20px;
