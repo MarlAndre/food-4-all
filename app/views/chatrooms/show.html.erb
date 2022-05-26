@@ -17,7 +17,7 @@
 
   <%= simple_form_for [@chatroom, @message],
   remote: true,
-  html: {class: "d-flex"} do |f|
+  html: {data: {action: "ajax:success->chatroom-subscription#resetForm" }, class: "d-flex"} do |f|
   %>
     <%= f.input :content,
       label: false,

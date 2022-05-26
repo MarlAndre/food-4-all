@@ -41,4 +41,15 @@ export default class extends Controller {
   #userStyleClass(currentUser) {
     return currentUser ? 'sender-style' : 'receiver-style'
   }
+
+  // To reset the form after the message has been sent:
+  resetForm(event) {
+    event.target.reset()
+  }
+
+  // The disconnect() method is called when the controller disappears from the DOM:
+  disconnect() {
+    // console.log("Unsubscribed from the chatroom");
+    this.channel.unsubscribe()
+  }
 }
