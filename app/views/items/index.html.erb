@@ -1,4 +1,4 @@
-<div class="container py-5">
+<div class="app-container">
 
   <!-- Geocoder
   <div style="width: 100%; height: 600px;"
@@ -11,8 +11,7 @@
   <div class="special-alert-container">
     <div class="special-alert alert-success" role="alert">
       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <h4 class="alert-heading">How to share safely during COVID-19?
-    </h4>
+      <h4 class="alert-heading">How to share safely during COVID-19?</h4>
       <hr>
       <p class="mb-0"><ul>
       <li>Consider wearing a mask</li>
@@ -33,12 +32,14 @@
   </form>
 
   <!-- Cards-->
-  <div class="card-product">
+  <div class="cards items">
     <% @items.each do |item| %>
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-        <h2>Product name</h2>
-        <p>Product description with <strong>relevant info</strong> only.</p>
+      <div class="card-product">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+          <div class="card-product-infos">
+            <h2><%= item.name %></h2>
+            <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+          </div>
       </div>
     <% end %>
   </div>

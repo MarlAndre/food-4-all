@@ -7,19 +7,12 @@
 
 /* The alert message box */
 .special-alert-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 16px;
+
 }
+
 .special-alert {
-  z-index: 1000;
   padding: 8px;
-  width: 100%;
 }
 .alert-sucess {
   padding: 20px;

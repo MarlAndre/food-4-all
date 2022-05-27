@@ -2,7 +2,12 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show]
 
   def index
-    @items = Item.all.order(id: :desc)
+    if params[:query].present?
+      @items = Item.search_index(params[:query])
+    else
+      @items = Item.all.order(id: :desc)
+      @items
+    end
 
     # @markers = @items.geocoded.map do |item|
     #   {
