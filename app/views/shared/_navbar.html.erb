@@ -1,20 +1,16 @@
 <div class="navbar fixed-bottom navbar-expand-sm navbar-light navbar-lewagon py-3">
   <%# 4 icons + one collapse button in the navbar %>
-  <div class="container-fluid">
-    <a href="/"><i class="fas fa-home"></i></a>
+  <div class="container-fluid ps-4">
+    <a href="/"><i class="fas fa-map-marker-alt"></i></a>
     <a href="/items"><i class="fas fa-search"></i></a>
     <a href="/items/new"><i class="far fa-plus-square"></i></a>
     <a href="/chatrooms"><i class="far fa-comment"></i></a>
 
     <%# collapse button shows the avatar image (for the demo user only) or a normal icon (for everyone else) %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <% if current_user == User.first %>
-        <%= image_tag "demo_user.png", class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-      <% else %>
-        <a href="#" class="avatar dropdown-toggle text-white" id="navbarDropdown" data-bs_toggle="dropdown" aria-haspopup=true aria-expanded=false>
-          <i class="far fa-user"></i>
-        </a>
-      <% end %>
+      <a href="#" class="avatar dropdown-toggle text-white" id="navbarDropdown" data-bs_toggle="dropdown" aria-haspopup=true aria-expanded=false>
+        <i class="far fa-user"></i>
+      </a>
     </button>
 
     <%# collapse menu to show 'Login' or 'Log out' option. %>
