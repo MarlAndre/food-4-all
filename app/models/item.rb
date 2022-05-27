@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   geocoded_by :location
-  after_validation :geocode, if: :will_save_change_to_location?
+  # after_validation :geocode, if: :will_save_change_to_location?
 
   belongs_to :user
   has_and_belongs_to_many :allergens
