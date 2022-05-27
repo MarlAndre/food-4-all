@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  # geocoded_by :location
+  geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
   belongs_to :user
@@ -14,11 +14,11 @@ class Item < ApplicationRecord
   # has_many_attached :photos, :maximum => 5 # cloudinary to be installed
 
   # Ex: READ instance using `item.reserved?`(boolean) and WRITE using `item.donated!`
-  enum status: {
-    available: 0,
-    reserved: 1,
-    donated: 2
-  }
+  # enum status: {
+  #   available: 0,
+  #   reserved: 1,
+  #   donated: 2
+  # }
 
   # added "pg_search" gem to filter the index by name/description
   include PgSearch::Model
