@@ -1,0 +1,17 @@
+.button {
+  background-color: rgba($rose, 1);
+  color: white;
+  border: none;
+  width: 61px;
+  height: 34px;
+  border-radius: 2px;
+  padding: 4px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 12px;
+  &:hover {
+    // Very simple animation for mobile 'click / hold / hover'
+  background-color: rgba($rose, 0.95);
+  }
+}
