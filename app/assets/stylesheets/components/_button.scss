@@ -10,8 +10,8 @@
   font-weight: lighter;
   text-align: center;
   font-size: 12px;
-  &:hover {
-    // Very simple animation for mobile 'click / hold / hover'
+  // Very simple animation for mobile 'touch'
+  &:active {
   background-color: rgba($rose, 0.95);
   }
 }
