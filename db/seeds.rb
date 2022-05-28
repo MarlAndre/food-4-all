@@ -17,11 +17,35 @@ meals_file_path = File.join(Rails.root, 'app', 'assets', 'meals.json')
 meals_file = File.read(meals_file_path)
 meals = JSON.parse(meals_file)
 
+# List of meals descriptions.
+meal_descriptions_file_path = File.join(Rails.root, 'app', 'assets', 'meal_descriptions.json')
+meal_descriptions_file = File.read(meal_descriptions_file_path)
+meal_descriptions = JSON.parse(meal_descriptions_file)
+
 # List of ingredients.
 ingredients_file_path = File.join(Rails.root, 'app', 'assets', 'ingredients.json')
 ingredients_file = File.read(ingredients_file_path)
 ingredients = JSON.parse(ingredients_file)
-#---------------------------------------------------------------------------#
+
+#############################################################################
+#--------------------------------METHODS------------------------------------#
+#############################################################################
+
+# FIX THIS ISSUE
+def add_allergens_and_diets(item)
+  case item.name
+  when 'cauliflower soup' then item.description = meal_descriptions[0]
+  when 'chicken' then puts 'chicken'
+  when 'mac and cheese with ham' then puts 'mac and cheese with ham'
+  when 'pizza' then puts 'pizza'
+  when 'plantain' then puts 'plantain'
+  when 'salad in a jar' then puts 'salad in a jar'
+  when 'salmon' then puts 'salmon'
+  # when 'spaghetti' then puts 'spaghetti'
+  else
+    puts 'error?'
+  end
+end
 
 #############################################################################
 #----------------------------ARRAYS TO SAMPLE FROM--------------------------#
@@ -44,8 +68,36 @@ puts "
 #{'╚═╝░░░░░░╚════╝░░╚════╝░╚═════╝░'.magenta}  #{'░░░░░╚═╝'.magenta}  ╚═╝░░╚═╝╚══════╝╚══════╝"
 puts "Donating the food and resetting the database".red.blink
 puts ''
-# With proper dependencies, deleting the users should delete the entire db.
+# Due to model associations, this will delete the entire database.
 User.destroy_all
+
+#############################################################################
+#-------------------------SEED DB WITH ALLERGENS----------------------------#
+#############################################################################
+
+allergen_counter = 0
+@allergens_list.length.times do
+  allergen = Allergen.create!(name: @allergens_list[allergen_counter])
+  allergen_counter += 1
+  print "#{allergen.id}. "
+  puts allergen.name.light_blue
+end
+puts "#{'✓ Allergens '.light_green}created"
+puts '--------------------------------------------------------------------'.light_black
+
+#############################################################################
+#---------------------------SEED DB WITH DIETS------------------------------#
+#############################################################################
+
+diet_counter = 0
+@diets_list.length.times do
+  diet = Diet.create!(name: @diets_list[diet_counter])
+  diet_counter += 1
+  print "#{diet.id}. "
+  puts diet.name.light_blue
+end
+puts "#{'✓ Diets '.light_green}created"
+puts '--------------------------------------------------------------------'.light_black
 
 #############################################################################
 #----------------------------DEMO PERSONAS-----------------------------------#
@@ -80,85 +132,60 @@ puts "#{'✓'.light_green} Demo persona: #{williams.username.light_cyan} has bee
 puts '--------------------------------------------------------------------'.light_black
 
 #############################################################################
-#-------------------------SEED DB WITH ALLERGENS----------------------------#
+#----------------------------SEED DB WITH USERS-----------------------------#
 #############################################################################
 
-allergen_counter = 0
-@allergens_list.length.times do
-  allergen = Allergen.create!(name: @allergens_list[allergen_counter])
-  allergen_counter += 1
-  print "#{allergen.id}. "
-  puts allergen.name.light_blue
-end
-puts "#{'✓ Allergens '.light_green}created"
-puts '--------------------------------------------------------------------'.light_black
-
-#############################################################################
-#---------------------------SEED DB WITH DIETS------------------------------#
-#############################################################################
-
-diet_counter = 0
-@diets_list.length.times do
-  diet = Diet.create!(name: @diets_list[diet_counter])
-  diet_counter += 1
-  print "#{diet.id}. "
-  puts diet.name.light_blue
-end
-puts "#{'✓ Diets '.light_green}created"
-puts '--------------------------------------------------------------------'.light_black
-
-#############################################################################
-#-----------------------SEED DB WITH INGREDIENT ITEMS-----------------------#
-#-------!These items do not have any allergens or dietary restrictions!-----#
-#############################################################################
-
-# Creates users with ingredient items to fill DB.
-user = User.create!(
-  email: Faker::Internet.email,
-  username: Faker::Name.first_name + Faker::Creature::Dog.name,
-  password: '123456',
-  address: locations.sample
-)
-puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
-
-5.times do
-  ingredient = Item.create!(
-    user_id: user.id,
-    name: Faker::Food.vegetables,
-    status: @status_list.sample,
-    item_type: 'ingredient',
-    description: Faker::Food.description,
-    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+# Creates users, further below each meal/ingredient will be applied to each user.
+32.times do
+  user = User.create!(
+    email: Faker::Internet.email,
+    username: Faker::Name.first_name + Faker::Creature::Dog.name,
+    password: '123456',
+    address: locations.sample
   )
+  puts "#{'✓'.light_green} Demo user: ID:#{user.id.to_s.light_white} - #{user.username.light_cyan} has been created."
 end
-puts "#{'5'.blue} ingredient items created for #{user.username.light_cyan} "
+
+# 5.times do
+#   ingredient = Item.create!(
+#     user_id: user.id,
+#     name: Faker::Food.vegetables,
+#     status: @status_list.sample,
+#     item_type: 'ingredient',
+#     description: Faker::Food.description,
+#     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+#   )
+# end
+# puts "#{'5'.blue} ingredient items created for #{user.username.light_cyan} "
 puts '--------------------------------------------------------------------'.light_black
 
 #############################################################################
 #-------------------------SEED DB WITH MEAL ITEMS---------------------------#
-#-------!These items DO NOT have any allergens or dietary restrictions!-----#
 #############################################################################
 
-# Creates users with meal items to fill DB.
-user = User.create!(
-  email: Faker::Internet.email,
-  username: Faker::Name.first_name + Faker::Creature::Dog.name,
-  password: '123456',
-  address: locations.sample
-)
-puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
-
-5.times do
+# Creates meals for existing users.
+user_id_counter = williams.id + 1
+counter_from_zero = 0
+7.times do
   meal = Item.create!(
-    user_id: user.id,
-    name: Faker::Food.dish,
-    status: @status_list.sample,
+    user_id: user_id_counter,
+    name: meals[counter_from_zero],
+    status: 'available',
     item_type: 'meal',
-    description: Faker::Food.description,
+    description: meal_descriptions[counter_from_zero],
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
+
+  add_allergens_and_diets(meal)
+  user_id_counter += 1
+  counter_from_zero += 1
+  puts "meal items created for #{meal.user.username.light_cyan} "
+  puts ''
+  puts meal.description
+  puts ''
 end
-puts "#{'5'.blue} meal items created for #{user.username.light_cyan} "
+
+puts "#{'✓'.light_green} #{'7'.blue} meal items created"
 puts '--------------------------------------------------------------------'.light_black
 
 #############################################################################
