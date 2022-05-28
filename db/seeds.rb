@@ -19,7 +19,7 @@ locations = JSON.parse(locations_file)
 
 @item_types = %w[meal ingredient]
 @status_list = %w[available reserved donated]
-@allergens_list = %w[peanuts eggs milk soy]
+@allergens_list = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
 @diets_list = ['vegan', 'vegetarian', 'lactose intolerant', 'gluten free', 'pescatarian']
 #---------------------------------------------------------------------------#
 
@@ -196,11 +196,11 @@ puts "#{'5'.blue} meal items #{'with diets'.light_blue} created for #{user.usern
 puts '--------------------------------------------------------------------'.light_black
 
 #############################################################################
-#-------------------------SEED DB WITH TRANSACTIONS-------------------------#
+#-------------------------SEED DB WITH REQUESTS-------------------------#
 #############################################################################
 
 5.times do
-  # Creates receiver with meal or ingredient item for transaction.
+  # Creates receiver with meal or ingredient item for request.
   receiver = User.create!(
     email: Faker::Internet.email,
     username: Faker::Name.first_name + Faker::Creature::Dog.name,
@@ -209,7 +209,7 @@ puts '--------------------------------------------------------------------'.ligh
   )
   puts "Receiver: #{receiver.username.light_cyan} has been created."
 
-  # Creates giver with meal or ingredient item for transaction.
+  # Creates giver with meal or ingredient item for request.
   giver = User.create!(
     email: Faker::Internet.email,
     username: Faker::Name.first_name + Faker::Creature::Dog.name,
@@ -242,7 +242,7 @@ puts '--------------------------------------------------------------------'.ligh
         diet_id: rand(1..5)
       )
     end
-    transaction = Transaction.create!(
+    request = Request.create!(
       giver_id: giver.id,
       receiver_id: receiver.id,
       item_id: meal.id
