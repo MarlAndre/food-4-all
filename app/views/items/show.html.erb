@@ -74,7 +74,9 @@
   <div>
     <%# button to link to request; using our own .button class %>
     <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
-      <%= link_to 'Continue This Chat', request_path(@request), class: "button reserve"  %>
+      <div class="button reserve">
+        <%= link_to 'Continue The Chat', request_path(@request) %>
+      </div>
     <% else %>
       <%= simple_form_for @request do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
