@@ -8,7 +8,11 @@ class RequestsController < ApplicationController
   # make sure only the current users can access the page, otherwise redirect.
   def show
     @request = Request.find(params[:id])
-    @message = Message.new
+    if current_user == @request.giver || current_user == @request.receiver
+      @message = Message.new
+    else
+      redirect_to item_path(@request.item)
+    end
   end
 
   def create
