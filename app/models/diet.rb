@@ -8,6 +8,10 @@
 #  updated_at :datetime         not null
 #
 class Diet < ApplicationRecord
-  has_and_belongs_to_many :items
-  validates :name, presence: true, uniqueness: true
+  # Associations
+  has_many :items_diets
+  has_many :items, through: :items_diets
+
+  # Validations
+  validates :name, presence: true
 end

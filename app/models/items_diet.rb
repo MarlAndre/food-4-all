@@ -9,6 +9,7 @@
 #  item_id    :bigint           not null
 #
 class ItemsDiet < ApplicationRecord
+  # Associations
   belongs_to :item
-  belongs_to :diet
+  belongs_to :diet#, dependent: :destroy
 end
