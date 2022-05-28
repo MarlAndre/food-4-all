@@ -19,6 +19,7 @@
   remote: true,
   html: {data: {action: "ajax:success->request-subscription#resetForm" }, class: "d-flex"} do |f|
   %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <%= f.input :content,
       label: false,
       placeholder: "Message ##{@request.item.name}",

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Shows user's food/ingredient items
   get "my-items", to: "items#my_items"
 
-  # Creates requests (chatrooms) for giver and receiver to send messages
+  # Creates requests for giver and receiver to send messages
   resources :requests, only: %i[show index create] do
     post "messages", to: "messages#create"
   end

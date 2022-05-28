@@ -242,7 +242,7 @@ puts '--------------------------------------------------------------------'.ligh
         diet_id: rand(1..5)
       )
     end
-    transaction = Transaction.create!(
+    request = Request.create!(
       giver_id: giver.id,
       receiver_id: receiver.id,
       item_id: meal.id
