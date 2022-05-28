@@ -1,0 +1,33 @@
+.card-category {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
+.container {
+  border-color: 10px solid red;
+  position: relative;
+}
+
+.two {
+  position: absolute;
+  width: auto;
+  background-color: #814B67;
+}
+
+.share {
+  width: 15px;
+  height: 15px;
+}
+
+.btn {
+  color: #814B67;
+  padding-bottom: 50px;
+}
