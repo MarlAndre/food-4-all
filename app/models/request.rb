@@ -16,7 +16,7 @@ class Request < ApplicationRecord
   belongs_to :giver, class_name: "User"
   belongs_to :receiver, class_name: "User"
   # one request can have two feedbacks (from receiver and giver)
-  has_many :feedbacks
+  has_many :feedbacks, dependent: :destroy
   # one chatroom represents one chatroom and has many messages
   has_many :messages
 
