@@ -1,0 +1,27 @@
+// this component is for styling the messages in each chatroom.
+// refer to usage in views/chatrooms/show.html.erb
+
+// To style the wrapping div
+.message-row {
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+// To style the message itself
+.sender-style, .receiver-style {
+  width: 70%;
+  max-width: 400px;
+  border-radius: 4px;
+  padding: 8px;
+  min-height: 80px;
+  color: rgba(black, 0.9)
+}
+
+// changing the boilerplate colors to our theme colors in Figma
+.sender-style {
+  background-color: rgba(grey, 0.3);
+}
+
+.receiver-style {
+  background-color: rgba($light-green, 0.5);
+}
