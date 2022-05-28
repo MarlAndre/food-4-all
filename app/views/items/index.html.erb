@@ -1,16 +1,28 @@
+ <!-- PLEASE DONT DELETE THIS DIV-->
+ <form class="absolute d-none">
+      <label for="postal_code">Enter your postal code: </label>
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
+      <button name="button" id="btn" type="submit">Submit</button>
+ </form>
+ <!-- KEEP THE DIV ABOVE-->
+
 <div class="modal-popup-container">
   <div class="modal-popup">
-    <form action="/items">
+    <form>
       <span class="closebtnpopup" onclick="this.parentElement.parentElement.parentElement.style.display='none';">&times;</span>
-      <label for="postal-code">Enter your postal code: </label><input type="text" id="postal-code"> <button id="btn">Submit</button>
+      <label for="postal_code">Enter your postal code: </label>
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
+      <button name="button" id="btn" type="submit">Submit</button>
     </form>
   </div>
 </div>
 
+
+
 <%# <div style="width: 100%; height: 600px;"
   data-controller="mapbox"
   data-mapbox-markers-value="<%= @markers.to_json %>
-  <%# data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %></div>
+  <%# data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>
 
 <!-- Covid notices-->
 <div class="special-alert-container">
