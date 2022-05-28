@@ -1,19 +1,16 @@
-<%# <div class="modal-popup-container">
+<div class="modal-popup-container">
   <div class="modal-popup">
     <form action="/items">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <label for="postal-code">Enter your postal code: </label><input type="text" id="postal-code"> <button>Submit</button>
+      <span class="closebtnpopup" onclick="this.parentElement.parentElement.parentElement.style.display='none';">&times;</span>
+      <label for="postal-code">Enter your postal code: </label><input type="text" id="postal-code"> <button id="btn">Submit</button>
     </form>
   </div>
-</div> %>
-
-
-
-<div style="width: 100%; height: 600px;"
-  data-controller="mapbox"
-  data-mapbox-markers-value="<%= @markers.to_json %>"
-  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
+
+<%# <div style="width: 100%; height: 600px;"
+  data-controller="mapbox"
+  data-mapbox-markers-value="<%= @markers.to_json %>
+  <%# data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %></div>
 
 <!-- Covid notices-->
 <div class="special-alert-container">

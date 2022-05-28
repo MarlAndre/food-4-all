@@ -58,3 +58,19 @@
  padding: 16px;
  max-width: 350px;
 }
+
+.closebtnpopup {
+  margin-left: 15px;
+  color: $light-green;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtnpopup:hover {
+  color: $rose;
+}
