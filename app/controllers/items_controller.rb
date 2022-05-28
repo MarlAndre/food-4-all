@@ -9,12 +9,12 @@ class ItemsController < ApplicationController
       @items
     end
 
-    # @markers = @items.geocoded.map do |item|
-    #   {
-    #     lat: item.latitude,
-    #     lng: item.longitude
-    #   }
-    # end
+    @markers = @items.geocoded.map do |item|
+      {
+        lat: item.latitude,
+        lng: item.longitude
+      }
+    end
   end
 
   def show; end
