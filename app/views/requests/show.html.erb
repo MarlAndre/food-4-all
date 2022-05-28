@@ -3,7 +3,7 @@
   data-request-subscription-request-id-value="<%= @request.id %>"
   data-request-subscription-current-user-id-value="<%= current_user.id %>"
 >
-  <h1>#<%= @request.name %></h1>
+  <h1>"<%= @request.item.name %>" from <%= @request.giver.username %> to <%= @request.receiver.username %></h1>
 
   <div class="messages" data-request-subscription-target="messages">
     <% @request.messages.each do |message| %>
@@ -21,7 +21,7 @@
   %>
     <%= f.input :content,
       label: false,
-      placeholder: "Message ##{@request.name}",
+      placeholder: "Message ##{@request.item.name}",
       wrapper_html: {class: "flex-grow-1"}
     %>
     <%= f.submit "Send", class: "btn btn-primary" %>

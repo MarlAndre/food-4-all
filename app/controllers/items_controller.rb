@@ -18,8 +18,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # link the show page to a request (chatroom)
-    # @request = Request.new
+    # link the show page to a new or existing request (chatroom)
+    if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
+      @request = Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
+    else
+      @request = Request.new
+    end
   end
 
   def new
