@@ -11,7 +11,7 @@
   object-fit: cover;
 }
 
-.container {
+.container-detail {
   border-color: 10px solid red;
   position: relative;
   background-color: #8BAD85;
@@ -96,7 +96,11 @@
 }
 
 .btn:hover {
-  border: #814B67;
+  border: #814B67 1px solid;
   background-color: #FFFFF0;
   color: #814B67;
+}
+
+.fas:hover {
+  background-color: #814B67;
 }
