@@ -44,7 +44,6 @@ export default class extends Controller {
 
   // To reset the form after the message has been sent:
   resetForm(event) {
-    console.log("test");
     event.target.reset()
   }
 
