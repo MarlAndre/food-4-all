@@ -4,3 +4,34 @@
   right: 16px;
   z-index: 1000;
 }
+
+/* The alert message box */
+.special-alert-container {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.special-alert {
+  padding: 8px;
+}
+.alert-sucess {
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
