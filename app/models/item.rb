@@ -40,7 +40,7 @@ class Item < ApplicationRecord
   #   available: 0,
   #   reserved: 1,
   #   donated: 2
-  # }seed
+  # }
 
   # added "pg_search" gem to filter the index by name/description
   include PgSearch::Model
