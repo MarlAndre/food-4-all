@@ -11,5 +11,5 @@
 class ItemsAllergen < ApplicationRecord
   # Associations
   belongs_to :item
-  belongs_to :allergen#, dependent: :destroy
+  belongs_to :allergen
 end

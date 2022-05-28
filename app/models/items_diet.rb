@@ -11,5 +11,5 @@
 class ItemsDiet < ApplicationRecord
   # Associations
   belongs_to :item
-  belongs_to :diet#, dependent: :destroy
+  belongs_to :diet
 end
