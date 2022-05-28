@@ -17,6 +17,5 @@ class Request < ApplicationRecord
   validates_presence_of :giver_id, :item_id, :receiver_id
   # one request can have two feedbacks (from receiver and giver)
   has_many :feedbacks
-  # one chatroom represents one chatroom and has many messages
   has_many :messages
 end

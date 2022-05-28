@@ -70,7 +70,7 @@
   <br>
 
   <div>
-    <%# button to link to request (chatroom); using our own .button class %>
+    <%# button to link to request; using our own .button class %>
     <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
       <%= link_to 'Continue This Chat', request_path(@request), class: "button reserve"  %>
     <% else %>

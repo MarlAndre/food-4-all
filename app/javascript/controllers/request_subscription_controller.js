@@ -6,12 +6,12 @@ export default class extends Controller {
   static targets = [ "messages" ]
 
   connect() {
-    // subscribe to the request (chatroom) channel (app/channels/request_channel.rb)
+    // subscribe to the request channel (app/channels/request_channel.rb)
     this.channel = consumer.subscriptions.create(
       { channel: "RequestChannel", id: this.requestIdValue },
       { received: data => this.#insertMessageAndScrollDown(data) }
       )
-      // console.log(`I need to subscribe to the request (chatroom) with the id ${this.requestIdValue}.`);
+      // console.log(`I need to subscribe to the request with the id ${this.requestIdValue}.`);
     }
 
   #insertMessageAndScrollDown(data) {
@@ -50,7 +50,7 @@ export default class extends Controller {
 
   // The disconnect() method is called when the controller disappears from the DOM:
   disconnect() {
-    // console.log("Unsubscribed from the chatroom");
+    // console.log("Unsubscribed from the request");
     this.channel.unsubscribe()
   }
 }
