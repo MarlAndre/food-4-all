@@ -1,48 +1,64 @@
-<div class="app-container">
+ <!-- PLEASE DONT DELETE THIS DIV-->
+ <form class="absolute d-none">
+      <label for="postal_code">Enter your postal code: </label>
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
+      <button name="button" id="btn" type="submit">Submit</button>
+ </form>
+ <!-- KEEP THE DIV ABOVE-->
 
-  <!-- Geocoder
-  <div style="width: 100%; height: 600px;"
-    data-controller="mapbox"
-    data-mapbox-markers-value="<%= @markers.to_json %>"
-    data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div> -->
-
-  <!-- Covid notices-->
-  <div class="special-alert-container">
-    <div class="special-alert alert-success" role="alert">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <h4 class="alert-heading">How to share safely during COVID-19?</h4>
-      <hr>
-      <p class="mb-0"><ul>
-      <li>Consider wearing a mask</li>
-      <li>Stay at home if you think you present symptoms</li>
-      <li>Wash and sanitize your hands regularly</li>
-    </ul></p>
-    </div>
+<div class="modal-popup-container">
+  <div class="modal-popup">
+    <form>
+      <span class="closebtnpopup" onclick="this.parentElement.parentElement.parentElement.style.display='none';">&times;</span>
+      <label for="postal_code">Enter your postal code: </label>
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
+      <button name="button" id="btn" type="submit">Submit</button>
+    </form>
   </div>
+</div>
 
-  <!-- Search form-->
-  <form>
-    <div class="search-form-control form-group">
-      <input class="form-control string required" name="query" id="query" value="<%= params[:query] %>" placeholder="What are you looking for?">
-      <button name="button" type="submit" class="btn btn-flat">
-        <i class="fas fa-search"></i> Search
-      </button>
-    </div>
-  </form>
 
-  <!-- Cards-->
-  <div class="cards items">
-    <% @items.each do |item| %>
-      <div class="card-product">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-          <div class="card-product-infos">
-            <h2><%= item.name %></h2>
 
-            <h3><%=h truncate(item.description, :length => 100) %></h3>
-            <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
-          </div>
-      </div>
-    <% end %>
+<%# <div style="width: 100%; height: 600px;"
+  data-controller="mapbox"
+  data-mapbox-markers-value="<%= @markers.to_json %>
+  <%# data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>
+
+<!-- Covid notices-->
+<div class="special-alert-container">
+  <div class="special-alert alert-success" role="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <h4 class="alert-heading">How to share safely during COVID-19?</h4>
+    <hr>
+    <p class="mb-0"><ul>
+    <li>Consider wearing a mask</li>
+    <li>Stay at home if you think you present symptoms</li>
+    <li>Wash and sanitize your hands regularly</li>
+  </ul></p>
   </div>
+</div>
+
+<!-- Search form-->
+<form>
+  <div class="search-form-control form-group">
+    <input class="form-control string required" name="query" id="query" value="<%= params[:query] %>" placeholder="What are you looking for?">
+    <button name="button" type="submit" class="btn btn-flat">
+      <i class="fas fa-search"></i> Search
+    </button>
+  </div>
+</form>
+
+<!-- Cards-->
+<div class="cards items">
+  <% @items.each do |item| %>
+    <div class="card-product">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+          <h2><%= item.name %></h2>
+
+          <h3><%=h truncate(item.description, :length => 100) %></h3>
+          <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+        </div>
+    </div>
+  <% end %>
 </div>

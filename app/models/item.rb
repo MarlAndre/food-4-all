@@ -15,12 +15,14 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
-  geocoded_by :location
-  # after_validation :geocode, if: :will_save_change_to_location?
-
   belongs_to :user
-  has_and_belongs_to_many :allergens
-  has_and_belongs_to_many :diets
+  has_many :items_diets, dependent: :destroy
+  has_many :diets, through: :items_diets
+  has_many :items_allergens, dependent: :destroy
+  has_many :items, through: :items_allergens
+  has_many :requests, dependent: :destroy
+
+  # Validations
   validates_presence_of :user_id, :description, :expiration_date, :item_type, :status, :name
   validates :description, length: { minimum: 5 }
 
