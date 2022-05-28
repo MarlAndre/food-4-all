@@ -9,10 +9,19 @@ class ItemsController < ApplicationController
       @items
     end
 
-    # @markers = @items.geocoded.map do |item|
+    # Filter by postal code
+    if params[:postal_code].present?
+      # Filter users if items are near (10km)
+      @users = User.near(params[:postal_code], 5)
+      # Get all of these users items
+      @items = @users.map {|u| u.items}.flatten
+    end
+
+
+    # @markers = @users.items.geocoded.map do |user|
     #   {
-    #     lat: item.latitude,
-    #     lng: item.longitude
+    #     lat: user.latitude,
+    #     lng: user.longitude
     #   }
     # end
   end

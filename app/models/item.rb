@@ -15,10 +15,6 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
-  geocoded_by :location
-  # after_validation :geocode, if: :will_save_change_to_location?
-
-  # Associations
   belongs_to :user
   has_many :items_diets, dependent: :destroy
   has_many :diets, through: :items_diets
