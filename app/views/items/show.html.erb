@@ -1,8 +1,6 @@
 <div class="container-fluid">
 
-  <h1>This is an Item page.</h1>
-
-
+<div class="container-carrusel">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
     <div class="carousel-inner">
@@ -29,40 +27,40 @@
     </a>
   </div>
 
-    <ul class="list-inline">
-      <li># km away</li>
-      <li><i class="fa-thin fa-thumbs-up"></i></li>
-      <li><i class="fa-solid fa-share-nodes"></i></li>
-    </ul>
+  <div class="social-media">
+    <p class="distance"># km away</p>
+    <div class="d-flex">
+      <p><i class="fas fa-thumbs-up"></i></p>
+      <p><i class="fas fa-share-alt"></i></p>
+    </div>
+  </div>
+
+</div>
 
   <br>
 
   <div class="container">
-    <div class="two">
 
-      <div class="three">
-        <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-      </div>
+    <div class="card-user">
 
-      <div class="four">
-        <div class="five">
-          <p>Name of item</p>
-        </div>
+      <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
 
-        <div class="six">
-          <p>Food sharer username</p>
-        </div>
+      <div class="card-description">
+        <p class="item-name"><%= @item.name %></p>
+        <p class="username">username?</p>
       </div>
 
     </div>
 
-    <div class="seven">
-      <p>Expiration date:</p>
-    </div>
+    <ul class="details">
+      <li><%= item.expiration_date %></li>
+      <li>Listed how long ago</li>
+      <li>Quick description</li>
+      <li>Prefered pickup time</li>
+      <li>Bring your container</li>
+    </ul>
 
   </div>
-
-  <br>
 
    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
   </div>

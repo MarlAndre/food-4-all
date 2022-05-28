@@ -9,7 +9,7 @@
 #  latitude        :float
 #  longitude       :float
 #  name            :string
-#  status          :integer          default("available")
+#  status          :integer          default(0)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  user_id         :bigint           not null
