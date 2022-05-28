@@ -6,13 +6,13 @@
  </form>
  <!-- KEEP THE DIV ABOVE-->
 
-<div class="modal-popup-container">
+<div class="modal-popup-container" id="popup-container">
   <div class="modal-popup">
-    <form>
+    <form name="postal_form" data-controller="postal_code" data-action="submit->postal_code#closeBtnPopup">
       <span class="closebtnpopup" onclick="this.parentElement.parentElement.parentElement.style.display='none';">&times;</span>
       <label for="postal_code">Enter your postal code: </label>
       <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
-      <button name="button" id="btn" type="submit">Submit</button>
+      <button name="button" id="btn" type="submit" onclick="this.parentElement.parentElement.parentElement.style.display='none';">Submit</button>
     </form>
   </div>
 </div>
