@@ -2,15 +2,15 @@
 #
 # Table name: messages
 #
-#  id          :bigint           not null, primary key
-#  content     :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  chatroom_id :bigint           not null
-#  user_id     :bigint           not null
+#  id         :bigint           not null, primary key
+#  content    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  request_id :bigint
+#  user_id    :bigint           not null
 #
 class Message < ApplicationRecord
-  belongs_to :chatroom
+  belongs_to :request
   belongs_to :user
 
   def sender?(the_user)
