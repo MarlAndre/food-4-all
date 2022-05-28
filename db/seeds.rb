@@ -7,10 +7,20 @@
 # file = File.read(file_path)
 # list = JSON.parse(file)
 
-# Parses JSON file with a list of local addresses.
+# List of local addresses.
 locations_file_path = File.join(Rails.root, 'app', 'assets', 'locations.json')
 locations_file = File.read(locations_file_path)
 locations = JSON.parse(locations_file)
+
+# List of meals.
+meals_file_path = File.join(Rails.root, 'app', 'assets', 'meals.json')
+meals_file = File.read(meals_file_path)
+meals = JSON.parse(meals_file)
+
+# List of ingredients.
+ingredients_file_path = File.join(Rails.root, 'app', 'assets', 'ingredients.json')
+ingredients_file = File.read(ingredients_file_path)
+ingredients = JSON.parse(ingredients_file)
 #---------------------------------------------------------------------------#
 
 #############################################################################
@@ -38,17 +48,35 @@ puts ''
 User.destroy_all
 
 #############################################################################
-#----------------------------DEMO PERSONA-----------------------------------#
+#----------------------------DEMO PERSONAS-----------------------------------#
 #############################################################################
 
-# Demo user Justin ('receiver' then time passes and he becomes a 'giver').
+# Demo user Justin (starts as 'RECEIVER' then becomes a 'GIVER' by the end of pitch).
 justin = User.create!(
   email: 'justin@foodfor.all',
   username: 'Justin',
   password: '123456',
-  address: '5333 Av. Casgrain'
+  address: '5333 Av. Casgrain, montreal'
 )
 puts "#{'✓'.light_green} Demo persona: #{justin.username.light_cyan} has been created."
+
+# Demo user Shayna will be the GIVER that justin receives a meal from.
+shayna = User.create!(
+  email: 'shayna@foodfor.all',
+  username: 'Shayna',
+  password: '123456',
+  address: '5057 rue de bullion, montreal'
+)
+puts "#{'✓'.light_green} Demo persona: #{shayna.username.light_cyan} has been created."
+
+# Demo user Williams will be the RECEIVER that justin gives a meal to.
+williams = User.create!(
+  email: 'williams@foodfor.all',
+  username: 'Williams',
+  password: '123456',
+  address: '5305 drolet st, montreal'
+)
+puts "#{'✓'.light_green} Demo persona: #{williams.username.light_cyan} has been created."
 puts '--------------------------------------------------------------------'.light_black
 
 #############################################################################
