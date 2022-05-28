@@ -16,6 +16,7 @@
   position: relative;
   background-color: #8BAD85;
   padding: 0;
+  width: auto;
 }
 
 .card-user {
@@ -82,4 +83,19 @@
   padding-bottom: 14px;
   padding-top: 18px;
   margin-left: -8px;
+  font-size: small;
+  padding-right: 4px;
+}
+
+.availability {
+  position: absolute;
+  margin-top: -250px;
+  margin-left: 374px;
+  color: white;
+  font-weight: bolder;
+}
+
+.btn:hover {
+  border: #814B67;
+  background-color: #FFFFF0;
 }
