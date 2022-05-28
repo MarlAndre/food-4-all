@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :items, dependent: :destroy
-  has_many :feedbacks
+  has_many :feedbacks, dependent: :destroy
   has_many :requests_as_giver, class_name: "Request", foreign_key: :giver_id, dependent: :destroy
   has_many :requests_as_receiver, class_name: "Request", foreign_key: :receiver_id, dependent: :destroy
   # has_one_attached :photo # cloudinary to be installed

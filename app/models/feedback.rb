@@ -9,7 +9,6 @@
 #  recommended   :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  request_id    :bigint
 #  user_id       :bigint           not null
 #
 class Feedback < ApplicationRecord
