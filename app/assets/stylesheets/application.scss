@@ -12,6 +12,9 @@
 @import "components/index";
 @import "pages/index";
 
+// Geocoder
+@import "mapbox-gl/dist/mapbox-gl";
+
 
 a:-webkit-any-link {
   text-decoration: none;
