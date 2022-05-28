@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id              :bigint           not null, primary key
+#  description     :text
+#  expiration_date :date
+#  item_type       :string
+#  latitude        :float
+#  longitude       :float
+#  name            :string
+#  status          :integer          default(0)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  user_id         :bigint           not null
+#
 class Item < ApplicationRecord
   belongs_to :user
   has_many :items_diets, dependent: :destroy
