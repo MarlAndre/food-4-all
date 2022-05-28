@@ -1,0 +1,29 @@
+<div class="container request"
+  data-controller="request-subscription"
+  data-request-subscription-request-id-value="<%= @request.id %>"
+  data-request-subscription-current-user-id-value="<%= current_user.id %>"
+>
+  <h1>#<%= @request.name %></h1>
+
+  <div class="messages" data-request-subscription-target="messages">
+    <% @request.messages.each do |message| %>
+      <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+        <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+          <%= render "messages/message", message: message %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= simple_form_for [@request, @message],
+  remote: true,
+  html: {data: {action: "ajax:success->request-subscription#resetForm" }, class: "d-flex"} do |f|
+  %>
+    <%= f.input :content,
+      label: false,
+      placeholder: "Message ##{@request.name}",
+      wrapper_html: {class: "flex-grow-1"}
+    %>
+    <%= f.submit "Send", class: "btn btn-primary" %>
+  <% end %>
+</div>

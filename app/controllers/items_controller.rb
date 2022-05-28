@@ -17,7 +17,10 @@ class ItemsController < ApplicationController
     # end
   end
 
-  def show; end
+  def show
+    # link the show page to a request (chatroom)
+    # @request = Request.new
+  end
 
   def new
     @item = Item.new
