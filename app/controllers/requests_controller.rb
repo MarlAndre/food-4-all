@@ -2,7 +2,8 @@ class RequestsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @requests = Request.all
+    # current user can only view the chats where s/he is a receiver/giver.
+    @requests = Request.where(receiver: current_user).or(Request.where(giver: current_user))
   end
 
   # make sure only the current users can access the page, otherwise redirect.

@@ -1,3 +1,4 @@
+// Requests#show
 .request {
   background: white;
   margin-top: 9px;
@@ -26,5 +27,13 @@
     .form-group {
       margin-bottom: 0;
     }
+  }
+}
+
+// Requests#index
+.requests {
+  h5 {
+    border-bottom: 1px black solid;
+    width: 100%;
   }
 }
