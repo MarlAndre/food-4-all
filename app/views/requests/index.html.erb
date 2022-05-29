@@ -6,9 +6,7 @@
     <% @requests.each do |request| %>
       <%= link_to request_path(request) do %>
         <div class="request-card ripple">
-          <div class="image">
-            <%= image_tag "ingredients/cucumber_two.jpg" %>
-          </div>
+          <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
           <div class="details">
             <% if current_user == request.receiver %>
               <span><%= request.giver.username %></span>
@@ -16,7 +14,20 @@
               <span><%= request.receiver.username %></span>
             <% end %>
             <strong><%= request.item.name %></strong>
-            <em><%= request.messages.last.user.username %>: <%= request.messages.last.content %></span>
+            <% if current_user == request.messages.last.user %>
+              <em>You: <%= request.messages.last.content %></span>
+            <% else %>
+              <em><%= request.messages.last.content %></em>
+            <% end %>
+          </div>
+          <div class="message-time">
+            <% if request.messages.last.created_at > 6.days.from_now %>
+              <%= request.messages.last.created_at.strftime("%D") %>
+            <% elsif request.messages.last.created_at > 1.day.from_now %>
+              <%= request.messages.last.created_at.strftime("%a") %>
+            <% else %>
+              Today
+            <% end %>
           </div>
         </div>
       <% end %>
