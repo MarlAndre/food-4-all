@@ -51,6 +51,10 @@
     display: flex;
     align-items: center;
     height: 104px;
+    margin-bottom: 5px;
+    &.donated {
+      background: rgba(128, 128, 128, 0.4);
+    }
     .img {
       padding: 0 10px;
       height: 88%;
@@ -62,7 +66,7 @@
       flex-direction: column;
       margin-left: 10px;
       color: black;
-      flex-grow: 1;
+      width: 80%;
       span {
         font-size: 12px;
       }
