@@ -1,12 +1,25 @@
 <div class="requests">
-  <div class="d-flex justify-content-center">
-      <h5>Messages</h5>
+  <div class="heading">
+    <h5>Messages</h5>
   </div>
-
+  <div class="container my-3">
+    <% @requests.each do |request| %>
+      <%= link_to request_path(request) do %>
+        <div class="request-card ripple">
+          <div class="image">
+            <%= image_tag "ingredients/cucumber_two.jpg" %>
+          </div>
+          <div class="details">
+            <% if current_user == request.receiver %>
+              <span><%= request.giver.username %></span>
+            <% elsif current_user == request.giver %>
+              <span><%= request.receiver.username %></span>
+            <% end %>
+            <strong><%= request.item.name %></strong>
+            <em><%= request.messages.last.user.username %>: <%= request.messages.last.content %></span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-
-
-<% @requests.each do |request| %>
-  <%= request.item.name %>
-  <p>Giver: <%= request.giver.username %></p>
-<% end %>
