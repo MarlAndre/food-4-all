@@ -15,6 +15,7 @@
   </head>
 
   <body>
+    <% unless current_page?(root_path) %>
     <%# app-container just for Requests#index page %>
     <%# Page heading needs 100% width %>
     <% if params[:controller] == "requests" && params[:action] == "index" %>
@@ -33,11 +34,26 @@
         <div class="page-content">
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
+
           <%= yield %>
         </div>
       </div>
+      <% else %>
+        <%= link_to items_path do %>
+        <div class="image-banner">
+          <div class="container-image-banner">
+            <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
+          </div>
+        </div>
+
+        <div class="white-banner-container">
+          <div class="white-banner">
+            <p>Too much food? Share it.</p>
+          </div>
+        </div>
     <% end %>
 
+    <% end %>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
