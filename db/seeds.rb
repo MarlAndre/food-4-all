@@ -41,23 +41,19 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'chicken'
     item.description = @meal_descriptions[1]
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'mac and cheese with ham'
     item.description = @meal_descriptions[2]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 1)
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'pizza'
     item.description = @meal_descriptions[3]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'plantain'
     item.description = @meal_descriptions[4]
     ItemsDiet.create!(item_id: item.id, diet_id: 1)
@@ -65,7 +61,6 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'salad in a jar'
     item.description = @meal_descriptions[5]
     ItemsDiet.create!(item_id: item.id, diet_id: 1)
@@ -73,22 +68,20 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'salmon'
     item.description = @meal_descriptions[6]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   when 'spaghetti'
     item.description = @meal_descriptions[7]
 
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
-    puts " The diets + allergens for #{item.name.cyan} have been created"
   else
     puts 'error?'.red.blink
   end
+  puts " The #{'diets'.light_blue} + #{'allergens'.light_blue} for #{item.name.cyan} have been created"
   puts ''
 end
 #############################################################################
@@ -277,7 +270,7 @@ puts "#{@shayna.username.light_cyan} has received some feedback."
 end
 puts "#{@williams.username.light_cyan} has received some feedback."
 
-puts "#{'✓ Feedback'.light_green}created."
+puts "#{'✓ Feedback'.light_green} created."
 puts ''
 
 #############################################################################
@@ -310,8 +303,10 @@ puts '-------------Fake data for front-end styling (requests)-------------'.ligh
   puts "Giver: #{giver.username.light_cyan} has #{item.name.to_s.cyan} to give."
   puts "#{@williams.username.light_cyan} is requesting the #{item.name.to_s.cyan}."
 end
+puts "#{'✓ Requests'.light_green} created."
+puts ''
 
 #---------------------------------END OF SEED-------------------------------#
-print '♡ '.light_red
-print "Finished sharing food".light_green
-puts ' ♡'.light_red
+print '♡♡♡ '.light_red
+print "Finished sharing food".blink
+puts ' ♡♡♡'.light_red
