@@ -10,22 +10,22 @@
 # List of local addresses.
 locations_file_path = File.join(Rails.root, 'app', 'assets', 'locations.json')
 locations_file = File.read(locations_file_path)
-locations = JSON.parse(locations_file)
+@locations = JSON.parse(locations_file)
 
 # List of meals.
 meals_file_path = File.join(Rails.root, 'app', 'assets', 'meals.json')
 meals_file = File.read(meals_file_path)
-meals = JSON.parse(meals_file)
+@meals = JSON.parse(meals_file)
 
 # List of meals descriptions.
 meal_descriptions_file_path = File.join(Rails.root, 'app', 'assets', 'meal_descriptions.json')
 meal_descriptions_file = File.read(meal_descriptions_file_path)
-meal_descriptions = JSON.parse(meal_descriptions_file)
+@meal_descriptions = JSON.parse(meal_descriptions_file)
 
 # List of ingredients.
 ingredients_file_path = File.join(Rails.root, 'app', 'assets', 'ingredients.json')
 ingredients_file = File.read(ingredients_file_path)
-ingredients = JSON.parse(ingredients_file)
+@ingredients = JSON.parse(ingredients_file)
 
 #############################################################################
 #--------------------------------METHODS------------------------------------#
@@ -34,16 +34,16 @@ ingredients = JSON.parse(ingredients_file)
 # FIX THIS ISSUE
 def add_allergens_and_diets(item)
   case item.name
-  when 'cauliflower soup' then item.description = meal_descriptions[0]
-  when 'chicken' then puts 'chicken'
-  when 'mac and cheese with ham' then puts 'mac and cheese with ham'
-  when 'pizza' then puts 'pizza'
-  when 'plantain' then puts 'plantain'
-  when 'salad in a jar' then puts 'salad in a jar'
-  when 'salmon' then puts 'salmon'
+  when 'cauliflower soup' then item.description = @meal_descriptions[0]
+  when 'chicken' then item.description = @meal_descriptions[0]
+  when 'mac and cheese with ham' then item.description = @meal_descriptions[0]
+  when 'pizza' then item.description = @meal_descriptions[0]
+  when 'plantain' then item.description = @meal_descriptions[0]
+  when 'salad in a jar' then item.description = @meal_descriptions[0]
+  when 'salmon' then item.description = @meal_descriptions[0]
   # when 'spaghetti' then puts 'spaghetti'
   else
-    puts 'error?'
+    puts 'error?'.red.blink
   end
 end
 
@@ -68,7 +68,7 @@ puts "
 #{'╚═╝░░░░░░╚════╝░░╚════╝░╚═════╝░'.magenta}  #{'░░░░░╚═╝'.magenta}  ╚═╝░░╚═╝╚══════╝╚══════╝"
 puts "Donating the food and resetting the database".red.blink
 puts ''
-# Due to model associations, this will delete the entire database.
+# Due to model associations, this will delete msot of the database.
 User.destroy_all
 
 #############################################################################
@@ -77,6 +77,8 @@ User.destroy_all
 
 allergen_counter = 0
 @allergens_list.length.times do
+  next if Allergen.count == 8
+
   allergen = Allergen.create!(name: @allergens_list[allergen_counter])
   allergen_counter += 1
   print "#{allergen.id}. "
@@ -119,6 +121,15 @@ shayna = User.create!(
   password: '123456',
   address: '5057 rue de bullion, montreal'
 )
+shaynas_meal = Item.create!(
+  user_id: shayna.id,
+  name: @meals.last,
+  status: 'available',
+  item_type: 'meal',
+  description: @meal_descriptions.last,
+  expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+)
+puts "#{'✓'.light_green} Demo persona: #{shayna.username.light_cyan} has been created. with a #{shaynas_meal.name.green.blink}"
 puts "#{'✓'.light_green} Demo persona: #{shayna.username.light_cyan} has been created."
 
 # Demo user Williams will be the RECEIVER that justin gives a meal to.
@@ -139,9 +150,9 @@ puts '--------------------------------------------------------------------'.ligh
 32.times do
   user = User.create!(
     email: Faker::Internet.email,
-    username: Faker::Name.first_name + Faker::Creature::Dog.name,
+    username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
     password: '123456',
-    address: locations.sample
+    address: @locations.sample
   )
   puts "#{'✓'.light_green} Demo user: ID:#{user.id.to_s.light_white} - #{user.username.light_cyan} has been created."
 end
@@ -163,16 +174,16 @@ puts '--------------------------------------------------------------------'.ligh
 #-------------------------SEED DB WITH MEAL ITEMS---------------------------#
 #############################################################################
 
-# Creates meals for existing users.
+# Creates @ for existing users.
 user_id_counter = williams.id + 1
 counter_from_zero = 0
 7.times do
   meal = Item.create!(
     user_id: user_id_counter,
-    name: meals[counter_from_zero],
+    name: @meals[counter_from_zero],
     status: 'available',
     item_type: 'meal',
-    description: meal_descriptions[counter_from_zero],
+    description: @meal_descriptions[counter_from_zero],
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
 
@@ -196,9 +207,9 @@ puts '--------------------------------------------------------------------'.ligh
 # Creates users with meal items to fill DB.
 user = User.create!(
   email: Faker::Internet.email,
-  username: Faker::Name.first_name + Faker::Creature::Dog.name,
+  username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
   password: '123456',
-  address: locations.sample
+  address: @locations.sample
 )
 puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
 
@@ -227,9 +238,9 @@ puts '--------------------------------------------------------------------'.ligh
 # Creates users with meal items to fill DB.
 user = User.create!(
   email: Faker::Internet.email,
-  username: Faker::Name.first_name + Faker::Creature::Dog.name,
+  username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
   password: '123456',
-  address: locations.sample
+  address: @locations.sample
 )
 puts "#{'✓'.light_green} Demo user: #{user.username.light_cyan} has been created."
 
@@ -258,18 +269,18 @@ puts '--------------------------------------------------------------------'.ligh
   # Creates receiver with meal or ingredient item for request.
   receiver = User.create!(
     email: Faker::Internet.email,
-    username: Faker::Name.first_name + Faker::Creature::Dog.name,
+    username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
     password: '123456',
-    address: locations.sample
+    address: @locations.sample
   )
-  puts "Receiver: #{receiver.username.light_cyan} has been created."
+  puts "Receiver: #{receiver.username.cyan} has been created."
 
   # Creates giver with meal or ingredient item for request.
   giver = User.create!(
     email: Faker::Internet.email,
-    username: Faker::Name.first_name + Faker::Creature::Dog.name,
+    username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
     password: '123456',
-    address: locations.sample
+    address: @locations.sample
   )
   puts "Giver: #{giver.username.light_cyan} has been created."
 
@@ -303,7 +314,7 @@ puts '--------------------------------------------------------------------'.ligh
       item_id: meal.id
     )
   end
-  puts "#{'✓'.light_green} #{giver.username.light_cyan} just gave #{receiver.username.light_cyan} a #{meal.name.cyan} meal."
+  puts "#{'✓'.light_green} #{giver.username.light_cyan} just gave #{receiver.username.cyan} a #{meal.name.cyan} meal."
   puts '--------------------------------------------------------------------'.light_black
 end
 
