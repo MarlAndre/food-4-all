@@ -2,16 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static values = { chatroomId: Number, currentUserId: Number }
+  static values = { requestId: Number, currentUserId: Number }
   static targets = [ "messages" ]
 
   connect() {
-    // subscribe to the chatroom channel (app/channels/chatroom_channel.rb)
+    // subscribe to the request channel (app/channels/request_channel.rb)
     this.channel = consumer.subscriptions.create(
-      { channel: "ChatroomChannel", id: this.chatroomIdValue },
+      { channel: "RequestChannel", id: this.requestIdValue },
       { received: data => this.#insertMessageAndScrollDown(data) }
       )
-      // console.log(`I need to subscribe to the chatroom with the id ${this.chatroomIdValue}.`);
+      // console.log(`I need to subscribe to the request with the id ${this.requestIdValue}.`);
     }
 
   #insertMessageAndScrollDown(data) {
@@ -49,7 +49,7 @@ export default class extends Controller {
 
   // The disconnect() method is called when the controller disappears from the DOM:
   disconnect() {
-    // console.log("Unsubscribed from the chatroom");
+    // console.log("Unsubscribed from the request");
     this.channel.unsubscribe()
   }
 }

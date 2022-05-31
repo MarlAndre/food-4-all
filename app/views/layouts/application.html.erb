@@ -12,12 +12,23 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-
   </head>
 
   <body>
     <% unless current_page?(root_path) %>
-
+    <%# app-container just for Requests#index page %>
+    <%# Page heading needs 100% width %>
+    <% if params[:controller] == "requests" && params[:action] == "index" %>
+      <div class="app-container requests">
+        <%= render '/shared/navbar' %>
+        <div class="page-content">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <%# normal app-container for all other pages %>
       <div class="app-container">
         <%= render '/shared/navbar' %>
         <div class="page-content">
