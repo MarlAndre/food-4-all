@@ -1,3 +1,4 @@
+// --------------------------------------------Requests#show
 .request {
   background: white;
   margin-top: 9px;
@@ -25,6 +26,88 @@
 
     .form-group {
       margin-bottom: 0;
+    }
+  }
+}
+
+// --------------------------------------------Requests#index
+.requests {
+  .heading {
+    border-bottom: 1.5px $light-green solid;
+    h5 {
+      width: 100%;
+      font-size: 17px;
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: black;
+    }
+  }
+  .request-card {
+    background: $light-green;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    height: 104px;
+    margin-bottom: 5px;
+    &.donated {
+      background: rgba(128, 128, 128, 0.4);
+    }
+    .img {
+      padding: 0 10px;
+      height: 88%;
+      display: contain;
+      border-radius: 50%;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      color: black;
+      width: 80%;
+      span {
+        font-size: 12px;
+      }
+      strong {
+        font-size: 17px;
+      }
+      em {
+        font-size: 13px;
+        opacity: 0.6;
+      }
+    }
+  }
+  .ripple {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0,0,0);
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10, 10);
+      opacity: 0;
+      transition: transform .5s, opacity 1s;
+    }
+    &:active:after {
+      transform: scale(0, 0);
+      opacity: .3;
+      transition: 0s;
+    }
+    .message-time {
+      padding-right: 7px;
+      font-size: 12.5px;
+      color: rgba(black, 0.6);
     }
   }
 }

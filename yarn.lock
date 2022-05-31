@@ -2310,6 +2310,11 @@ css-prefers-color-scheme@^3.1.1:
   dependencies:
     postcss "^7.0.5"
 
+css-ripple-effect@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/css-ripple-effect/-/css-ripple-effect-1.0.5.tgz#6963b752aaf59babbd3fea3ec0da5d44e9122efb"
+  integrity sha512-wtYlyYA0MQklWNQw60XSE1uUJrTKOL6JZbQhcqa3LzVLW0OqZnswkvctbPo/8W2MI8BfHAzyCfja2tjVVIxoww==
+
 css-select-base-adapter@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/css-select-base-adapter/-/css-select-base-adapter-0.1.1.tgz#3b2ff4972cc362ab88561507a95408a1432135d7"
