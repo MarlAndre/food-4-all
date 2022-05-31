@@ -74,6 +74,7 @@ User.destroy_all
 #############################################################################
 #-------------------------SEED DB WITH ALLERGENS----------------------------#
 #############################################################################
+puts '----------------------------Allergens-------------------------------'.light_black
 
 allergen_counter = 0
 @allergens_list.length.times do
@@ -85,25 +86,29 @@ allergen_counter = 0
   puts allergen.name.light_blue
 end
 puts "#{'✓ Allergens '.light_green}created"
-puts '--------------------------------------------------------------------'.light_black
+puts ''
 
 #############################################################################
 #---------------------------SEED DB WITH DIETS------------------------------#
 #############################################################################
+puts '-----------------------------Diets----------------------------------'.light_black
 
 diet_counter = 0
 @diets_list.length.times do
+  next if Diet.count == 5
+
   diet = Diet.create!(name: @diets_list[diet_counter])
   diet_counter += 1
   print "#{diet.id}. "
   puts diet.name.light_blue
 end
 puts "#{'✓ Diets '.light_green}created"
-puts '--------------------------------------------------------------------'.light_black
+puts ''
 
 #############################################################################
 #----------------------------DEMO PERSONAS-----------------------------------#
 #############################################################################
+puts '----------------------------Personas--------------------------------'.light_black
 
 # Demo user Justin (starts as 'RECEIVER' then becomes a 'GIVER' by the end of pitch).
 justin = User.create!(
@@ -112,7 +117,7 @@ justin = User.create!(
   password: '123456',
   address: '5333 Av. Casgrain, montreal'
 )
-puts "#{'✓'.light_green} Demo persona: #{justin.username.light_cyan} has been created."
+puts " Demo persona: #{justin.username.light_cyan} has been created."
 
 # Demo user Shayna will be the GIVER that justin receives a meal from.
 shayna = User.create!(
@@ -129,8 +134,7 @@ shaynas_meal = Item.create!(
   description: @meal_descriptions.last,
   expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
 )
-puts "#{'✓'.light_green} Demo persona: #{shayna.username.light_cyan} has been created. with a #{shaynas_meal.name.green.blink}"
-puts "#{'✓'.light_green} Demo persona: #{shayna.username.light_cyan} has been created."
+puts " Demo persona: #{shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
 
 # Demo user Williams will be the RECEIVER that justin gives a meal to.
 williams = User.create!(
@@ -139,40 +143,42 @@ williams = User.create!(
   password: '123456',
   address: '5305 drolet st, montreal'
 )
-puts "#{'✓'.light_green} Demo persona: #{williams.username.light_cyan} has been created."
-puts '--------------------------------------------------------------------'.light_black
+puts " Demo persona: #{williams.username.light_cyan} has been created to rent #{shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
+puts "#{'✓ Personas '.light_green}created"
+puts ''
 
 #############################################################################
 #----------------------------SEED DB WITH USERS-----------------------------#
 #############################################################################
+puts '-----------------------------Users----------------------------------'.light_black
 
+# 32 - 7 users total
 # Creates users, further below each meal/ingredient will be applied to each user.
-32.times do
+@counter_from_zero = 0
+7.times do
   user = User.create!(
     email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
+    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
     password: '123456',
     address: @locations.sample
   )
-  puts "#{'✓'.light_green} Demo user: ID:#{user.id.to_s.light_white} - #{user.username.light_cyan} has been created."
+  meal = Item.create!(
+    user_id: user.id,
+    name: @meals[@counter_from_zero],
+    status: 'available',
+    item_type: 'meal',
+    description: @meal_descriptions[@counter_from_zero],
+    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+  )
+  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with a #{meal.name.cyan}(ID:#{meal.id.to_s.light_white}) meal."
 end
-
-# 5.times do
-#   ingredient = Item.create!(
-#     user_id: user.id,
-#     name: Faker::Food.vegetables,
-#     status: @status_list.sample,
-#     item_type: 'ingredient',
-#     description: Faker::Food.description,
-#     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
-#   )
-# end
-# puts "#{'5'.blue} ingredient items created for #{user.username.light_cyan} "
-puts '--------------------------------------------------------------------'.light_black
+puts "#{'✓ Users '.light_green}created"
+puts ''
 
 #############################################################################
 #-------------------------SEED DB WITH MEAL ITEMS---------------------------#
 #############################################################################
+puts '----------------------------Meals-----------------------------------'.light_black
 
 # Creates @ for existing users.
 user_id_counter = williams.id + 1
@@ -197,7 +203,7 @@ counter_from_zero = 0
 end
 
 puts "#{'✓'.light_green} #{'7'.blue} meal items created"
-puts '--------------------------------------------------------------------'.light_black
+puts ''
 
 #############################################################################
 #-------------------------SEED DB WITH MEAL ITEMS---------------------------#
@@ -207,7 +213,7 @@ puts '--------------------------------------------------------------------'.ligh
 # Creates users with meal items to fill DB.
 user = User.create!(
   email: Faker::Internet.email,
-  username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
+  username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
   password: '123456',
   address: @locations.sample
 )
@@ -238,7 +244,7 @@ puts '--------------------------------------------------------------------'.ligh
 # Creates users with meal items to fill DB.
 user = User.create!(
   email: Faker::Internet.email,
-  username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
+  username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
   password: '123456',
   address: @locations.sample
 )
@@ -269,7 +275,7 @@ puts '--------------------------------------------------------------------'.ligh
   # Creates receiver with meal or ingredient item for request.
   receiver = User.create!(
     email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
+    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
     password: '123456',
     address: @locations.sample
   )
@@ -278,7 +284,7 @@ puts '--------------------------------------------------------------------'.ligh
   # Creates giver with meal or ingredient item for request.
   giver = User.create!(
     email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).downcase,
+    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
     password: '123456',
     address: @locations.sample
   )
@@ -322,3 +328,15 @@ end
 print '♡ '.light_red
 print "Finished sharing food".light_green
 puts ' ♡'.light_red
+
+# 5.times do
+#   ingredient = Item.create!(
+#     user_id: user.id,
+#     name: Faker::Food.vegetables,
+#     status: @status_list.sample,
+#     item_type: 'ingredient',
+#     description: Faker::Food.description,
+#     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+#   )
+# end
+# puts "#{'5'.blue} ingredient items created for #{user.username.light_cyan} "
