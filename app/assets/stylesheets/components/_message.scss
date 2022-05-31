@@ -1,6 +1,11 @@
 // this component is for styling the messages in each request.
 // refer to usage in views/requests/show.html.erb
 
+// background color of the card for messages
+.messages {
+  background-color: rgba($light-green, 0.15);
+}
+
 // To style the wrapping div
 .message-row {
   margin-bottom: 10px;
@@ -11,10 +16,10 @@
 .sender-style, .receiver-style {
   width: 70%;
   max-width: 400px;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 8px;
   min-height: 80px;
-  color: rgba(black, 0.9)
+  color: rgba(black, 0.9);
 }
 
 // changing the boilerplate colors to our theme colors in Figma
@@ -24,4 +29,13 @@
 
 .receiver-style {
   background-color: rgba($light-green, 0.5);
+}
+
+// button to send messages
+.send-messages {
+  .button {
+    height: 62px;
+    font-size: 14px;
+    font-weight: 400;
+  }
 }
