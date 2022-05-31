@@ -99,6 +99,7 @@ end
 @status_list = %w[available reserved donated]
 @allergens_list = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
 @diets_list = ['vegan', 'vegetarian', 'pescatarian', 'lactose free', 'gluten free']
+@true_or_false = [true, false]
 #---------------------------------------------------------------------------#
 
 # Clears screen and wipes database
@@ -155,23 +156,23 @@ puts ''
 puts '----------------------------Personas--------------------------------'.light_black
 
 # Demo user Justin (starts as 'RECEIVER' then becomes a 'GIVER' by the end of pitch).
-justin = User.create!(
+@justin = User.create!(
   email: 'justin@foodfor.all',
   username: 'Justin',
   password: '123456',
   address: '5333 Av. Casgrain, montreal'
 )
-puts " Demo persona: #{justin.username.light_cyan} has been created."
+puts " Demo persona: #{@justin.username.light_cyan} has been created."
 puts ''
 # Demo user Shayna will be the GIVER that justin receives a meal from.
-shayna = User.create!(
+@shayna = User.create!(
   email: 'shayna@foodfor.all',
   username: 'Shayna',
   password: '123456',
   address: '5057 rue de bullion, montreal'
 )
 shaynas_meal = Item.create!(
-  user_id: shayna.id,
+  user_id: @shayna.id,
   name: @meals.last,
   status: 'available',
   item_type: 'meal',
@@ -179,17 +180,17 @@ shaynas_meal = Item.create!(
   expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
 )
 
-puts " Demo persona: #{shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
+puts " Demo persona: #{@shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
 add_allergens_and_diets(shaynas_meal)
 
 # Demo user Williams will be the RECEIVER that justin gives a meal to.
-williams = User.create!(
+@williams = User.create!(
   email: 'williams@foodfor.all',
   username: 'Williams',
   password: '123456',
   address: '5305 drolet st, montreal'
 )
-puts " Demo persona: #{williams.username.light_cyan} has been created to rent #{shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
+puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #{@shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
 puts "#{'✓ Personas '.light_green}created"
 puts ''
 
@@ -241,110 +242,76 @@ puts '---------------------Users with ingredients-------------------------'.ligh
     )
   ingredient.description = "Delicious #{ingredient.name}"
   ingredient.save!
-  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with a #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_white}) meal."
+  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_white})."
   @counter_from_zero += 1
 end
 puts "#{'✓ Users with ingredients '.light_green}created"
 puts ''
 
 #############################################################################
-#------------------------ATTACH ALLERGENS TO MEALS--------------------------#
+#---------------------------SEED DB WITH FEEDBACK---------------------------#
 #############################################################################
+puts '------------------------------Feedback------------------------------'.light_black
 
+5.times do
+  # Creates feedback for a user
+  feedback = Feedback.create!(
+  user_id: @shayna.id,
+  punctual: @true_or_false.sample,
+  friendly: true,
+  communication: true,
+  recommended: true
+  )
+end
+puts "#{@shayna.username.light_cyan} has received some feedback."
 
+5.times do
+  # Creates feedback for a user
+  feedback = Feedback.create!(
+  user_id: @williams.id,
+  punctual: true,
+  friendly: true,
+  communication: @true_or_false.sample,
+  recommended: true
+  )
+end
+puts "#{@williams.username.light_cyan} has received some feedback."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+puts "#{'✓ Feedback'.light_green}created."
+puts ''
 
 #############################################################################
 #---------------------------SEED DB WITH REQUESTS---------------------------#
+#------Comment this out during live demo, this code shouldn't be seen-------#
 #############################################################################
-puts '----Fake Receiver for front-end styling------'
+puts '-------------Fake data for front-end styling (requests)-------------'.light_black
 
 5.times do
-  # Creates receiver with meal or ingredient item for request.
-  receiver = User.create!(
-    email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
-    password: '123456',
-    address: @locations.sample
-  )
-  puts "Receiver: #{receiver.username.cyan} has been created."
-
-  # Creates giver with meal or ingredient item for request.
+  # Creates giver with meal or ingredient item.
   giver = User.create!(
     email: Faker::Internet.email,
     username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
     password: '123456',
     address: @locations.sample
   )
-  puts "Giver: #{giver.username.light_cyan} has been created."
-
-  meal = Item.create!(
+  item = Item.create!(
     user_id: giver.id,
     name: Faker::Food.dish,
-    status: 'reserved',
+    status: 'available',
     item_type: @item_types.sample,
     description: Faker::Food.description,
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
-
-  # If the item is a meal, it might have an allergen or dietary restriction.
-  if meal.item_type == 'meal'
-    allergen_or_diet = rand(1..3)
-    case allergen_or_diet
-    when 1
-      ItemsAllergen.create!(
-        item_id: meal.id,
-        allergen_id: rand(1..4)
-      )
-    when 2
-      ItemsDiet.create!(
-        item_id: meal.id,
-        diet_id: rand(1..5)
-      )
-    end
-    request = Request.create!(
-      giver_id: giver.id,
-      receiver_id: receiver.id,
-      item_id: meal.id
-    )
-  end
-  puts "#{'✓'.light_green} #{giver.username.light_cyan} just gave #{receiver.username.cyan} a #{meal.name.cyan} meal."
-  puts '--------------------------------------------------------------------'.light_black
+  request = Request.create!(
+    giver_id: giver.id,
+    receiver_id: @williams.id,
+    item_id: item.id
+  )
+  puts "Giver: #{giver.username.light_cyan} has #{item.name.to_s.cyan} to give."
+  puts "#{@williams.username.light_cyan} is requesting the #{item.name.to_s.cyan}."
 end
 
 #---------------------------------END OF SEED-------------------------------#
 print '♡ '.light_red
 print "Finished sharing food".light_green
 puts ' ♡'.light_red
-
-# 5.times do
-#   ingredient = Item.create!(
-#     user_id: user.id,
-#     name: Faker::Food.vegetables,
-#     status: @status_list.sample,
-#     item_type: 'ingredient',
-#     description: Faker::Food.description,
-#     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
-#   )
-# end
-# puts "#{'5'.blue} ingredient items created for #{user.username.light_cyan} "
