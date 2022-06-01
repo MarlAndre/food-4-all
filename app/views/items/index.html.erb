@@ -54,15 +54,15 @@
 <!-- Cards-->
 <div class="cards items" id="cards-items">
   <% @items.each do |item| %>
-    <div class="card-product">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-        <%= link_to item_path(item), class: "text-decoration-none" do %>
-          <h2><%= item.name %></h2>
-          <h3><%=h truncate(item.description, :length => 100) %></h3>
-          <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
-        <% end %>
+    <%= link_to item_path(item), class: "text-decoration-none" do %>
+      <div class="card-product">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+            <h2><%= item.name %></h2>
+            <h3><%=h truncate(item.description, :length => 100) %></h3>
+            <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
