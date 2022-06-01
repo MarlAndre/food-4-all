@@ -7,7 +7,7 @@
     <% if @requests %>
       <% @requests.each do |request| %>
         <%# only if a request has messages, show it in the page %>
-        <% if request.messages %>
+        <% unless request.messages %>
           <%= link_to request_path(request) do %>
             <%# each request is a flex card %>
             <div class="ripple shadow request-card <%= request.item.status == 2 ? 'donated' : '' %>">
