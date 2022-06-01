@@ -1,51 +1,51 @@
 <div class="container-fluid mb-5 pb-5">
 
-<div class="container-carrusel">
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div class="container-carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="First slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="First slide">
+        </div>
+
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940" alt="Second slide">
+        </div>
+
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="Third slide">
+        </div>
       </div>
 
-      <div class="carousel-item">
-        <img class="d-block w-100" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940" alt="Second slide">
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+      <%# added stimulus controller at this div to like (heart) an item %>
+      <div class="social-media"
+      data-controller="toggle-favorite"
+      data-toggle-favorite-item-id-value="<%= @item.id %>"
+      >
+        <p class="distance"># km away</p>
+        <div class="d-flex">
+          <%# this is an icon link to like and store the item in 'My Favorites' page. %>
+          <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post  do %>
+            <i class="far fa-heart <%= 'red' if current_user.favorited?(@item) %>"></i>
+          <% end %>
+          <p><i class="fas fa-share-alt"></i></p>
+        </div>
       </div>
 
-      <div class="carousel-item">
-        <img class="d-block w-100" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="Third slide">
+      <div class="availability">
+        <p><%= @item.status %></p>
       </div>
-    </div>
 
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
   </div>
-
-  <div class="social-media"
-  data-controller="toggle-favorite"
-  data-toggle-favorite-item-id-value="<%= @item.id %>"
-  >
-    <p class="distance"># km away</p>
-    <div class="d-flex">
-      <%# this is an icon link to like and store the item in 'My Favorites' page. %>
-      <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post  do %>
-        <i class="far fa-heart <%= 'red' if current_user.favorited?(@item) %>"></i>
-      <% end %>
-      <p><i class="fas fa-share-alt"></i></p>
-    </div>
-  </div>
-
-  <div class="availability">
-    <p><%= @item.status %></p>
-  </div>
-
-</div>
 
   <br>
 
@@ -56,8 +56,8 @@
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
 
       <div class="card-description">
-        <p class="item-name">From <%= @item.name %></p>
-        <p class="username"> <%= @item.user.username %></p>
+        <p class="item-name"> <%= @item.name %></p>
+        <p class="username">From <%= @item.user.username %></p>
       </div>
 
     </div>
@@ -72,7 +72,8 @@
 
   </div>
 
-   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
+  <div>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
   </div>
 
   <br>
