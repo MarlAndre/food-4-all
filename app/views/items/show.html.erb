@@ -27,10 +27,16 @@
     </a>
   </div>
 
-  <div class="social-media">
+  <div class="social-media"
+  data-controller="toggle-favorite"
+  data-toggle-favorite-item-id-value="<%= @item.id %>"
+  >
     <p class="distance"># km away</p>
     <div class="d-flex">
-      <p><i class="fas fa-thumbs-up"></i></p>
+      <%# this is an icon link to like and store the item in 'My Favorites' page. %>
+      <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post  do %>
+        <i class="far fa-heart <%= 'red' if current_user.favorited?(@item) %>"></i>
+      <% end %>
       <p><i class="fas fa-share-alt"></i></p>
     </div>
   </div>

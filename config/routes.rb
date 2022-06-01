@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   # CRUD actions / routes for items
-  resources :items
+  resources :items do
+    member do
+      post 'toggle_favorite', to: "items#toggle_favorite"
+    end
+  end
 
   # Shows user's food/ingredient items
   get "my-items", to: "items#my_items"

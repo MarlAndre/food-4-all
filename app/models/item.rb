@@ -15,6 +15,7 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
+  acts_as_favoritable
   belongs_to :user
   has_many :items_diets, dependent: :destroy
   has_many :diets, through: :items_diets

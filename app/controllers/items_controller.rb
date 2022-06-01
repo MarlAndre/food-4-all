@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :find_item, only: %i[show]
+  # a user doesn't have to log in to visit the index and show pages
+  skip_before_action :authenticate_user!, only: %i[index show]
+  # a user has to log in to like an item
+  before_action :authenticate_user!, only: %i[toggle_favorite]
+  before_action :find_item, only: %i[show toggle_favorite]
 
   def index
     if params[:query].present?
@@ -53,6 +57,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def toggle_favorite
+    current_user.favorited?(@item) ? current_user.unfavorite(@item) : current_user.favorite(@item)
   end
 
   private
