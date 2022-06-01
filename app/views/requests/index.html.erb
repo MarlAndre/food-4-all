@@ -24,7 +24,7 @@
                 <% end %>
                 <strong><%= request.item.name %></strong>
                 <% if request.item.status == 'donated' %>
-                  <em><%= '<This item was donated>' if request.item.status == 'donated' %></em>
+                  <em>This item was donated.</em>
                 <% else %>
                   <%# only part of the message is previewed if it's too long %>
                   <% if current_user == request.messages.last.user %>
