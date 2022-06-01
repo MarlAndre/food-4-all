@@ -9,10 +9,9 @@
 #  recommended   :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  request_id    :bigint
 #  user_id       :bigint           not null
 #
 class Feedback < ApplicationRecord
-  belongs_to :request
-  validates_presence_of :request_id, :user_id
+  belongs_to :user
+  validates_presence_of :user_id
 end

@@ -1,8 +1,9 @@
 # == Schema Information
 #
-# Table name: transactions
+# Table name: requests
 #
 #  id          :bigint           not null, primary key
+#  status      :boolean          default(FALSE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  giver_id    :bigint           not null
@@ -11,7 +12,7 @@
 #
 require "test_helper"
 
-class TransactionTest < ActiveSupport::TestCase
+class RequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

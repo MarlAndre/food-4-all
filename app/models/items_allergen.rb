@@ -9,6 +9,7 @@
 #  item_id     :bigint           not null
 #
 class ItemsAllergen < ApplicationRecord
+  # Associations
   belongs_to :item
   belongs_to :allergen
 end
