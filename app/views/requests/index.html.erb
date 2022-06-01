@@ -1,0 +1,62 @@
+<div class="requests">
+  <div class="heading">
+    <h5>Messages</h5>
+  </div>
+  <div class="container my-3">
+    <%# if @requests is not empty, show them. Otherwise, "You don't have any requests." %>
+    <% if @requests %>
+      <% @requests.each do |request| %>
+        <%# only if a request has messages, show it in the page %>
+        <% if request.messages %>
+          <%= link_to request_path(request) do %>
+            <%# each request is a flex card %>
+            <div class="ripple shadow request-card <%= request.item.status == 2 ? 'donated' : '' %>">
+              <%# image is the first div %>
+              <%# To insert dynamic images for all items %>
+              <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
+              <%# details is the second div %>
+              <div class="details">
+                <% if current_user == request.receiver %>
+                  <span><%= request.giver.username %></span>
+                <% elsif current_user == request.giver %>
+                  <span><%= request.receiver.username %></span>
+                <% end %>
+                <strong><%= request.item.name %></strong>
+                <% if request.item.status == 2 %>
+                  <em><%= '<This item was donated>' if request.item.status == 2 %></em>
+                <% else %>
+                  <%# only part of the message is previewed if it's too long %>
+                  <% if current_user == request.messages.last.user %>
+                    <% if request.messages.last.content.chars.count > 21 %>
+                      <em>You: <%= request.messages.last.content.chars[0..20].join %>...</em>
+                    <% else %>
+                      <em>You: <%= request.messages.last.content %></em>
+                    <% end %>
+                  <% else %>
+                    <% if request.messages.last.content.chars.count > 25 %>
+                      <em><%= request.messages.last.content.chars[0..24].join %>...</em>
+                    <% else %>
+                      <em><%= request.messages.last.content %></em>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <%# last message's received time is the third div %>
+              <div class="message-time">
+                <% if request.messages.last.created_at > 6.days.from_now %>
+                  <%= request.messages.last.created_at.strftime("%D") %>
+                <% elsif request.messages.last.created_at > 1.day.from_now %>
+                  <%= request.messages.last.created_at.strftime("%a") %>
+                <% else %>
+                  Today
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <em>You don't have any requests to date.</em>
+    <% end %>
+  </div>
+</div>

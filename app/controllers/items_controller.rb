@@ -27,8 +27,17 @@ class ItemsController < ApplicationController
   end
 
   def show
+<<<<<<< HEAD
     @diets = @item.diets
     @allergens = @item.allergens
+=======
+    # link the show page to a new or existing request
+    if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
+      @request = Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
+    else
+      @request = Request.new
+    end
+>>>>>>> 45f8ca50cf21f44b042ba2173f0849957844aff0
   end
 
   def new

@@ -11,7 +11,7 @@
 #  receiver_id :bigint           not null
 #
 class Request < ApplicationRecord
-# Associations
+  # Associations
   belongs_to :item
   belongs_to :giver, class_name: "User"
   belongs_to :receiver, class_name: "User"

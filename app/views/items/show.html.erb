@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid mb-5 pb-5">
 
 <div class="container-carrusel">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -90,12 +90,25 @@
 
   <br>
 
-  <div class="btn btn-primary btn-block">
-    Reserve this item
+  <div>
+    <%# button to link to request; using our own .button class %>
+    <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
+      <div class="button reserve">
+        <%= link_to 'Continue The Chat', request_path(@request) %>
+      </div>
+    <% else %>
+      <%= simple_form_for @request do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.submit 'Reserve This Item', class: "button reserve" %>
+      <% end %>
+    <% end %>
   </div>
+<<<<<<< HEAD
 
   <div class="btn btn-primary btn-block">
      <%= link_to 'Back', items_path %>
   </div>
 
+=======
+>>>>>>> 45f8ca50cf21f44b042ba2173f0849957844aff0
 </div>
