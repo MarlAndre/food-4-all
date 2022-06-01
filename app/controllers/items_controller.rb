@@ -26,7 +26,10 @@ class ItemsController < ApplicationController
     # end
   end
 
-  def show; end
+  def show
+    @diets = @item.diets
+    @allergens = @item.allergens
+  end
 
   def new
     @item = Item.new
@@ -42,6 +45,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def my_items
+    @my_items = Item.where(user: current_user)
+  end
+
   private
 
   def find_item
@@ -49,6 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type)
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
   end
 end
