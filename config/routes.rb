@@ -23,5 +23,6 @@ Rails.application.routes.draw do
     post "feedbacks", to: "feedbacks#create"
   end
 
-  resources :profiles, only: %i[show edit update]
+  # resources :profiles, only: %i[show edit update]
+  get '/my-profile', to: 'profiles#my_profile', as: :my_profile
 end

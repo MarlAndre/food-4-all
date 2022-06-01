@@ -15,8 +15,8 @@
     <%# collapse menu to show 'Login' or 'Log out' option. %>
     <div class="collapse navbar-collapse my-1" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto text-end">
-        <li class="nav-item"><%= link_to "My profile", profile_path(current_user) %></li>
         <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "My profile", my_profile_path %></li>
           <li class="nav-item active">
             <%= link_to "Log out", destroy_user_session_path, method: :delete %>
           </li>
