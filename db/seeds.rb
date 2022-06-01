@@ -197,7 +197,7 @@ puts '------------------------Users with meals----------------------------'.ligh
 7.times do
   user = User.create!(
     email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
+    username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
     address: @locations.sample
   )
@@ -222,7 +222,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
 26.times do
   user = User.create!(
     email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
+    username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
     address: @locations.sample
   )

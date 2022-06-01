@@ -6,13 +6,13 @@ class RequestsController < ApplicationController
     @requests = Request.where(receiver: current_user).or(Request.where(giver: current_user))
   end
 
-  # make sure only the current users can access the page, otherwise redirect.
+  # make sure only the current users can access the page, otherwise redirect to Requests#index page.
   def show
     @request = Request.find(params[:id])
     if current_user == @request.giver || current_user == @request.receiver
       @message = Message.new
     else
-      redirect_to item_path(@request.item)
+      redirect_to requests_path
     end
   end
 
