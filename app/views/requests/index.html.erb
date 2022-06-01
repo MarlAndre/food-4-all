@@ -3,11 +3,13 @@
     <h5>Messages</h5>
   </div>
   <div class="container my-3">
-    <%# if @requests is not empty, show them. Otherwise, "You don't have any requests." %>
-    <% if @requests %>
+    <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
+    <% if @requests.nil? || @requests.all? { |r| r.messages.empty? } %>
+      <em>You don't have any requests to date.</em>
+    <% else %>
       <% @requests.each do |request| %>
         <%# only if a request has messages, show it in the page %>
-        <% if request.messages %>
+        <% unless request.messages %>
           <%= link_to request_path(request) do %>
             <%# each request is a flex card %>
             <div class="ripple shadow request-card <%= request.item.status == 2 ? 'donated' : '' %>">
@@ -55,8 +57,6 @@
           <% end %>
         <% end %>
       <% end %>
-    <% else %>
-      <em>You don't have any requests to date.</em>
     <% end %>
   </div>
 </div>
