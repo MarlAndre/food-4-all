@@ -70,8 +70,8 @@
     </div>
 
     <ul class="details">
-      <li>Listed on: <%= @item.created_at %></li>
-      <li>Expiration date: <%= @item.expiration_date %></li>
+      <li>Listed on: <%= @item.created_at.strftime("%b %e") %></li>
+      <li>Expiration date: <%= @item.expiration_date.strftime("%b %e") %></li>
       <li>Description: <%= @item.description %></li>
 
       <% @diets.each do |diet| %>
