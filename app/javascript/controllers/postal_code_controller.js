@@ -18,14 +18,35 @@ export default class extends Controller {
   submitForm(event) {
     event.preventDefault()
 
-    fetch(this.element.formAction  + new URLSearchParams({ postal_code: this.inputTarget.value }),{
+    fetch(`items?${new URLSearchParams({ postal_code: this.inputTarget.value })}`,{
       method: "GET",
       headers: { "Accept": "application/json", "X-CSRF-Token": csrfToken() },
     })
+
       .then(response => response.json())
-      .then((data) => {
-        console.log(data)
+
+      .then((items) => {
+        const cardsItems = document.querySelector("#cards-items");
+        cardsItems.innerHTML='';
+
+        items.forEach((item) => {
+          const itemCard = `<div class="card-product">
+              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+              <div class="card-product-infos">
+                <h2>${item.name}</h2>
+
+                <h3>${item.description}</h3>
+                <p>"Montreal, Villeray-Saint-Michel-Parc-Extension"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+              </div>
+          </div>`
+          cardsItems.insertAdjacentHTML("beforeend", itemCard)
+        })
       })
+
+      .finally(() => {
+        this.element.style.display='none';
+      })
+
   }
 
 }
