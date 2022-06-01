@@ -3,8 +3,10 @@
     <h5>Messages</h5>
   </div>
   <div class="container my-3">
-    <%# if @requests is not empty, show them. Otherwise, "You don't have any requests." %>
-    <% if @requests %>
+    <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
+    <% if @requests.nil? || @requests.all? { |r| r.messages.empty? } %>
+      <em>You don't have any requests to date.</em>
+    <% else %>
       <% @requests.each do |request| %>
         <%# only if a request has messages, show it in the page %>
         <% unless request.messages %>
@@ -55,8 +57,6 @@
           <% end %>
         <% end %>
       <% end %>
-    <% else %>
-      <em>You don't have any requests to date.</em>
     <% end %>
   </div>
 </div>
