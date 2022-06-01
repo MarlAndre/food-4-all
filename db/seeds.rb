@@ -277,34 +277,38 @@ puts ''
 #---------------------------SEED DB WITH REQUESTS---------------------------#
 #------Comment this out during live demo, this code shouldn't be seen-------#
 #############################################################################
-puts '-------------Fake data for front-end styling (requests)-------------'.light_black
-
-5.times do
-  # Creates giver with meal or ingredient item.
-  giver = User.create!(
-    email: Faker::Internet.email,
-    username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
-    password: '123456',
-    address: @locations.sample
-  )
-  item = Item.create!(
-    user_id: giver.id,
-    name: Faker::Food.dish,
-    status: 'available',
-    item_type: @item_types.sample,
-    description: Faker::Food.description,
-    expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
-  )
-  request = Request.create!(
-    giver_id: giver.id,
-    receiver_id: @williams.id,
-    item_id: item.id
-  )
-  puts "Giver: #{giver.username.light_cyan} has #{item.name.to_s.cyan} to give."
-  puts "#{@williams.username.light_cyan} is requesting the #{item.name.to_s.cyan}."
-end
-puts "#{'✓ Requests'.light_green} created."
+puts '-------Fake data for front-end styling commented out for demo-------'.light_black
 puts ''
+
+
+# puts '-------------Fake data for front-end styling (requests)-------------'.light_black
+
+# 5.times do
+#   # Creates giver with meal or ingredient item.
+#   giver = User.create!(
+#     email: Faker::Internet.email,
+#     username: (Faker::Name.first_name + Faker::Name.last_name).capitalize,
+#     password: '123456',
+#     address: @locations.sample
+#   )
+#   item = Item.create!(
+#     user_id: giver.id,
+#     name: Faker::Food.dish,
+#     status: 'available',
+#     item_type: @item_types.sample,
+#     description: Faker::Food.description,
+#     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+#   )
+#   request = Request.create!(
+#     giver_id: giver.id,
+#     receiver_id: @williams.id,
+#     item_id: item.id
+#   )
+#   puts "Giver: #{giver.username.light_cyan} has #{item.name.to_s.cyan} to give."
+#   puts "#{@williams.username.light_cyan} is requesting the #{item.name.to_s.cyan}."
+# end
+# puts "#{'✓ Requests'.light_green} created."
+# puts ''
 
 #---------------------------------END OF SEED-------------------------------#
 print '♡♡♡ '.light_red
