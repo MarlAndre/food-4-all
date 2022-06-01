@@ -11,14 +11,20 @@ class ItemsController < ApplicationController
 
     # Filter by postal code
     if params[:postal_code].present?
-      # Filter users if items are near (10km)
+      # Filter users if items are near (5km)
       @users = User.near(params[:postal_code], 5)
       # Get all of these users items
       @items = @users.map {|u| u.items}.flatten
     end
 
+    # Stimulus controller
+    respond_to do |format|
+      format.html { render "items/index" }
+      format.json { render json: @items }
+    end
 
-    # @markers = @users.items.geocoded.map do |user|
+    # Geocoder
+    # @markers = @users.geocoded.map do |user|
     #   {
     #     lat: user.latitude,
     #     lng: user.longitude
