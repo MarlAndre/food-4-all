@@ -7,4 +7,10 @@ body {
   margin: 0 auto; // center the container
   padding: 0 12px;
   background-color: $ivory;
+
+  // app-container just for Requests#index page
+  &.requests {
+    max-width: 100%;
+    padding: 0;
+  }
 }
