@@ -75,3 +75,6 @@ gem 'pg_search', '~> 2.3.0'
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'cloudinary', '~> 1.16.0'
+
+# To like or dislike an item so I can save items in 'My Favorites' page
+gem 'acts_as_favoritor'
