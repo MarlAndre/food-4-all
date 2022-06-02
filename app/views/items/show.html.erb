@@ -5,7 +5,7 @@
       <div class=carousel-inner>
 
         <div class="carousel-item active">
-          <img class="d-block w-100"
+          <img class="d-block w-100">
             <% @item.photos.each do |photo| %>
               <%= cl_image_tag photo.key, height: 400, width: 400 %>
           <% end %>
