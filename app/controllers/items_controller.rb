@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :find_item, only: %i[show]
+  # a user doesn't have to log in to visit the index and show pages
+  skip_before_action :authenticate_user!, only: %i[index show]
+  # a user has to log in to like an item
+  before_action :authenticate_user!, only: %i[toggle_favorite]
+  before_action :find_item, only: %i[show toggle_favorite]
 
   def index
     if params[:query].present?
@@ -34,6 +38,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @diets = @item.diets
+    @allergens = @item.allergens
     # link the show page to a new or existing request
     if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
       @request = Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
@@ -56,6 +62,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def toggle_favorite
+    current_user.favorited?(@item) ? current_user.unfavorite(@item) : current_user.favorite(@item)
+  end
+
+  def my_items
+    @my_items = Item.where(user: current_user)
+  end
+
   private
 
   def find_item
@@ -63,6 +77,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type)
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
   end
 end

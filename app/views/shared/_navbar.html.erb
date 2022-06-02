@@ -6,9 +6,8 @@
     <a href="/items/new"><i class="far fa-plus-square"></i></a>
     <a href="/requests"><i class="far fa-comment"></i></a>
 
-    <%# collapse button shows the avatar image (for the demo user only) or a normal icon (for everyone else) %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <a href="#" class="avatar dropdown-toggle text-white" id="navbarDropdown" data-bs_toggle="dropdown" aria-haspopup=true aria-expanded=false>
+      <a href="#" class="dropdown-toggle text-white" id="navbarDropdown" data-bs_toggle="dropdown" aria-haspopup=true aria-expanded=false>
         <i class="far fa-user"></i>
       </a>
     </button>
@@ -17,6 +16,7 @@
     <div class="collapse navbar-collapse my-1" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto text-end">
         <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "My profile", my_profile_path %></li>
           <li class="nav-item active">
             <%= link_to "Log out", destroy_user_session_path, method: :delete %>
           </li>

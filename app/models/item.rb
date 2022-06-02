@@ -15,12 +15,14 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
+  acts_as_favoritable
   belongs_to :user
   has_many :items_diets, dependent: :destroy
   has_many :diets, through: :items_diets
   has_many :items_allergens, dependent: :destroy
-  has_many :items, through: :items_allergens
+  has_many :allergens, through: :items_allergens
   has_many :requests, dependent: :destroy
+  has_many_attached :photos
 
   # Validations
   validates_presence_of :user_id, :description, :expiration_date, :item_type, :status, :name

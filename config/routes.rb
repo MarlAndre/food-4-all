@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   # CRUD actions / routes for items
-  resources :items
+  resources :items do
+    member do
+      post 'toggle_favorite', to: "items#toggle_favorite"
+    end
+  end
 
   # Shows user's food/ingredient items
   get "my-items", to: "items#my_items"
@@ -19,5 +23,6 @@ Rails.application.routes.draw do
     post "feedbacks", to: "feedbacks#create"
   end
 
-  resources :profiles, only: %i[show edit update]
+  # resources :profiles, only: %i[show edit update]
+  get '/my-profile', to: 'profiles#my_profile', as: :my_profile
 end
