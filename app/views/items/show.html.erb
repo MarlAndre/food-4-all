@@ -39,13 +39,11 @@
           <a href="#"><i class="fas fa-share-alt"></i></a>
         </div>
       </div>
-
     </div>
 
     <div class="availability">
       <%= @item.status %>
     </div>
-
   </div>
 
   <br>
@@ -57,10 +55,9 @@
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
 
       <div class="card-description">
-        <p class="item-name">From <%= @item.user.username %></p>
-        <p class="username"> <%= @item.name %></p>
+        <p class="item-name"> <%= @item.name.capitalize %></p>
+        <p class="username">From <%= @item.user.username %></p>
       </div>
-
     </div>
 
     <ul class="details">
@@ -76,7 +73,6 @@
         <li><= allergen.name  ></li>
       < end > %>
     </ul>
-
   </div>
 
   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://retailinsider.b-cdn.net/wp-content/uploads/2015/02/mal2.png.webp);height: 200px;">
@@ -85,15 +81,20 @@
   <br>
 
   <div>
-    <%# button to link to request; using our own .button class %>
-    <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
-      <div class="button reserve">
-        <%= link_to 'Continue The Chat', request_path(@request) %>
-      </div>
+    <%# owner cannot request for his/her own items. %>
+    <% if @item.user == current_user %>
+      <em>You cannot book your own items.</em>
     <% else %>
-      <%= simple_form_for @request do |f| %>
-        <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit 'Reserve This Item', class: "button reserve" %>
+      <%# button to link to request; using our own .button class %>
+      <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
+        <div class="button reserve">
+          <%= link_to "Back to chat", request_path(@request) %>
+        </div>
+      <% else %>
+        <%= simple_form_for @request do |f| %>
+          <%= f.hidden_field :item_id, value: @item.id %>
+          <%= f.submit "Send message", class: "button reserve" %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

@@ -1,24 +1,35 @@
 class ItemsController < ApplicationController
-  before_action :find_item, only: %i[show]
+  # a user doesn't have to log in to visit the index and show pages
+  skip_before_action :authenticate_user!, only: %i[index show]
+  # a user has to log in to like an item
+  before_action :authenticate_user!, only: %i[toggle_favorite]
+  before_action :find_item, only: %i[show toggle_favorite]
 
   def index
     if params[:query].present?
       @items = Item.search_index(params[:query])
     else
-      @items = Item.all.order(id: :desc)
+      # Changed to :asc for the Thursday demo
+      @items = Item.all.order(id: :asc)
       @items
     end
 
     # Filter by postal code
     if params[:postal_code].present?
-      # Filter users if items are near (10km)
+      # Filter users if items are near (5km)
       @users = User.near(params[:postal_code], 5)
       # Get all of these users items
       @items = @users.map {|u| u.items}.flatten
     end
 
+    # Stimulus controller
+    respond_to do |format|
+      format.html { render "items/index" }
+      format.json { render json: @items }
+    end
 
-    # @markers = @users.items.geocoded.map do |user|
+    # Geocoder
+    # @markers = @users.geocoded.map do |user|
     #   {
     #     lat: user.latitude,
     #     lng: user.longitude
@@ -49,6 +60,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def toggle_favorite
+    current_user.favorited?(@item) ? current_user.unfavorite(@item) : current_user.favorite(@item)
   end
 
   def my_items

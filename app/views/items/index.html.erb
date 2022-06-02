@@ -6,12 +6,13 @@
  </form>
  <!-- KEEP THE DIV ABOVE-->
 
-<div class="modal-popup-container">
+ <!-- Ask for Postal code-->
+<div class="modal-popup-container" id="popup-container" data-controller="postal-code">
   <div class="modal-popup">
-    <form>
-      <span class="closebtnpopup" onclick="this.parentElement.parentElement.parentElement.style.display='none';">&times;</span>
+    <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
+      <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
       <label for="postal_code">Enter your postal code: </label>
-      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
     </form>
   </div>
@@ -19,10 +20,12 @@
 
 
 
-<%# <div style="width: 100%; height: 600px;"
+<!-- Geocoder-->
+<div id="map" style="width: 100%; height: 600px;"
   data-controller="mapbox"
-  data-mapbox-markers-value="<%= @markers.to_json %>
-  <%# data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>
+  data-mapbox-markers-value="<%= @markers.to_json %>"
+  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
 
 <!-- Covid notices-->
 <div class="special-alert-container">
@@ -49,17 +52,17 @@
 </form>
 
 <!-- Cards-->
-<div class="cards items">
+<div class="cards items" id="cards-items">
   <% @items.each do |item| %>
-    <div class="card-product">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-        <%= link_to item_path(item), class: "text-decoration-none" do %>
-          <h2><%= item.name %></h2>
-          <h3><%=h truncate(item.description, :length => 100) %></h3>
-          <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
-        <% end %>
+    <%= link_to item_path(item), class: "text-decoration-none" do %>
+      <div class="card-product">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+            <h2><%= item.name %></h2>
+            <h3><%=h truncate(item.description, :length => 100) %></h3>
+            <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

@@ -76,6 +76,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    acts_as_favoritor (6.0.0)
+      activerecord (>= 5.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     annotate (3.2.0)
@@ -297,6 +299,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_favoritor
   annotate
   autoprefixer-rails (= 10.2.5)
   bootsnap (>= 1.4.4)
