@@ -50,18 +50,18 @@
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
 
       <div class="card-description">
-        <p class="item-name">From <%= @item.name %></p>
-        <p class="username"> <%= @item.user.username %></p>
+        <p class="item-name"> <%= @item.name.capitalize %></p>
+        <p class="username">From <%= @item.user.username %></p>
       </div>
 
     </div>
 
     <ul class="details">
       <li>Expiration date: <%=@item.expiration_date %></li>
-      <li>Listed how long ago ?</li>
+      <%# <li>Listed how long ago ?</li> %>
       <li><%=@item.description %></li>
-      <li>Prefered pickup time ?</li>
-      <li>Bring your container ?</li>
+      <%# <li>Prefered pickup time ?</li> %>
+      <%# <li>Bring your container ?</li> %>
     </ul>
 
   </div>

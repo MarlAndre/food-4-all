@@ -93,6 +93,11 @@ end
 @allergens_list = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
 @diets_list = ['vegan', 'vegetarian', 'pescatarian', 'lactose free', 'gluten free']
 @true_or_false = [true, false]
+# Random simply ingredient descriptions
+@ingr_descr = [
+  'fresh', 'free', 'extra', 'yummy', 'raw', 'healthy', 'clean', 'delicious', 'fresh picked', 'good for you',
+  'hearty', 'locally-grown', 'wholesome', 'ready to be picked up', 'good'
+]
 #---------------------------------------------------------------------------#
 
 # Clears screen and wipes database
@@ -219,7 +224,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
 
 # Creates users, each user will have an ingredient to give.
 @counter_from_zero = 0
-26.times do
+25.times do
   user = User.create!(
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
@@ -233,7 +238,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
     item_type: 'ingredient',
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
     )
-  ingredient.description = "Delicious #{ingredient.name}"
+  ingredient.description = "#{@ingr_descr.sample} #{ingredient.name}"
   ingredient.save!
   puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_white})."
   @counter_from_zero += 1
