@@ -9,7 +9,8 @@ class ItemsController < ApplicationController
     if params[:query].present?
       @items = Item.search_index(params[:query])
     else
-      @items = Item.all.order(id: :desc)
+      # Changed to :asc for the Thursday demo
+      @items = Item.all.order(id: :asc)
       @items
     end
 

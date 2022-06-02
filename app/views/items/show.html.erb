@@ -52,10 +52,9 @@
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
 
       <div class="card-description">
-        <p class="item-name"> <%= @item.name %></p>
+        <p class="item-name"> <%= @item.name.capitalize %></p>
         <p class="username">From <%= @item.user.username %></p>
       </div>
-
     </div>
 
     <ul class="details">
@@ -71,7 +70,6 @@
         <li><= allergen.name  ></li>
       < end > %>
     </ul>
-
   </div>
 
   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
