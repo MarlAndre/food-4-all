@@ -3,17 +3,22 @@
   <div class="container-carousel">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <div class=carousel-inner>
+
         <div class="carousel-item active">
-          <img class="d-block w-100" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="First slide">
+          <img class="d-block w-100"
+            <% @item.photos.each do |photo| %>
+              <%= cl_image_tag photo.key, height: 400, width: 400 %>
+          <% end %>
         </div>
 
-        <div class="carousel-item">
+        <%# <div class="carousel-item">
           <img class="d-block w-100" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940" alt="Second slide">
         </div>
 
         <div class="carousel-item">
           <img class="d-block w-100" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="Third slide">
-        </div>
+        </div> %>
+
       </div>
 
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -37,8 +42,6 @@
 
     </div>
 
-
-
     <div class="availability">
       <%= @item.status %>
     </div>
@@ -54,8 +57,8 @@
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
 
       <div class="card-description">
-        <p class="item-name">From <%= @item.name %></p>
-        <p class="username"> <%= @item.user.username %></p>
+        <p class="item-name">From <%= @item.user.username %></p>
+        <p class="username"> <%= @item.name %></p>
       </div>
 
     </div>
@@ -76,7 +79,7 @@
 
   </div>
 
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://retailinsider.b-cdn.net/wp-content/uploads/2015/02/mal2.png.webp);height: 200px;">
   </div>
 
   <br>
@@ -98,7 +101,6 @@
   <br>
 
   <div>
-    <%= link_to "Back", items_path, class:"btn"%>
+    <%= link_to "Back", items_path, class:"btn" %>
   </div>
-
 </div>
