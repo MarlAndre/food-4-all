@@ -1,5 +1,5 @@
 cloudinary:
-  service: Claudinary
+  service: Cloudinary
 
 test:
   service: Disk
