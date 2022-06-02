@@ -33,6 +33,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @diets = @item.diets
+    @allergens = @item.allergens
     # link the show page to a new or existing request
     if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
       @request = Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
@@ -55,6 +57,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def my_items
+    @my_items = Item.where(user: current_user)
+  end
+
   private
 
   def find_item
@@ -62,6 +68,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type)
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
   end
 end
