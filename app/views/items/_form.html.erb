@@ -7,6 +7,7 @@
         <%= f.input :status, collection: Item.statuses.keys %>
         <%= f.input :expiration_date, as: :date, html5: true %>
         <%= f.input :description %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         <%= f.submit %>
       <% end %>
       <%= link_to "Back", items_path %>

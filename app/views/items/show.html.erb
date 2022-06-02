@@ -2,10 +2,9 @@
 
   <div class="container-carousel">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
-      <div class="carousel-inner">
+      <div class=carousel-inner>
         <div class="carousel-item active">
-          <img class="d-block w-100" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="First slide">
+          <img class="d-block w-100" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="First slide">
         </div>
 
         <div class="carousel-item">
@@ -26,25 +25,22 @@
         <span class="sr-only">Next</span>
       </a>
 
-      <%# added stimulus controller at this div to like (heart) an item %>
-      <div class="social-media"
-      data-controller="toggle-favorite"
-      data-toggle-favorite-item-id-value="<%= @item.id %>"
-      >
+      <div class="social-media">
         <p class="distance"># km away</p>
         <div class="d-flex">
-          <%# this is an icon link to like and store the item in 'My Favorites' page. %>
-          <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post  do %>
-            <i class="far fa-heart <%= 'red' if current_user.favorited?(@item) %>"></i>
-          <% end %>
-          <p><i class="fas fa-share-alt"></i></p>
+          <%# <p><i class="fas fa-thumbs-up"></i></p> %>
+          <a href="#"><i class="fas fa-thumbs-up"></i></a>
+          <%# <p><i class="fas fa-share-alt"></i></p> %>
+          <a href="#"><i class="fas fa-share-alt"></i></a>
         </div>
       </div>
+    </div>
 
-      <div class="availability">
-        <p><%= @item.status %></p>
-      </div>
 
+
+    <div class="availability">
+      <%= @item.status %>
+    </div>
   </div>
 
   <br>
@@ -63,17 +59,22 @@
     </div>
 
     <ul class="details">
-      <li>Expiration date: <%=@item.expiration_date %></li>
-      <li>Listed how long ago ?</li>
-      <li><%=@item.description %></li>
-      <li>Prefered pickup time ?</li>
-      <li>Bring your container ?</li>
+      <li>Listed on: <%= @item.created_at.strftime("%b %e") %></li>
+      <li>Expiration date: <%= @item.expiration_date.strftime("%b %e") %></li>
+      <li>Description: <%= @item.description %></li>
+
+      <%# < @diets.each do |diet| >
+        <li>< diet.name  ></li>
+      < end >
+
+      < @allergens.each do |allergen|  >
+        <li><= allergen.name  ></li>
+      < end > %>
     </ul>
 
   </div>
 
-  <div>
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062);height: 200px;">
   </div>
 
   <br>
@@ -96,4 +97,11 @@
       <% end %>
     <% end %>
   </div>
+
+  <br>
+
+  <div>
+    <%= link_to "Back", items_path, class:"btn"%>
+  </div>
+
 </div>

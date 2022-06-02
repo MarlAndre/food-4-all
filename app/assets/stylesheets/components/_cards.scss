@@ -14,9 +14,10 @@
 .container-detail {
   border-color: 10px solid red;
   position: relative;
-  background-color: #8BAD85;
+  background-color: #d2f8e7;
   padding: 0;
   width: auto;
+  color: #0c5836;
 }
 
 .card-user {
@@ -55,6 +56,11 @@
   color: white;
   margin-right: 8px;
   margin-left: 8px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.distance {
+  margin-top: 18px;
 }
 
 .fa-thumbs-up {
@@ -89,10 +95,11 @@
 
 .availability {
   position: absolute;
-  margin-top: -250px;
-  margin-left: 374px;
+  margin-top: -490px;
+  margin-left: 674px;
   color: white;
-  font-weight: bolder;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .btn:hover {
@@ -101,6 +108,20 @@
   color: #814B67;
 }
 
+.fas {
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
 .fas:hover {
+  color: #814B67;
+}
+
+.d-flex {
+  z-index: 1;
+}
+
+.nav-link .active  {
   background-color: #814B67;
+  color: #FFFFF0;
 }
