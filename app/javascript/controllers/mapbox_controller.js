@@ -7,7 +7,6 @@ export default class extends Controller {
     apiKey: String,
     markers: Array
   }
-
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
@@ -15,16 +14,16 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
     })
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
+    // this.#addMarkersToMap()
+    // this.#fitMapToMarkers()
   }
 
   #addMarkersToMap() {
-    this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
-      .setLngLat([ marker.lng, marker.lat ])
-      .addTo(this.map)
-    });
+    // this.markersValue.forEach((marker) => {
+    //   new mapboxgl.Marker()
+    //   .setLngLat([ marker.lng, marker.lat ])
+    //   .addTo(this.map)
+    // });
   }
 
   #fitMapToMarkers() {

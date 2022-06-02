@@ -28,12 +28,14 @@ class ItemsController < ApplicationController
     end
 
     # Geocoder
-    # @markers = @users.geocoded.map do |user|
-    #   {
-    #     lat: user.latitude,
-    #     lng: user.longitude
-    #   }
-    # end
+    @users = User.all
+    @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+    end
+    raise
   end
 
   def show
