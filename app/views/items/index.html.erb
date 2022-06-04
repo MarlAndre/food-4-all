@@ -1,39 +1,22 @@
-
  <!-- PLEASE DONT DELETE THIS DIV-->
  <%# <form class="absolute d-none">
       <label for="postal_code">Enter your postal code: </label>
       <input type="text" id="postal_code" name="postal_code" value="< params[:postal_code] >" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
  </form> %>
-<!-- please add the percentage and the equal sign for the params[:postal_code] percentage before the chevron-->
-
  <!-- KEEP THE DIV ABOVE-->
 
- <!-- Ask for Postal code-->
-<%# <div class="modal-popup-container" id="popup-container" data-controller="postal-code">
+<!-- Ask for Postal code-->
+<div class="modal-popup-container" id="popup-container" data-controller="postal-code">
   <div class="modal-popup">
     <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
       <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
       <label for="postal_code">Enter your postal code: </label>
-      <input type="text" id="postal_code" name="postal_code" value="< params[:postal_code] >" data-postal-code-target="input" placeholder="Type something">
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
     </form>
-<!-- please add the percentage and the equal sign for the params[:postal_code] percentage before the chevron-->
-
   </div>
-</div> %>
-
-<!-- Geocoder-->
-<%# <div id="map" style="width: 100%; height: 600px;"
-  data-controller="mapbox"
-  data-mapbox-markers-value="< @markers.to_json >"
-  data-mapbox-api-key-value="< ENV['MAPBOX_API_KEY'] >">
-
-<!-- please add the percentage and the equal sign for the @markers.to_json percentage before the chevron-->
-<!-- please add the percentage and the equal sign for the ENV['MAPBOX_API_KEY'] percentage before the chevron-->
-
-
-</div> %>
+</div>
 
 <!-- Covid notices-->
 <div class="special-alert-container">
@@ -59,19 +42,49 @@
   </div>
 </form>
 
-<!-- Cards-->
-<div class="cards items" id="cards-items">
-  <% @items.each do |item| %>
-    <%= link_to item_path(item), class: "text-decoration-none" do %>
-      <div class="card-product">
-        <%# hardcoded image for item %>
-        <%= image_tag "item_hardcoded.png" %>
-        <div class="card-product-infos">
-            <h2><%= item.name %></h2>
-            <h3><%=h truncate(item.description, :length => 100) %></h3>
-            <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-see-items-tab" data-bs-toggle="tab" data-bs-target="#nav-see-items" type="button" role="tab" aria-controls="nav-see-items" aria-selected="true">See list items</button>
+      <button class="nav-link" id="nav-see-map-tab" data-bs-toggle="tab" data-bs-target="#nav-see-map" type="button" role="tab" aria-controls="nav-see-map" aria-selected="false">See items on map</button>
+    </div>
+  </nav>
+
+
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
+         <!-- Cards-->
+          <div class="cards items" id="cards-items">
+            <% @items.each do |item| %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <div class="card-product">
+                  <%# hardcoded image for item %>
+                  <%= image_tag "item_hardcoded.png" %>
+                  <div class="card-product-infos">
+                    <h2><%= item.name %></h2>
+                    <h3><%=h truncate(item.description, :length => 100) %></h3>
+                    <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div class="tab-pane fade" id="nav-see-map" role="tabpanel" aria-labelledby="nav-see-map-tab">
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-see-map" role="tabpanel" aria-labelledby="nav-see-map-tab">
+      <!-- Geocoder-->
+      <div id="map" style="width: 100%; height: 600px;"
+        data-controller="mapbox"
+        data-mapbox-markers-value="<%= @markers.to_json %>"
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+  </div>
 </div>
