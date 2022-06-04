@@ -1,10 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static values = { itemId: Number }
   static targets = [ "icon" ]
 
-  connect () {
-    console.log(this.itemIdValue);
+  red(event) {
+    if (this.iconTarget.classList.contains('red')) {
+      this.iconTarget.classList.remove('red');
+    } else {
+      this.iconTarget.classList.add('red');
+    }
+    console.log(this.iconTarget)
   }
 }
