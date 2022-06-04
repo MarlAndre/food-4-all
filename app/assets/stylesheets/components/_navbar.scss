@@ -1,18 +1,32 @@
 .navbar {
+  padding: 0;
+  height: 40px;
   i {
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
-  .navbar-toggler {
-    padding: 0;
-    color: $rose;
-    border-color: $rose;
-  }
-  .nav-item a {
+  a {
     color: white;
+    font-size: 1rem;
   }
-  .dropdown-toggle::after {
-    margin-left: 0;
+  .container-fluid {
+    height: 100%;
+  }
+  .nav-item-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .active {
+    background: white;
+    border-top: 3px solid $rose;
+    i {
+      color: $rose;
+      animation: pulse;
+      animation-duration: 0.3s;
+    }
   }
 }
 .navbar-lewagon {
@@ -22,8 +36,4 @@
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
 }

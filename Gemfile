@@ -71,6 +71,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "geocoder"
 gem 'social-share-button'
 gem 'pg_search', '~> 2.3.0'
+# wrapper for link_to to add an optional :active paramater
+gem 'active_link_to'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
