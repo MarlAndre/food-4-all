@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
   # a user doesn't have to log in to visit the index and show pages
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: :index
   # a user has to log in to like an item
-  before_action :authenticate_user!, only: %i[toggle_favorite]
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
