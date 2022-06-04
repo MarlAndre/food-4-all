@@ -12,6 +12,7 @@ export default class extends Controller {
 
   connect() {
     this.inputTarget.value = ''
+    window.localStorage.setItem('name', 'Marlene');
   }
 
  // Find a way to send params (form input) to fetch.
@@ -26,22 +27,26 @@ export default class extends Controller {
       .then(response => response.json())
 
       .then((items) => {
+
+        console.log("items", items)
         const cardsItems = document.querySelector("#cards-items");
         cardsItems.innerHTML='';
 
         items.forEach((item) => {
+          console.log(item)
           const itemCard = `<div class="card-product">
               <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
               <div class="card-product-infos">
-                <h2>${item.name}</h2>
+                <h2>${item[0].name}</h2>
 
-                <h3>${item.description}</h3>
-                <p>"Montreal, Villeray-Saint-Michel-Parc-Extension"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+                <h3>${item[0].description}</h3>
+                <p>${item[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
               </div>
           </div>`
           cardsItems.insertAdjacentHTML("beforeend", itemCard)
         })
       })
+      .catch(e => console.log('error', e.message))
 
       .finally(() => {
         this.element.style.display='none';

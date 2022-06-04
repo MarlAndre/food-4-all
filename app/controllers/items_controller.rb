@@ -32,9 +32,11 @@ class ItemsController < ApplicationController
     end
 
     # Stimulus controller
+    @items_with_address = @items.map  { | item| [item, item.user.address] }
+
     respond_to do |format|
       format.html { render "items/index" }
-      format.json { render json: @items }
+      format.json { render json: @items_with_address }
     end
   end
 
