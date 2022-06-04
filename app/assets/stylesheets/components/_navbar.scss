@@ -22,8 +22,9 @@
   .active {
     background: white;
     border-top: 3px solid $rose;
+    border-radius: 12px;
     i {
-      color: $rose;
+      color: $light-green;
       animation: pulse;
       animation-duration: 0.3s;
     }
