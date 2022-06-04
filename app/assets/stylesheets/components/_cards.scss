@@ -121,7 +121,17 @@
   z-index: 1;
 }
 
-.nav-link .active  {
+.nav-item .nav-link.active {
   background-color: #814B67;
   color: #FFFFF0;
+}
+
+.nav-item .nav-link {
+  color: #814B67;
+}
+
+.picture_for_show {
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
 }

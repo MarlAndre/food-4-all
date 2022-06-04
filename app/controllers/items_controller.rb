@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     else
       # Changed to :asc for the Thursday demo
       @items = Item.all.order(id: :asc)
-      @items
+      # @items
     end
 
     # Filter by postal code
