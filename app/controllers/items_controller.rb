@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
+    puts "\n\n\n ------------Called index------------- \n\n\n".red.blink
     if params[:query].present?
       @items = Item.search_index(params[:query])
     else
@@ -29,13 +30,18 @@ class ItemsController < ApplicationController
     end
 
     # Geocoder - add distance from current location
-    # 1. Get the address from popup
-    start_address_coordinates = Geocoder.coordinates(params[:start_address])
-    destination_coordinates = Geocoder.coordinates(params[:destination])
-    users_location = Geocoder::Calculations.distance_between(start_address_coordinates, destination_coordinates)
+    unless params[:postal_code].nil?
+      puts "\n\n\n ------------params postal code nil------------- \n\n\n".red.blink
+      start_address_coordinates = Geocoder.coordinates(params[:postal_code])
+      distances_by_user_id = {}
+      @users.each do |user|
+        destination_coordinates = Geocoder.coordinates(user.address)
+        distances_by_user_id[user.id] = Geocoder::Calculations.distance_between(start_address_coordinates, destination_coordinates)
+      end
 
-    # Stimulus controller
-    @items_with_address = @items.map  { | item| [item, item.user.address] }
+      # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
+      @items_with_address = @items.map { |item| [item, item.user.address, distances_by_user_id[item.user.id]] }
+    end
 
     respond_to do |format|
       format.html { render "items/index" }

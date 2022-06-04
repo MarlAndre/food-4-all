@@ -44,4 +44,9 @@ class Item < ApplicationRecord
     against: %i[name description],
     associated_against: { user: :username },
     using: { tsearch: { prefix: true } }
+
+  def distance_from(start_address_coordinates)
+    destination_coordinates = Geocoder.coordinates(user.address)
+    return Geocoder::Calculations.distance_between(start_address_coordinates, destination_coordinates)
+  end
 end

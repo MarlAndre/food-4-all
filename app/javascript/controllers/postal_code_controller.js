@@ -39,6 +39,8 @@ export default class extends Controller {
 
                 <h3>${item[0].description}</h3>
                 <p>${item[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+                <p>${item[2]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+
               </div>
           </div>`
           cardsItems.insertAdjacentHTML("beforeend", itemCard)
@@ -48,6 +50,7 @@ export default class extends Controller {
         cards.forEach(card => {
           card.addEventListener("click", () =>{
             window.location.href = window.location.origin + "/items/" + card.dataset.id
+            console.log('yolo!!')
           })
         })
 
