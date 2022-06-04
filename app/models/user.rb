@@ -17,8 +17,10 @@
 #  updated_at             :datetime         not null
 #
 class User < ApplicationRecord
-  geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  geocoded_by :start_address
+  geocoded_by :destination_address
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode
   # acts_as_favoritor
 
   # Include default devise modules. Others available are:

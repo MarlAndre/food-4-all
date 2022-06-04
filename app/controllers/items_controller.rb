@@ -19,7 +19,6 @@ class ItemsController < ApplicationController
       @items = @users.map {|u| u.items}.flatten
     end
 
-
     # Geocoder
     @users = User.all
     @markers = @users.geocoded.map do |user|
@@ -28,6 +27,12 @@ class ItemsController < ApplicationController
         lng: user.longitude
       }
     end
+
+    # Geocoder - add distance from current location
+    # 1. Get the address from popup
+    start_address_coordinates = Geocoder.coordinates(params[:start_address])
+    destination_coordinates = Geocoder.coordinates(params[:destination])
+    users_location = Geocoder::Calculations.distance_between(start_address_coordinates, destination_coordinates)
 
     # Stimulus controller
     @items_with_address = @items.map  { | item| [item, item.user.address] }
