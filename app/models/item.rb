@@ -6,8 +6,6 @@
 #  description     :text
 #  expiration_date :date
 #  item_type       :string
-#  latitude        :float
-#  longitude       :float
 #  name            :string
 #  status          :integer          default("available")
 #  created_at      :datetime         not null
@@ -15,7 +13,7 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
-  acts_as_favoritable
+  # acts_as_favoritable
   belongs_to :user
   has_many :items_diets, dependent: :destroy
   has_many :diets, through: :items_diets
