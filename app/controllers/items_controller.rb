@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
       @items = Item.search_index(params[:query])
     else
       @items = Item.all.order(id: :desc)
-      @items
+
     end
 
     # Filter by postal code
@@ -21,11 +21,6 @@ class ItemsController < ApplicationController
       @items = @users.map {|u| u.items}.flatten
     end
 
-    # Stimulus controller
-    respond_to do |format|
-      format.html { render "items/index" }
-      format.json { render json: @items }
-    end
 
     # Geocoder
     @users = User.all
@@ -35,7 +30,12 @@ class ItemsController < ApplicationController
         lng: user.longitude
       }
     end
-    raise
+
+    # Stimulus controller
+    respond_to do |format|
+      format.html { render "items/index" }
+      format.json { render json: @items }
+    end
   end
 
   def show
