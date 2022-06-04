@@ -11,7 +11,7 @@
         <% unless request.messages.last.nil? %>
           <%= link_to request_path(request) do %>
             <%# each request is a flex card %>
-            <div class="ripple shadow request-card <%= request.item.status == 'donated' ? 'donated' : '' %>">
+            <div class="ripple shadow request-card <%= request.item.donated? ? 'donated' : '' %>">
               <%# image is the first div %>
               <%# To insert dynamic images for all items %>
               <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
