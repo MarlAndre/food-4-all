@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
       @items = Item.search_index(params[:query])
     else
       @items = Item.all.order(id: :desc)
-
     end
 
     # Filter by postal code

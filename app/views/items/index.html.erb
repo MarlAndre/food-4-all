@@ -1,9 +1,12 @@
+
  <!-- PLEASE DONT DELETE THIS DIV-->
- <form class="absolute d-none">
+ <%# <form class="absolute d-none">
       <label for="postal_code">Enter your postal code: </label>
-      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" placeholder="Type something">
+      <input type="text" id="postal_code" name="postal_code" value="< params[:postal_code] >" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
- </form>
+ </form> %>
+<!-- please add the percentage and the equal sign for the params[:postal_code] percentage before the chevron-->
+
  <!-- KEEP THE DIV ABOVE-->
 
  <!-- Ask for Postal code-->
@@ -12,7 +15,7 @@
     <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
       <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
       <label for="postal_code">Enter your postal code: </label>
-      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Type something">
+      <input type="text" id="postal_code" name="postal_code" value="< params[:postal_code] >" data-postal-code-target="input" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
     </form>
   </div>
@@ -54,7 +57,8 @@
   <% @items.each do |item| %>
     <%= link_to item_path(item), class: "text-decoration-none" do %>
       <div class="card-product">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <%# hardcoded image for item %>
+        <%= image_tag "item_hardcoded.png" %>
         <div class="card-product-infos">
             <h2><%= item.name %></h2>
             <h3><%=h truncate(item.description, :length => 100) %></h3>
