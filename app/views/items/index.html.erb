@@ -64,17 +64,17 @@
 
   <% @items.each do |item| %>
 
-    <%= link_to item_path(item), class: "text-decoration-none" do %>
+    <%= link_to item_path(item), class: "text-decoration-none" do%>
 
       <div class="card-product">
           <%# hardcoded image for item %>
-          <% @items.photos.each do |photo| %>
-        <% if photo.attached? %>
-            <%= cl_image_tag photo.key, width: "100%", height: 400 %>
+          <% @items.each do |item| %>
+            <% if item.photos.attached? %>
+              <%= cl_image_tag photo.key, width: "100%", height: 400 %>
+            <% else %>
+              <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+            <% end %>
           <% end %>
-        <% else %>
-          <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-        <% end %>
 
         <div class="card-product-infos">
           <h2><%= item.name %></h2>
