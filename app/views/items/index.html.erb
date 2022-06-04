@@ -10,7 +10,7 @@
  <!-- KEEP THE DIV ABOVE-->
 
  <!-- Ask for Postal code-->
-<%# <div class="modal-popup-container" id="popup-container" data-controller="postal-code">
+<div class="modal-popup-container" id="popup-container" data-controller="postal-code" data-postal-code-target="popup">
   <div class="modal-popup">
     <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
       <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
@@ -18,22 +18,15 @@
       <input type="text" id="postal_code" name="postal_code" value="< params[:postal_code] >" data-postal-code-target="input" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
     </form>
-<!-- please add the percentage and the equal sign for the params[:postal_code] percentage before the chevron-->
-
   </div>
-</div> %>
+</div>
 
 <!-- Geocoder-->
-<%# <div id="map" style="width: 100%; height: 600px;"
+<div id="map" style="width: 100%; height: 600px;"
   data-controller="mapbox"
-  data-mapbox-markers-value="< @markers.to_json >"
-  data-mapbox-api-key-value="< ENV['MAPBOX_API_KEY'] >">
-
-<!-- please add the percentage and the equal sign for the @markers.to_json percentage before the chevron-->
-<!-- please add the percentage and the equal sign for the ENV['MAPBOX_API_KEY'] percentage before the chevron-->
-
-
-</div> %>
+  data-mapbox-markers-value="<%= @markers.to_json %>"
+  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
 
 <!-- Covid notices-->
 <div class="special-alert-container">

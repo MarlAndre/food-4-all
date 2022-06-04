@@ -3,7 +3,7 @@ import { csrfToken } from "@rails/ujs"
 
 
 export default class extends Controller {
-  static targets = [ "input", "submit" ]
+  static targets = [ "input", "submit", "popup" ]
 
   closeBtnPopup() {
     this.element.style.display='none';
@@ -12,9 +12,10 @@ export default class extends Controller {
 
   connect() {
     this.inputTarget.value = ''
+    this.showPopupOnLoad()
   }
 
- // Find a way to send params (form input) to fetch.
+  // Will show results when we send our location
   submitForm(event) {
     event.preventDefault()
 
@@ -30,23 +31,38 @@ export default class extends Controller {
         cardsItems.innerHTML='';
 
         items.forEach((item) => {
-          const itemCard = `<div class="card-product">
+          console.log(item)
+          const itemCard = `<div class="card-product" data-id="${item[0].id}">
               <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
               <div class="card-product-infos">
-                <h2>${item.name}</h2>
+                <h2>${item[0].name}</h2>
 
-                <h3>${item.description}</h3>
-                <p>"Montreal, Villeray-Saint-Michel-Parc-Extension"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+                <h3>${item[0].description}</h3>
+                <p>${item[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
               </div>
           </div>`
           cardsItems.insertAdjacentHTML("beforeend", itemCard)
+
         })
+        const cards = document.querySelectorAll(".card-product")
+        cards.forEach(card => {
+          card.addEventListener("click", () =>{
+            window.location.href = window.location.origin + "/items/" + card.dataset.id
+          })
+        })
+
       })
+      .catch(e => console.log('error', e.message))
 
       .finally(() => {
         this.element.style.display='none';
       })
-
   }
-
+  // show PopUp once per session
+  showPopupOnLoad() {
+    if (!localStorage.getItem('isPopUpSeen')) {
+        this.popupTarget.style.display = 'flex'
+        localStorage.setItem('isPopUpSeen', 'true')
+    }
+  }
 }
