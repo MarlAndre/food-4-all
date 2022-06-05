@@ -36,15 +36,13 @@
       <div class="social-media">
         <p class="distance"># km away</p>
         <div class="d-flex">
-          <div class="heart-container" data-action="click->toggle-favorite#red" data-toggle-favorite-target="icon">
+          <div data-action="click->toggle-favorite#red" data-toggle-favorite-target="icon">
             <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post do %>
-              <%# <i class="fas fa-heart "
-              >
-              </i> %>
-              <i class="far fa-angry <%= 'red' if current_user.favorited?(@item) %>"></i>
+              <i class="fas fa-hand-holding-heart fa-2x <%= 'red' if current_user.favorited?(@item) %>"></i>
             <% end %>
           </div>
-          <a href="#"><i class="fas fa-share-alt"></i></a>
+          <%# commented out 'share' button because we don't have the share function (yet) %>
+          <%# <a href="#"><i class="fas fa-share-alt"></i></a> %>
         </div>
       </div>
     </div>
