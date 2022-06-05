@@ -54,11 +54,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 100px;
-}
-
-.fas {
-  // display: block;
-  color: $dark-green;
-  font-size: 24px;
+  padding-top: 400px;
+  .fas {
+    // display: block;
+    color: $dark-green;
+    font-size: 24px;
+  }
 }
