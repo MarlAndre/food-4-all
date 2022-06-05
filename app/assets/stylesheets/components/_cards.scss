@@ -14,7 +14,7 @@
 .container-detail {
   border-color: 10px solid red;
   position: relative;
-  background-color: #d2f8e7;
+  background-color: $light-green;
   padding: 0;
   width: auto;
   color: #0c5836;
@@ -60,7 +60,8 @@
 }
 
 .distance {
-  margin-top: 18px;
+  margin-top: -1222px;
+  margin-left: 43px;
 }
 
 .fa-thumbs-up {
@@ -95,8 +96,8 @@
 
 .availability {
   position: absolute;
-  margin-top: -490px;
-  margin-left: 674px;
+  margin-top: -381px;
+  margin-left: 690px;
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
@@ -111,17 +112,39 @@
 .fas {
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 1.5rem;
 }
 
-.fas:hover {
-  color: #814B67;
+// commented out because there's no hover effect in mobile
+// if this is necessary, please change to other class because it's affecting all icons :(
+// .fas:hover {
+//   color: #814B67;
+// }
+
+.fa-thumbs-up {
+  margin-left: 594px !important;
+  margin-top: -20px !important;
 }
 
 .d-flex {
   z-index: 1;
 }
 
-.nav-link .active  {
+.nav-item .nav-link.active {
   background-color: #814B67;
   color: #FFFFF0;
+}
+
+.nav-item .nav-link {
+  color: #814B67;
+}
+
+.picture_for_show {
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+}
+
+.carousel-item > img {
+  object-fit: cover;
 }

@@ -1,17 +1,14 @@
 class ItemsController < ApplicationController
   # a user doesn't have to log in to visit the index and show pages
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: :index
   # a user has to log in to like an item
-  before_action :authenticate_user!, only: %i[toggle_favorite]
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
     if params[:query].present?
       @items = Item.search_index(params[:query])
     else
-      # Changed to :asc for the Thursday demo
-      @items = Item.all.order(id: :asc)
-      @items
+      @items = Item.all.order(id: :desc)
     end
 
     # Filter by postal code
@@ -22,19 +19,23 @@ class ItemsController < ApplicationController
       @items = @users.map {|u| u.items}.flatten
     end
 
-    # Stimulus controller
-    respond_to do |format|
-      format.html { render "items/index" }
-      format.json { render json: @items }
-    end
 
     # Geocoder
-    # @markers = @users.geocoded.map do |user|
-    #   {
-    #     lat: user.latitude,
-    #     lng: user.longitude
-    #   }
-    # end
+    @users = User.all
+    @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+    end
+
+    # Stimulus controller
+    @items_with_address = @items.map  { | item| [item, item.user.address] }
+
+    respond_to do |format|
+      format.html { render "items/index" }
+      format.json { render json: @items_with_address }
+    end
   end
 
   def show

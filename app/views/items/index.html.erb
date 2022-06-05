@@ -5,9 +5,8 @@
       <button name="button" id="btn" type="submit">Submit</button>
  </form> %>
  <!-- KEEP THE DIV ABOVE-->
-
-<!-- Ask for Postal code-->
-<div class="modal-popup-container" id="popup-container" data-controller="postal-code">
+ <!-- Ask for Postal code-->
+<div class="modal-popup-container" id="popup-container" data-controller="postal-code" data-postal-code-target="popup">
   <div class="modal-popup">
     <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
       <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
@@ -42,38 +41,13 @@
   </div>
 </form>
 
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-see-items-tab" data-bs-toggle="tab" data-bs-target="#nav-see-items" type="button" role="tab" aria-controls="nav-see-items" aria-selected="true">See list items</button>
-      <button class="nav-link" id="nav-see-map-tab" data-bs-toggle="tab" data-bs-target="#nav-see-map" type="button" role="tab" aria-controls="nav-see-map" aria-selected="false">See items on map</button>
-    </div>
-  </nav>
-
-
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
-         <!-- Cards-->
-          <div class="cards items" id="cards-items">
-            <% @items.each do |item| %>
-              <%= link_to item_path(item), class: "text-decoration-none" do %>
-                <div class="card-product">
-                  <%# hardcoded image for item %>
-                  <%= image_tag "item_hardcoded.png" %>
-                  <div class="card-product-infos">
-                    <h2><%= item.name %></h2>
-                    <h3><%=h truncate(item.description, :length => 100) %></h3>
-                    <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+<!-- Navbar to switch tab -->
+ <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link" id="nav-see-map-tab" data-bs-toggle="tab" data-bs-target="#nav-see-map" type="button" role="tab" aria-controls="nav-see-map" aria-selected="false">See items on map</button>
+    <button class="nav-link active" id="nav-see-items-tab" data-bs-toggle="tab" data-bs-target="#nav-see-items" type="button" role="tab" aria-controls="nav-see-items" aria-selected="true">See list items</button>
   </div>
-</div>
+</nav>
 
 
 <div class="tab-pane fade" id="nav-see-map" role="tabpanel" aria-labelledby="nav-see-map-tab">
@@ -83,7 +57,36 @@
       <div id="map" style="width: 100%; height: 600px;"
         data-controller="mapbox"
         data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
+        <!-- Cards-->
+        <div class="cards items" id="cards-items">
+          <% @items.each do |item| %>
+            <%= link_to item_path(item), class: "text-decoration-none" do%>
+              <div class="card-product">
+                <%# hardcoded image for item %>
+                <% if item.photos.attached? %>
+                  <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
+                <% else %>
+                  <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+                <% end %>
+
+                <div class="card-product-infos">
+                  <h2><%= item.name %></h2>
+                  <h3><%=h truncate(item.description, :length => 100) %></h3>
+                  <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
