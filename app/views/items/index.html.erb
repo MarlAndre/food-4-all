@@ -69,7 +69,7 @@
 
         <div class="card-product-infos">
           <h2><%= item.name %></h2>
-          <h3><%=h truncate(item.description, :length => 100) %></h3>
+          <h3><%= truncate(item.description, :length => 100) %></h3>
           <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
         </div>
       </div>

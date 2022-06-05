@@ -4,6 +4,6 @@ class PagesController < ApplicationController
   def home; end
 
   def my_favorites
-
+    @my_favorites = current_user.all_favorites
   end
 end

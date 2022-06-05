@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   # Shows user's food/ingredient items
-  get "my-items", to: "items#my_items"
+  get "my-items", to: "items#my_items", as: :my_items
 
   # Creates requests for giver and receiver to send messages
   resources :requests, only: %i[show index create] do
