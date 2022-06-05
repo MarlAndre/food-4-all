@@ -60,7 +60,8 @@
 }
 
 .distance {
-  margin-top: 18px;
+  margin-top: -1222px;
+  margin-left: 43px;
 }
 
 .fa-thumbs-up {
@@ -95,8 +96,8 @@
 
 .availability {
   position: absolute;
-  margin-top: -490px;
-  margin-left: 674px;
+  margin-top: -381px;
+  margin-left: 690px;
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
@@ -120,11 +121,30 @@
 //   color: #814B67;
 // }
 
+.fa-thumbs-up {
+  margin-left: 594px !important;
+  margin-top: -20px !important;
+}
+
 .d-flex {
   z-index: 1;
 }
 
-.nav-link .active  {
+.nav-item .nav-link.active {
   background-color: #814B67;
   color: #FFFFF0;
+}
+
+.nav-item .nav-link {
+  color: #814B67;
+}
+
+.picture_for_show {
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+}
+
+.carousel-item > img {
+  object-fit: cover;
 }
