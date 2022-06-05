@@ -73,7 +73,17 @@
     </ul>
   </div>
 
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://retailinsider.b-cdn.net/wp-content/uploads/2015/02/mal2.png.webp);height: 200px;">
+  <div class="card-category">
+    <%# Geocoder map %>
+    <div
+      id="map"
+      style="width: 100%;
+      height: 400px;"
+        data-controller="mapbox"
+        data-mapbox-markers-value="<%= @markers.to_json %>"
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      >
+    </div>
   </div>
 
   <br>
