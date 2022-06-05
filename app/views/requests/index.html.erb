@@ -28,17 +28,9 @@
                 <% else %>
                   <%# only part of the message is previewed if it's too long %>
                   <% if current_user == request.messages.last.user %>
-                    <% if request.messages.last.content.chars.count > 21 %>
-                      <em>You: <%= request.messages.last.content.chars[0..20].join %>...</em>
-                    <% else %>
-                      <em>You: <%= request.messages.last.content %></em>
-                    <% end %>
+                    <em>You: <%= truncate(request.messages.last.content, length: 24) %></em>
                   <% else %>
-                    <% if request.messages.last.content.chars.count > 25 %>
-                      <em><%= request.messages.last.content.chars[0..24].join %>...</em>
-                    <% else %>
-                      <em><%= request.messages.last.content %></em>
-                    <% end %>
+                    <em><%= truncate(request.messages.last.content, length: 28) %></em>
                   <% end %>
                 <% end %>
               </div>
