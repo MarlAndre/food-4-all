@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   # resources :profiles, only: %i[show edit update]
   get '/my-profile', to: 'profiles#my_profile', as: :my_profile
+
+  get '/my-favorites', to: 'pages#my_favorites', as: :my_favorites
 end
