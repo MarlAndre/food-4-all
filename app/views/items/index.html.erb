@@ -68,9 +68,12 @@
             <% end %>
 
         <div class="card-product-infos">
-          <h2><%= item.name %></h2>
-          <h3><%=h truncate(item.description, :length => 100) %></h3>
-          <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+          <h2><%= item.name.capitalize %></h2>
+          <h3><%= truncate(item.description, :length => 93) %></h3>
+          <%# removed '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i>' in the next line %>
+          <%# we don't have the share function (yet) %>
+          <%# added the marker icon in front of the address %>
+          <p><i class="fas fa-map-marker-alt"><%= item.user.address %></p>
         </div>
       </div>
 

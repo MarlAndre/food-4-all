@@ -2,7 +2,7 @@
   <div class="heading">
     <h5>Messages</h5>
   </div>
-  <div class="container my-3">
+  <div class="container my-4">
     <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
     <% if @requests.nil? || @requests.all? { |r| r.messages.last.nil? } %>
       <em>You don't have any requests to date.</em>
