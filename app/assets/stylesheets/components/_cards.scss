@@ -14,7 +14,7 @@
 .container-detail {
   border-color: 10px solid red;
   position: relative;
-  background-color: #d2f8e7;
+  background-color: $light-green;
   padding: 0;
   width: auto;
   color: #0c5836;
@@ -112,11 +112,14 @@
 .fas {
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 1.5rem;
 }
 
-.fas:hover {
-  color: #814B67;
-}
+// commented out because there's no hover effect in mobile
+// if this is necessary, please change to other class because it's affecting all icons :(
+// .fas:hover {
+//   color: #814B67;
+// }
 
 .fa-thumbs-up {
   margin-left: 594px !important;

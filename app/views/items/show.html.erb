@@ -1,19 +1,25 @@
 <div class="container-fluid mb-5 pb-5 container-custom-full-width">
+  <div
+  class="container-carousel"
+  data-controller="toggle-favorite"
+  >
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class=carousel-inner>
 
-  <div class="container-carousel">
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <% @item.photos.each_with_index do |photo, index| %>
-        <% if index == 0 %>
-          <div class="carousel-item active">
-            <%= cl_image_tag photo.key, width: "100%", height: 400 %>
-          </div>
-          <% else %>
-            <div class="carousel-item">
-              <%= cl_image_tag photo.key, width: "100%", height: 400 %>
-          </div>
+        <div class="carousel-item active">
+          <img class="d-block w-100">
+            <% @item.photos.each do |photo| %>
+              <%= cl_image_tag photo.key, height: 400, width: 400 %>
           <% end %>
-        <% end %>
+        </div>
+
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940" alt="Second slide">
+        </div>
+
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770" alt="Third slide">
+        </div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -31,8 +37,16 @@
       <p class="distance"># km away</p>
 
       <div class="social-media">
-        <a href="#"><i class="fas fa-thumbs-up"></i></a>
-        <a href="#"><i class="fas fa-share-alt"></i></a>
+        <p class="distance"># km away</p>
+        <div class="d-flex">
+          <div data-action="click->toggle-favorite#red" data-toggle-favorite-target="icon">
+            <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post do %>
+              <i class="fas fa-hand-holding-heart <%= 'red' if current_user.favorited?(@item) %>"></i>
+            <% end %>
+          </div>
+          <%# commented out 'share' button because we don't have the share function (yet) %>
+          <%# <a href="#"><i class="fas fa-share-alt"></i></a> %>
+        </div>
       </div>
     </div>
 
