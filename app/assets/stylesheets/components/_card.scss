@@ -10,7 +10,8 @@
 }
 
 .card-product img {
-  height: 100%;
+  // commented out so all item cards now have the same size of image :)
+  // height: 100%;
   width: 120px;
   object-fit: cover;
 }
