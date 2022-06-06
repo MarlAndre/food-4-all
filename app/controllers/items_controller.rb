@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
 
     # Geocoder - add distance from current location
     unless params[:postal_code].nil?
-      puts "\n\n\n ------------params postal code nil------------- \n\n\n".red.blink
+      puts "\n\n\n ------------params postal NOT code nil------------- \n\n\n".green.blink
       start_address_coordinates = Geocoder.coordinates(params[:postal_code])
       distances_by_user_id = {}
       @users.each do |user|
@@ -41,6 +41,8 @@ class ItemsController < ApplicationController
 
       # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
       @items_with_address = @items.map { |item| [item, item.user.address, distances_by_user_id[item.user.id]] }
+    else
+      puts "\n\n\n ------------params postal code nil------------- \n\n\n".red.blink
     end
 
     respond_to do |format|
