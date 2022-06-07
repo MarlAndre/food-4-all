@@ -11,3 +11,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+// Geocoder
+@import "mapbox-gl/dist/mapbox-gl";
+// @import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder";
+
+
+a:-webkit-any-link {
+  text-decoration: none;
+  cursor: auto;
+}

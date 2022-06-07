@@ -13,9 +13,16 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
+  acts_as_favoritable
   belongs_to :user
-  has_and_belongs_to_many :allergens
-  has_and_belongs_to_many :diets
+  has_many :items_diets, dependent: :destroy
+  has_many :diets, through: :items_diets
+  has_many :items_allergens, dependent: :destroy
+  has_many :allergens, through: :items_allergens
+  has_many :requests, dependent: :destroy
+  has_many_attached :photos
+
+  # Validations
   validates_presence_of :user_id, :description, :expiration_date, :item_type, :status, :name
   validates :description, length: { minimum: 5 }
 
@@ -24,10 +31,17 @@ class Item < ApplicationRecord
 
   # has_many_attached :photos, :maximum => 5 # cloudinary to be installed
 
-  # READ instance using `item.reserved?`(boolean) and WRITE using `item.donated!`
+  # Ex: READ instance using `item.reserved?`(boolean) and WRITE using `item.donated!`
   enum status: {
     available: 0,
     reserved: 1,
     donated: 2
   }
+
+  # added "pg_search" gem to filter the index by name/description
+  include PgSearch::Model
+  pg_search_scope :search_index,
+    against: %i[name description],
+    associated_against: { user: :username },
+    using: { tsearch: { prefix: true } }
 end

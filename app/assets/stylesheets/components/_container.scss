@@ -1,0 +1,25 @@
+body {
+  background-color: $ivory !important;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto; // center the container
+  padding: 0 12px;
+  background-color: $ivory;
+
+  // app-container just for Requests#index page
+  &.requests {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.container-custom-full-width {
+ padding: 0 !important;
+margin-bottom: 0;
+}
+
+.container-fluid {
+  margin-bottom: 0 !important;
+}

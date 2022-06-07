@@ -39,7 +39,6 @@ gem 'font-awesome-sass', '~> 5.6.1'
 gem 'simple_form', github: 'heartcombo/simple_form'
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'dotenv-rails'
   # Get a summary of the Active Record schema in relevant files, e.g. models
   gem 'annotate'
 
@@ -68,3 +67,16 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "geocoder"
+gem 'social-share-button'
+gem 'pg_search', '~> 2.3.0'
+# wrapper for link_to to add an optional :active paramater
+gem 'active_link_to'
+
+gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'cloudinary', '~> 1.16.0'
+
+# To like or dislike an item so I can save items in 'My Favorites' page
+gem 'acts_as_favoritor'

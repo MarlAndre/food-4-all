@@ -1,12 +1,40 @@
+.navbar {
+  padding: 0;
+  height: 40px;
+  i {
+    color: white;
+    font-size: 1.3rem;
+  }
+  a {
+    color: white;
+    font-size: 1rem;
+  }
+  .container-fluid {
+    height: 100%;
+  }
+  .nav-item-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .active {
+    background: white;
+    border-top: 3px solid $rose;
+    border-radius: 12px;
+    i {
+      color: $light-green;
+      animation: pulse;
+      animation-duration: 0.3s;
+    }
+  }
+}
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: $rose;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
 }

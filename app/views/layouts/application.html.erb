@@ -6,16 +6,64 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
+    <% unless current_page?(root_path) %>
+    <%# app-container just for Requests#index page %>
+    <%# Page heading needs 100% width %>
+      <% if params[:controller] == "requests" && params[:action] == "index" ||
+      params[:controller] == "pages" && params[:action] == "my_favorites"
+      %>
+        <div class="app-container requests">
+          <%= render '/shared/navbar' %>
+          <div class="page-content">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+        <%# normal app-container for all other pages %>
+        <div class="app-container">
+          <%= render '/shared/navbar' %>
+          <div class="page-content">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+            <%= yield %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to items_path do %>
+        <div class="image-banner">
+          <div class="container-image-banner">
+            <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
+          </div>
+        </div>
+
+        <div class="white-banner-container">
+          <div class="white-banner">
+            <p>Too much food? Share it.</p>
+          </div>
+        </div>
+
+        <div class="spinner-container">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+      <% end %>
+    <% end %>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   </body>
 </html>

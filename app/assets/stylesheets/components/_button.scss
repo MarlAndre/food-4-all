@@ -1,0 +1,28 @@
+.button {
+  background-color: rgba($rose, 1);
+  color: white;
+  border: none;
+  width: 61px;
+  height: 34px;
+  border-radius: 2px;
+  padding: 4px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 12px;
+  // Very simple animation for mobile 'touch'
+  &:active {
+    background-color: rgba($rose, 0.95);
+    color: white;
+  }
+  // 'reserve' button in Items#show page
+  &.reserve {
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    a {
+      color: white;
+      line-height: 40px;
+    }
+  }
+}

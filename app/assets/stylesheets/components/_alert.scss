@@ -4,3 +4,73 @@
   right: 16px;
   z-index: 1000;
 }
+
+/* The alert message box COVID */
+.special-alert-container {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.special-alert {
+  padding: 8px;
+}
+.alert-sucess {
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+
+/* Postal code popup */
+
+.modal-popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0, 0.4);
+  z-index: 100;
+  overflow-y: hidden;
+}
+
+.modal-popup {
+ background-color: white;
+ padding: 16px;
+ max-width: 350px;
+}
+
+.closebtnpopup {
+  margin-left: 15px;
+  color: $light-green;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtnpopup:hover {
+  color: $rose;
+}

@@ -1,0 +1,152 @@
+.card-category {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
+.container-detail {
+  border-color: 10px solid red;
+  position: relative;
+  background-color: $light-green;
+  padding: 0;
+  width: auto;
+  color: #0c5836;
+}
+
+.card-user {
+  display: flex;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding-bottom: 8px;
+}
+
+.share {
+  width: 15px;
+  height: 15px;
+}
+
+.btn {
+  background-color: #814B67;
+  color:white;
+  padding-bottom: 8px;
+  border: 0;
+}
+
+.social-media {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-carousel {
+  position: relative;
+}
+
+.social-media {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  margin-right: 8px;
+  margin-left: 8px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  // nested in .social-media so .fas won't affect other icons
+  .fas {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-size: 1.5rem;
+  }
+}
+
+.distance {
+  margin-top: -1222px;
+  margin-left: 43px;
+}
+
+// .fa-thumbs-up {
+//   margin-right: 8px;
+// }
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 8px;
+  margin-top: 11px;
+}
+
+.card-description {
+  margin-left: 8px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  border: 0;
+  p {
+    margin: 0;
+  }
+}
+
+.details {
+  padding-bottom: 14px;
+  padding-top: 18px;
+  margin-left: -8px;
+  font-size: small;
+  padding-right: 4px;
+}
+
+.availability {
+  position: absolute;
+  margin-top: -381px;
+  margin-left: 690px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+  border: #814B67 1px solid;
+  background-color: #FFFFF0;
+  color: #814B67;
+}
+
+
+// commented out because there's no hover effect in mobile
+// if this is necessary, please change to other class because it's affecting all icons :(
+// .fas:hover {
+//   color: #814B67;
+// }
+
+// commented out because it's replaced by heart icon
+// .fa-thumbs-up {
+//   margin-left: 594px !important;
+//   margin-top: -20px !important;
+// }
+
+.d-flex {
+  z-index: 1;
+}
+
+.nav-item .nav-link.active {
+  background-color: #814B67;
+  color: #FFFFF0;
+}
+
+.nav-item .nav-link {
+  color: #814B67;
+}
+
+.picture_for_show {
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+}
+
+.carousel-item > img {
+  object-fit: cover;
+}
