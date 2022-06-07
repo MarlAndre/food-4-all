@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   # Shows user's food/ingredient items
-  get "my-items", to: "items#my_items"
+  get "my-items", to: "items#my_items", as: :my_items
 
   # Creates requests for giver and receiver to send messages
   resources :requests, only: %i[show index create] do
@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   # resources :profiles, only: %i[show edit update]
   get '/my-profile', to: 'profiles#my_profile', as: :my_profile
+
+  get '/my-favorites', to: 'pages#my_favorites', as: :my_favorites
 end

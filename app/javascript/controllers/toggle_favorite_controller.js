@@ -1,9 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
+import ContextExclusionPlugin from "webpack/lib/ContextExclusionPlugin";
 
 export default class extends Controller {
-  static values = { itemId: Number }
+  static targets = [ "icon" ]
 
-  connect () {
-    console.log(this.itemIdValue);
+  red(event) {
+    this.iconTarget.querySelector('i').classList.toggle('red')
   }
 }

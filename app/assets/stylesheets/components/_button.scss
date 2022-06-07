@@ -12,7 +12,8 @@
   font-size: 12px;
   // Very simple animation for mobile 'touch'
   &:active {
-  background-color: rgba($rose, 0.95);
+    background-color: rgba($rose, 0.95);
+    color: white;
   }
   // 'reserve' button in Items#show page
   &.reserve {
@@ -24,4 +25,13 @@
       line-height: 40px;
     }
   }
+}
+
+// Styling tabs
+.nav-link {
+  color: $dark-green;
+}
+
+.nav-link:hover {
+  color: black;
 }

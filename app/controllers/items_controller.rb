@@ -19,7 +19,6 @@ class ItemsController < ApplicationController
       @items = @users.map {|u| u.items}.flatten
     end
 
-
     # Geocoder
     @users = User.all
     @users = User.geocoded
@@ -51,6 +50,16 @@ class ItemsController < ApplicationController
       @request = Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id)
     else
       @request = Request.new
+    end
+
+    # For the map
+    @users = User.all
+    # @users = User.find(params[:id])
+    @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
     end
   end
 
