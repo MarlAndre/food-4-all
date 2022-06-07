@@ -30,6 +30,7 @@ export default class extends Controller {
         const cardsItems = document.querySelector("#cards-items");
         cardsItems.innerHTML='';
 
+        // This needs to be updated
         items.forEach((item) => {
           console.log(item)
           const itemCard = `<div class="card-product" data-id="${item[0].id}">
@@ -39,7 +40,7 @@ export default class extends Controller {
 
                 <h3>${item[0].description}</h3>
                 <p>${item[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
-                <p>${item[2]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+                <p>${item[2]} km &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
 
               </div>
           </div>`
@@ -50,7 +51,6 @@ export default class extends Controller {
         cards.forEach(card => {
           card.addEventListener("click", () =>{
             window.location.href = window.location.origin + "/items/" + card.dataset.id
-            console.log('yolo!!')
           })
         })
 

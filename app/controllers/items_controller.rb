@@ -5,23 +5,43 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
-    puts "\n\n\n ------------Called index------------- \n\n\n".red.blink
+    puts "\n\n\n ------------!Index called!------------- \n\n\n".light_green.blink
+
+    # Filter by postal code POSTAL CODE RESETS EACH TIME YOU GO BACK TO INDEX! <<<<<<<<<<<<<<
+    # It's impossible to use a 'raise' anytime a postal code is entered in the pop up. <<<<<<<<<<<<<<
+    @current_postal_code = params[:postal_code]
+
+    # Gets current user coordinates from the postal code the user entered, default is Montreal coordinates if none entered.
+    # Postal code is not saving? <<<<<<<<<<<<<<
+    @current_coordinates = Geocoder.coordinates(@current_postal_code) || Geocoder.coordinates("Montreal")
+
+    # Distance between current user and other users (for index cards)
+    @distances_between_other_users = {}
+    if @current_postal_code.present?
+      # puts "\n\n\n ------------params postal code #{@current_postal_code}------------- \n\n\n".green.blink
+
+      # Filter users if items are near (5km)
+      @users = User.near(@current_postal_code, 25)
+
+      # Get all of these users items
+      @items = @users.map {|user| user.items}.flatten
+
+      # Sets distance for each user that's nearby.
+      @users.each do |user|
+        total_distance = user.distance_from(@current_coordinates).round(1)
+        @distances_between_other_users[user.id] = total_distance
+      end
+    else
+      @users = User.all
+    end
+
     if params[:query].present?
       @items = Item.search_index(params[:query])
     else
       @items = Item.all.order(id: :desc)
     end
 
-    # Filter by postal code
-    if params[:postal_code].present?
-      # Filter users if items are near (5km)
-      @users = User.near(params[:postal_code], 5)
-      # Get all of these users items
-      @items = @users.map {|u| u.items}.flatten
-    end
-
     # Geocoder
-    @users = User.all
     @markers = @users.geocoded.map do |user|
       {
         lat: user.latitude,
@@ -29,21 +49,9 @@ class ItemsController < ApplicationController
       }
     end
 
-    # Geocoder - add distance from current location
-    unless params[:postal_code].nil?
-      puts "\n\n\n ------------params postal NOT code nil------------- \n\n\n".green.blink
-      start_address_coordinates = Geocoder.coordinates(params[:postal_code])
-      distances_by_user_id = {}
-      @users.each do |user|
-        destination_coordinates = Geocoder.coordinates(user.address)
-        distances_by_user_id[user.id] = Geocoder::Calculations.distance_between(start_address_coordinates, destination_coordinates)
-      end
-
-      # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
-      @items_with_address = @items.map { |item| [item, item.user.address, distances_by_user_id[item.user.id]] }
-    else
-      puts "\n\n\n ------------params postal code nil------------- \n\n\n".red.blink
-    end
+    # Because of this, index page card photos change, card info changes, raise doesn't work, etc. How to edit this ? <<<<<<<<<<<<<<
+    # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
+    @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
 
     respond_to do |format|
       format.html { render "items/index" }

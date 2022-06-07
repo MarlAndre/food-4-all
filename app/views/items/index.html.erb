@@ -37,6 +37,8 @@
     <li>Consider wearing a mask</li>
     <li>Stay at home if you think you present symptoms</li>
     <li>Wash and sanitize your hands regularly</li>
+    <%# V-- For testing --V %>
+    <li><%= @current_coordinates %></li>
   </ul></p>
   </div>
 </div>
@@ -72,9 +74,6 @@
           <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
         </div>
       </div>
-
     <% end %>
-
   <% end %>
-
 </div>
