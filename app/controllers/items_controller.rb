@@ -18,10 +18,10 @@ class ItemsController < ApplicationController
     # Distance between current user and other users (for index cards)
     @distances_between_other_users = {}
     if @current_postal_code.present?
-      # puts "\n\n\n ------------params postal code #{@current_postal_code}------------- \n\n\n".green.blink
+      puts "\n\n\n ------------params postal code #{@current_postal_code}------------- \n\n\n".green.blink
 
       # Filter users if items are near (5km)
-      @users = User.near(@current_postal_code, 25)
+      @users = User.near(@current_postal_code, 5)
 
       # Get all of these users items
       @items = @users.map {|user| user.items}.flatten
@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
         total_distance = user.distance_from(@current_coordinates).round(1)
         @distances_between_other_users[user.id] = total_distance
       end
+      # merge this
     else
       @users = User.all
     end
