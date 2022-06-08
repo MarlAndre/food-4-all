@@ -14,8 +14,8 @@
         <% end %>
 
         <div class="card-product-infos">
-          <h2><%= @request.item.name.capitalize %></h2>
-          <h3>From <strong><%= @request.item.user.username.capitalize %></strong></h3>
+          <h3><strong><%= @request.item.user.username.capitalize %></strong></h3>
+          <h2>Is giving away <strong><%= @request.item.name.capitalize %></strong></h2>
           <span class="text-white"><%= @request.item.status.capitalize %></span>
           <p>x km away</p>
         </div>
@@ -34,8 +34,9 @@
     <div class="special-alert-container">
       <div class="special-alert alert-success" role="alert">
         <h5 class="alert-heading text-center">Recommendations</h5>
-        <li>COVID safety policy</li>
-        <li>Be polite</li>
+        <li>Stay home if you are sick</li>
+        <li>Sanitize your hands regularly</li>
+        <li>Be polite :)</li>
         <li>Say when you can pick up</li>
       </ul></p>
       </div>
