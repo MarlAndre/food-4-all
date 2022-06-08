@@ -3,7 +3,25 @@
   data-request-subscription-request-id-value="<%= @request.id %>"
   data-request-subscription-current-user-id-value="<%= current_user.id %>"
 >
-  <h1>"<%= @request.item.name %>" from <%= @request.giver.username %> to <%= @request.receiver.username %></h1>
+  <div class="card-item">
+    <%= link_to item_path(@request.item), class: "text-decoration-none" do%>
+      <div class="card-product">
+        <%# hardcoded image for item %>
+        <% if @request.item.photos.attached? %>
+          <%= cl_image_tag @request.item.photos.first.key, width: "100%", height: 400 %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="" width = 100% height = 400>
+        <% end %>
+
+        <div class="card-product-infos">
+          <h2><%= @request.item.name.capitalize %></h2>
+          <h3>From <strong><%= @request.item.user.username.capitalize %></strong></h3>
+          <span class="text-white"><%= @request.item.status.capitalize %></span>
+          <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= @request.item.user.address %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
   <div class="messages" data-request-subscription-target="messages">
     <% @request.messages.each do |message| %>
@@ -23,7 +41,7 @@
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <%= f.input :content,
         label: false,
-        placeholder: "Message ##{@request.item.name}",
+        placeholder: "Type here...",
         wrapper_html: {class: "flex-grow-1"}
       %>
       <%= f.submit "Send", class: "button" %>

@@ -84,19 +84,6 @@ ActiveRecord::Schema.define(version: 2022_06_04_160852) do
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
-  create_table "feedbacks", force: :cascade do |t|
-    t.bigint "item_transaction_id", null: false
-    t.bigint "user_id", null: false
-    t.boolean "punctual", default: false
-    t.boolean "friendly", default: false
-    t.boolean "communication", default: false
-    t.boolean "recommended", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_transaction_id"], name: "index_feedbacks_on_item_transaction_id"
-    t.index ["user_id"], name: "index_feedbacks_on_user_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "status", default: 0
@@ -132,7 +119,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_160852) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "request_id"
+    t.bigint "request_id", null: false
     t.index ["request_id"], name: "index_messages_on_request_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
