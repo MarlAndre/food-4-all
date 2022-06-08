@@ -1,23 +1,32 @@
+.banner-container {
+  position: relative;
+}
+
 .image-banner {
+  position: absolute;
   background-image: url(landingpage.png);
   background-size: cover;
   background-position: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  opacity: 0.8;
   height: 100vh;
   padding-top: 24px;
 }
 
-.image-banner h1 {
+.title-banner h1 {
+  position: absolute;
   color: #814B67;
-  font-style: normal;
-  font-weight: 700;
   font-size: 84px;
   text-align: center;
 }
 
-.image-banner span {
+.title-banner span {
   color: white;
 }
 
+// Claim and slogan
 .white-banner-container {
   position: absolute;
   top: 0;
@@ -32,17 +41,13 @@
 .white-banner {
   background-color: rgba(255, 255, 255, 0.6);
   width: 100%;
-  padding: 24px 8px;
+  padding: 12px 8px;
 }
 
 .white-banner p {
-  font-style: normal;
-  font-weight: 400;
   font-size: 36px;
   text-align: center;
-
   color: #2B3D29;
-
 }
 
 .spinner-container {
@@ -59,5 +64,25 @@
     // display: block;
     color: $dark-green;
     font-size: 24px;
+  }
+}
+
+// Postal code
+.modal-popup-container {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-popup {
+ padding: 16px;
+  .form-control {
+    display: inline-block;
+  }
+
+  .btn {
+    display: inline-block;
   }
 }

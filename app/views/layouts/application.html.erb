@@ -42,11 +42,14 @@
         </div>
       <% end %>
     <% else %>
-      <div class="image-banner">
-        <div class="container-image-banner">
+
+    <!-- Landing page -->
+    <div class = banner-container>
+      <div class="image-banner"></div>
+      <div class="title-banner">
           <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
         </div>
-      </div>
+    </div>
 
       <div class="white-banner-container">
         <div class="white-banner">
@@ -54,13 +57,14 @@
         </div>
       </div>
 
-      <div class="modal-popup-container" id="popup-container" data-controller="postal-code" data-postal-code-target="popup">
+
+      <div class="modal-popup-container input-group mb-3" id="popup-container" data-controller="postal-code" data-postal-code-target="popup">
         <div class="modal-popup">
           <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
-            <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
-            <label for="postal_code">Enter your postal code: </label>
-            <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Type something">
-            <button name="button" id="btn" type="submit">Submit</button>
+            <%# <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span> %>
+            <label for="postal_code"></label>
+            <input class="form-control" type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Enter your zip code...">
+            <button name="button" id="btn" type="submit" class="btn btn-flat">Submit</button>
           </form>
         </div>
       </div>

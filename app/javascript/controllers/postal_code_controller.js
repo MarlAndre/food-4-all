@@ -5,10 +5,10 @@ import { csrfToken } from "@rails/ujs"
 export default class extends Controller {
   static targets = [ "input", "submit", "popup" ]
 
-  closeBtnPopup() {
-    this.element.style.display='none';
-    this.inputTarget.value = ''
-  }
+  // closeBtnPopup() {
+  //   this.element.style.display='none';
+  //   this.inputTarget.value = ''
+  // }
 
   connect() {
     this.inputTarget.value = ''
@@ -18,7 +18,7 @@ export default class extends Controller {
   // Will show results when we send our location
   submitForm(event) {
     event.preventDefault()
-    // window.location.href="items";
+    window.location.href="items";
 
     fetch(`items?${new URLSearchParams({ postal_code: this.inputTarget.value })}`,{
       method: "GET",
