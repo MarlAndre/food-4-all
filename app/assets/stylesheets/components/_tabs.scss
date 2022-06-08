@@ -4,22 +4,27 @@
 }
 
 .tabs-underlined .tab-underlined {
-  color: black;
+  color: $dark-green;
   padding: 8px;
   margin: 8px;
-  opacity: .4;
-  cursor: pointer;
+  opacity: .6;
   text-decoration: none;
   border-bottom: 4px solid transparent;
 }
 
 .tabs-underlined .tab-underlined.active {
   opacity: 1;
-  border-bottom: 3px solid #555555;
+  border-bottom: 3px solid $rose;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   /* color: #495057; */
   background-color: $ivory;
-  border-color: $ivory $ivory black;
+  border-color: $ivory $ivory $rose;
+}
+
+.nav-link.active {
+  color: $dark-green;
+  background-color: $ivory;
+  border-color: $ivory $ivory $rose;
 }

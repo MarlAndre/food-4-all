@@ -22,15 +22,36 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
-.modal-popup-container {
-  // display: none;
-}
-
+// Map cards
 .mapboxgl-popup {
-  max-width: 200px;
+  max-width: 250px;
 }
 
 .mapboxgl-popup-content {
   text-align: center;
-  font-family: "Open Sans", sans-serif;
+  border-radius: 16px;
+  font-size: 16px;
+  background-color: $ivory;
+}
+
+.mapboxgl-popup-content h6 {
+  font-size: 16px;
+  color: $rose;
+  }
+
+.mapboxgl-ctrl-geocoder {
+    max-width: none;
+    width: 100%;
+    border: 1px solid lightgrey;
+    box-shadow: none;
+  }
+
+
+.mapboxgl-ctrl-attrib-inner .mapboxgl-ctrl-logo .mapboxgl-ctrl-bottom-right {
+  visibility:hidden;
+  }
+
+.avatar-name-map {
+  display:flex;
+  gap: 4px;
 }

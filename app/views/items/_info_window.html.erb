@@ -1,10 +1,10 @@
 <h5><%= user.username %> is giving away</h5>
 <% user.items.each do |item|%>
-  <h6><%= item.name.capitalize %></h6>
+  <h6><%= link_to (item.name.capitalize), item_path(item) %></h6>
   <% item.allergens.each do |allergen|  %>
-    <p>Contain:<%= allergen.name.capitalize%></p>
+    Contain:<%= allergen.name.capitalize%>
   <% end %>
    <% item.diets.each do |diet|  %>
-    <p>Best for:<%= diet.name.capitalize%></p>
+    Best for:<%= diet.name.capitalize%>
   <% end %>
 <% end %>
