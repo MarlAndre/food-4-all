@@ -5,23 +5,23 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
-    if params[:query].present?
-      @items = Item.search_index(params[:query])
-    else
-      @items = Item.all.order(id: :desc)
-    end
-
     # Filter by postal code
     if params[:postal_code].present?
       # Filter users if items are near (5km)
       @users = User.near(params[:postal_code], 5)
       # Get all of these users items
       @items = @users.map {|u| u.items}.flatten
+    elsif params[:query].present?
+      @items = Item.search_index(params[:query])
+      @users = User.all
+    else
+      @items = Item.all.order(id: :desc)
+      @users = User.all
     end
 
     # Geocoder
-    @users = User.geocoded
-    @markers = @users.geocoded.map do |user|
+    @geocoded_users = User.geocoded
+    @markers = @geocoded_users.geocoded.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
