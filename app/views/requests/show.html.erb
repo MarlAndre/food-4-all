@@ -17,13 +17,29 @@
           <h2><%= @request.item.name.capitalize %></h2>
           <h3>From <strong><%= @request.item.user.username.capitalize %></strong></h3>
           <span class="text-white"><%= @request.item.status.capitalize %></span>
-          <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= @request.item.user.address %></p>
+          <p>x km away</p>
         </div>
+      </div>
+      <div class="image">
+        <% if @request.item.user.username == "Shayna" || "shayna" %>
+          <%= image_tag "giver_shayna.png", class: "avatar-bordered" %>
+        <% else %>
+          <%= image_tag "demo_user.png", class: "avatar-bordered" %>
+        <% end %>
       </div>
     <% end %>
   </div>
 
   <div class="messages" data-request-subscription-target="messages">
+    <div class="special-alert-container">
+      <div class="special-alert alert-success" role="alert">
+        <h5 class="alert-heading text-center">Recommendations</h5>
+        <li>COVID safety policy ✅</li>
+        <li>Be polite 🌟 </li>
+        <li>Say when you can pick up 📅</li>
+      </ul></p>
+      </div>
+    </div>
     <% @request.messages.each do |message| %>
       <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
         <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
