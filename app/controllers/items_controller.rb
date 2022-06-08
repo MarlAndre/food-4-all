@@ -20,7 +20,6 @@ class ItemsController < ApplicationController
     end
 
     # Geocoder
-    @users = User.all
     @users = User.geocoded
     @markers = @users.geocoded.map do |user|
       {
@@ -53,14 +52,17 @@ class ItemsController < ApplicationController
     end
 
     # For the map
-    @users = User.all
-    # @users = User.find(params[:id])
-    @markers = @users.geocoded.map do |user|
+    user = @item.user
+    @markers = [
       {
         lat: user.latitude,
-        lng: user.longitude
+        lng: user.longitude,
+        info_window: render_to_string(
+          partial: "info_window",
+          locals: { user: user }
+        )
       }
-    end
+    ]
   end
 
   def new
