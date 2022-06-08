@@ -102,6 +102,7 @@ class ItemsController < ApplicationController
 
   def my_items
     @my_items = Item.where(user: current_user)
+    # @status = @item.status
   end
 
   private
