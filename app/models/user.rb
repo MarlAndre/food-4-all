@@ -17,22 +17,17 @@
 #  updated_at             :datetime         not null
 #
 class User < ApplicationRecord
-  # geocoded_by :start_address
-  # geocoded_by :destination_address
-  geocoded_by :address
-<<<<<<< HEAD
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode
-  # acts_as_favoritor
-=======
-  after_validation :geocode, if: :will_save_change_to_address?
+  # acts_as_favoritor gem --> https://github.com/jonhue/acts_as_favoritor
   acts_as_favoritor
->>>>>>> master
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  # Geocoder
+  geocoded_by :address
+  reverse_geocoded_by :latitude, :longitude
 
   # Associations
   has_many :items, dependent: :destroy
@@ -45,4 +40,6 @@ class User < ApplicationRecord
   # 'username' & 'address' fields are created on top of 'devise' gem
   validates_presence_of :email, :username, :password, :address
   validates_uniqueness_of :email, :username
+  after_validation :geocode
+  after_validation :geocode, if: :will_save_change_to_address?
 end
