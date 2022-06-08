@@ -1,32 +1,42 @@
-
  <!-- PLEASE DONT DELETE THIS DIV-->
  <%# <form class="absolute d-none">
       <label for="postal_code">Enter your postal code: </label>
       <input type="text" id="postal_code" name="postal_code" value="< params[:postal_code] >" placeholder="Type something">
       <button name="button" id="btn" type="submit">Submit</button>
  </form> %>
-<!-- please add the percentage and the equal sign for the params[:postal_code] percentage before the chevron-->
-
  <!-- KEEP THE DIV ABOVE-->
-
  <!-- Ask for Postal code-->
 <div class="modal-popup-container" id="popup-container" data-controller="postal-code" data-postal-code-target="popup">
   <div class="modal-popup">
     <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
       <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
       <label for="postal_code">Enter your postal code: </label>
+<<<<<<< HEAD
       <input type="text" id="postal_code" name="postal_code" value="params[:postal_code]" data-postal-code-target="input" placeholder="Type something">
+=======
+      <input type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Type something">
+>>>>>>> master
       <button name="button" id="btn" type="submit">Submit</button>
     </form>
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- Geocoder-->
 <div id="map" style="width: 100%; height: 600px;"
   data-controller="mapbox"
   data-mapbox-markers-value="<%= @markers.to_json %>"
   data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
+=======
+<!-- Navbar to switch tab -->
+ <nav>
+  <div class="nav nav-tabs tabs-underlined" id="nav-tab" role="tablist">
+    <button class="nav-link tab-underlined active" id="nav-see-items-tab" data-bs-toggle="tab" data-bs-target="#nav-see-items" type="button" role="tab" aria-controls="nav-see-items" aria-selected="true">See list items</button>
+    <button class="nav-link tab-underlined" id="nav-see-map-tab" data-bs-toggle="tab" data-bs-target="#nav-see-map" type="button" role="tab" aria-controls="nav-see-map" aria-selected="false">See items on map</button>
+  </div>
+</nav>
+>>>>>>> master
 <!-- Covid notices-->
 <div class="special-alert-container">
   <div class="special-alert alert-success" role="alert">
@@ -53,27 +63,51 @@
   </div>
 </form>
 
-<!-- Cards-->
-<div class="cards items" id="cards-items">
 
-  <% @items.each do |item| %>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade" id="nav-see-map" role="tabpanel" aria-labelledby="nav-see-map-tab">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-see-map" role="tabpanel" aria-labelledby="nav-see-map-tab">
+      <br>
+        <!-- Geocoder-->
+        <div id="map" style="width: 100%; height: 600px;"
+          data-controller="mapbox"
+          data-mapbox-markers-value="<%= @markers.to_json %>"
+          data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+    </div>
+  </div>
 
-    <%= link_to item_path(item), class: "text-decoration-none" do%>
+  <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
+      <br>
+        <!-- Cards-->
+        <div class="cards items" id="cards-items">
+          <% @items.each do |item| %>
+            <%= link_to item_path(item), class: "text-decoration-none" do%>
+              <div class="card-product">
+                <%# hardcoded image for item %>
+                <% if item.photos.attached? %>
+                  <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
+                <% else %>
+                  <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="" width = 100% height = 400>
+                <% end %>
 
-      <div class="card-product">
-          <%# hardcoded image for item %>
-            <% if item.photos.attached? %>
-              <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-            <% else %>
-              <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+                <div class="card-product-infos">
+                  <h2><%= item.name.capitalize %></h2>
+                  <h3><%= truncate(item.description, :length => 93) %></h3>
+                  <h3><%= "X km" %></h3>
+                  <%# removed '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i>' in the next line %>
+                  <%# we don't have the share function (yet) %>
+                  <%# added the marker icon in front of the address but commented it ou because of styling issue  %>
+                  <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= item.user.address %></p>
+                </div>
+              </div>
             <% end %>
-
-        <div class="card-product-infos">
-          <h2><%= item.name %></h2>
-          <h3><%=h truncate(item.description, :length => 100) %></h3>
-          <p><%= item.user.address %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+          <% end %>
         </div>
       </div>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </div>

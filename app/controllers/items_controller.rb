@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
+<<<<<<< HEAD
     puts "\n\n\n ------------!Index called!------------- \n\n\n".light_green.blink
 
     # Filter by postal code POSTAL CODE RESETS EACH TIME YOU GO BACK TO INDEX! <<<<<<<<<<<<<<
@@ -20,10 +21,15 @@ class ItemsController < ApplicationController
     if @current_postal_code.present?
       puts "\n\n\n ------------params postal code #{@current_postal_code}------------- \n\n\n".green.blink
 
+=======
+    # Filter by postal code
+    if params[:postal_code].present?
+>>>>>>> master
       # Filter users if items are near (5km)
       @users = User.near(@current_postal_code, 5)
 
       # Get all of these users items
+<<<<<<< HEAD
       @items = @users.map {|user| user.items}.flatten
 
       # Sets distance for each user that's nearby.
@@ -44,9 +50,27 @@ class ItemsController < ApplicationController
 
     # Geocoder
     @markers = @users.geocoded.map do |user|
+=======
+      @items = @users.map {|u| u.items}.flatten
+    elsif params[:query].present?
+      @items = Item.search_index(params[:query])
+      @users = User.all
+    else
+      @items = Item.all.order(id: :desc)
+      @users = User.all
+    end
+
+    # Geocoder
+    @geocoded_users = User.geocoded
+    @markers = @geocoded_users.geocoded.map do |user|
+>>>>>>> master
       {
         lat: user.latitude,
-        lng: user.longitude
+        lng: user.longitude,
+        info_window: render_to_string(
+          partial: "info_window",
+          locals: { user: user }
+        )
       }
     end
 
@@ -69,6 +93,19 @@ class ItemsController < ApplicationController
     else
       @request = Request.new
     end
+
+    # For the map
+    user = @item.user
+    @markers = [
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        info_window: render_to_string(
+          partial: "info_window",
+          locals: { user: user }
+        )
+      }
+    ]
   end
 
   def new

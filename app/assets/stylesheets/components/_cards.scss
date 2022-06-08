@@ -14,7 +14,7 @@
 .container-detail {
   border-color: 10px solid red;
   position: relative;
-  background-color: #d2f8e7;
+  background-color: $light-green;
   padding: 0;
   width: auto;
   color: #0c5836;
@@ -44,7 +44,7 @@
   align-items: center;
 }
 
-.container-carrusel {
+.container-carousel {
   position: relative;
 }
 
@@ -57,6 +57,12 @@
   margin-right: 8px;
   margin-left: 8px;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  // nested in .social-media so .fas won't affect other icons
+  .fas {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-size: 1.5rem;
+  }
 }
 
 .distance {
@@ -64,9 +70,9 @@
   margin-left: 43px;
 }
 
-.fa-thumbs-up {
-  margin-right: 8px;
-}
+// .fa-thumbs-up {
+//   margin-right: 8px;
+// }
 
 .avatar {
   width: 40px;
@@ -109,19 +115,18 @@
   color: #814B67;
 }
 
-.fas {
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
 
-.fas:hover {
-  color: #814B67;
-}
+// commented out because there's no hover effect in mobile
+// if this is necessary, please change to other class because it's affecting all icons :(
+// .fas:hover {
+//   color: #814B67;
+// }
 
-.fa-thumbs-up {
-  margin-left: 594px !important;
-  margin-top: -20px !important;
-}
+// commented out because it's replaced by heart icon
+// .fa-thumbs-up {
+//   margin-left: 594px !important;
+//   margin-top: -20px !important;
+// }
 
 .d-flex {
   z-index: 1;

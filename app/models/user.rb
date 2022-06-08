@@ -20,9 +20,14 @@ class User < ApplicationRecord
   # geocoded_by :start_address
   # geocoded_by :destination_address
   geocoded_by :address
+<<<<<<< HEAD
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
   # acts_as_favoritor
+=======
+  after_validation :geocode, if: :will_save_change_to_address?
+  acts_as_favoritor
+>>>>>>> master
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
