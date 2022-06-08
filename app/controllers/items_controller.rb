@@ -6,7 +6,8 @@ class ItemsController < ApplicationController
 
   def index
     # Gets current user coordinates from the postal code the user entered
-    @current_postal_code = 'H2T 1X3' #params[:postal_code]
+    # Currently using static postal code, we can update this when we fix the postal code issue<<<<<<<<<<<<<<<<
+    @current_postal_code = nil #params[:postal_code]
 
     # Default location is Montreal coordinates if no postal code was entered.
     @current_coordinates = Geocoder.coordinates(@current_postal_code) || Geocoder.coordinates("Montreal")
@@ -16,7 +17,6 @@ class ItemsController < ApplicationController
 
     # Filter by postal code
     if @current_postal_code.present?
-
 
       # Filter users if items are near (5km)
       @users = User.near(@current_postal_code, 5)
@@ -52,7 +52,6 @@ class ItemsController < ApplicationController
 
     # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
     @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
-
     respond_to do |format|
       format.html { render "items/index" }
       format.json { render json: @items_with_address }
