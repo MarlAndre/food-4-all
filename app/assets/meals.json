@@ -1,10 +1,50 @@
 [
-  "cauliflower soup",
-  "chicken",
-  "mac and cheese with ham",
-  "pizza",
-  "plantain",
-  "salad in a jar",
-  "salmon",
-  "spaghetti"
+  {
+    "name": "cauliflower soup",
+    "description": "Healthy and nutritious cauliflower soup",
+    "photo": "cauliflower_soup.jpg"
+  },
+
+  {
+    "name": "chicken",
+    "description": "Juicy sweet & sour baked chicken, enough for a big meal or 2 small meals.",
+    "photo": "chicken.jpg"
+  },
+
+  {
+    "name": "mac and cheese with ham",
+    "description": "Cheesy mac and cheese with ham. There should be enough for 4 portions, but it's very fattening so I would eat it as a treat and maybe freeze the rest.",
+    "photo": "mac_and_cheese_with_ham.jpg"
+  },
+
+  {
+    "name": "pizza",
+    "description": "Extra domino's cheese pizza with green peppers. Barely touched the pizza, ended up buying way too much. There are 6 slices left, first come first served.",
+    "photo": "pizza.jpg"
+  },
+
+
+  {
+    "name":"plantain",
+    "description": "Delicious plantain fried in olive oil. This is more of a side dish than a meal but if u eat the whole bowl (plz bring a container) it will fill you right up!",
+    "photo": "plantain.jpg"
+  },
+
+  {
+    "name":  "salad in a jar",
+    "description": "SUPER healthy, salad kitt. Simply empty the jar into a big bowl before serving and add salad dressing. This is 100% vegan!",
+    "photo": "salad_in_jar.jpg"
+  },
+
+  {
+    "name": "salmon",
+    "description": "Fresh salmon, baked today. We have 3 extra pieces so all you need is some rice or something and your meal is good to go.",
+    "photo": "salmon.jpg"
+  },
+
+  {
+    "name": "spaghetti",
+    "description": "Homecooked spaghetti for two, please bring your own container and message me to discuss the pickup details",
+    "photo": "spaghetti.jpg"
+  }
 ]
