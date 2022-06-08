@@ -5,36 +5,34 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show toggle_favorite]
 
   def index
-    # Gets current user coordinates from the postal code the user entered
-    # Currently using static postal code, we can update this when we fix the postal code issue<<<<<<<<<<<<<<<<
-    @current_postal_code = nil #params[:postal_code]
+    # Gets current user coordinates, currently using static postal code until we fix the Js issue.
+    @current_postal_code = 'H2T 1X3'
 
-    # Default location is Montreal coordinates if no postal code was entered.
-    @current_coordinates = Geocoder.coordinates(@current_postal_code) || Geocoder.coordinates("Montreal")
-
-    # Distance between current user and other users (for index cards)
+    # Distance between current user and other users (for index cards).
     @distances_between_other_users = {}
 
-    # Filter by postal code
-    if @current_postal_code.present?
+    # Sets distance for each user that's nearby, private method below.
+    set_distance
 
+    if @current_postal_code.present?
       # Filter users if items are near (5km)
       @users = User.near(@current_postal_code, 5)
 
       # Get all of these users items
       @items = @users.map {|u| u.items}.flatten
 
-      # Sets distance for each user that's nearby.
-      @users.each do |user|
-        total_distance = user.distance_from(@current_coordinates).round(1)
-        @distances_between_other_users[user.id] = total_distance
+      # This condition is nested so that the cards will still have the distance from the user.
+      if params[:query].present?
+        @users = User.all # Maybe this should only reflect the users who's items are shown. <<<<<
+        @items = Item.search_index(params[:query])
       end
-    elsif params[:query].present?
-      @items = Item.search_index(params[:query])
-      @users = User.all
-    else
-      @items = Item.all.order(id: :desc)
-      @users = User.all
+      elsif params[:query].present?
+        @users = User.all
+        @items = Item.search_index(params[:query])
+      else
+        # If no search or postal code was entered, show everything.
+        @users = User.all
+        @items = Item.all.order(id: :desc)
     end
 
     # Geocoder
@@ -113,5 +111,15 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
+  end
+
+  # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<
+  def set_distance
+    users = User.all
+    users.each do |user|
+      current_coordinates = Geocoder.coordinates(@current_postal_code)
+      total_distance = user.distance_from(current_coordinates).round(1)
+      @distances_between_other_users[user.id] = total_distance
+    end
   end
 end
