@@ -11,7 +11,6 @@ class ItemsController < ApplicationController
       @users = User.near(params[:postal_code], 5)
       # Get all of these users items
       @items = @users.map {|u| u.items}.flatten
-      raise
     elsif params[:query].present?
       @items = Item.search_index(params[:query])
       @users = User.all
