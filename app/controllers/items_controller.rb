@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
 
     # Geocoder
     @geocoded_users = User.geocoded
-    @markers = @geocoded_users.geocoded.map do |user|
+    @markers = @geocoded_users.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
     end
 
     # Stimulus controller
-    @items_with_address = @items.map  { | item| [item, item.user.address] }
+    @items_with_address = @items.map { |item| [item, item.user.address] }
 
     respond_to do |format|
       format.html { render "items/index" }

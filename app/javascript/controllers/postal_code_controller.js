@@ -18,6 +18,7 @@ export default class extends Controller {
   // Will show results when we send our location
   submitForm(event) {
     event.preventDefault()
+    // window.location.href="items";
 
     fetch(`items?${new URLSearchParams({ postal_code: this.inputTarget.value })}`,{
       method: "GET",
@@ -32,7 +33,6 @@ export default class extends Controller {
 
         // This needs to be updated
         items.forEach((item) => {
-          console.log(item)
           const itemCard = `<div class="card-product" data-id="${item[0].id}">
               <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" />
               <div class="card-product-infos">
