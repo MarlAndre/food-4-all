@@ -1,3 +1,6 @@
+
+# my_item.photos.attach(io: File.open("app/assets/images/meals/pizza.jpg"), filename: "pizza.jpg")
+
 #############################################################################
 #------------------------------PARSING JSON---------------------------------#
 #############################################################################
@@ -18,9 +21,9 @@ meals_file = File.read(meals_file_path)
 @meals = JSON.parse(meals_file)
 
 # List of meals descriptions.
-meal_descriptions_file_path = File.join(Rails.root, 'app', 'assets', 'meal_descriptions.json')
-meal_descriptions_file = File.read(meal_descriptions_file_path)
-@meal_descriptions = JSON.parse(meal_descriptions_file)
+# meal_descriptions_file_path = File.join(Rails.root, 'app', 'assets', 'meal_dessn').description
+# meal_descriptions_file = File.read(meal_descriptions_file_path)
+# @meal_descriptions = JSON.parse(meal_descriptions_file)
 
 # List of ingredients.
 ingredients_file_path = File.join(Rails.root, 'app', 'assets', 'ingredients.json')
@@ -35,46 +38,46 @@ ingredients_file = File.read(ingredients_file_path)
 def add_allergens_and_diets(item)
   case item.name
   when 'cauliflower soup'
-    item.description = @meal_descriptions[0]
+    item.description = @meals[0]["description"]
     ItemsDiet.create!(item_id: item.id, diet_id: 1)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'chicken'
-    item.description = @meal_descriptions[1]
+    item.description = @meals[1]["description"]
   when 'mac and cheese with ham'
-    item.description = @meal_descriptions[2]
+    item.description = @meals[2]["description"]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 1)
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
   when 'pizza'
-    item.description = @meal_descriptions[3]
+    item.description = @meals[3]["description"]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
   when 'plantain'
-    item.description = @meal_descriptions[4]
+    item.description = @meals[4]["description"]
     ItemsDiet.create!(item_id: item.id, diet_id: 1)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'salad in a jar'
-    item.description = @meal_descriptions[5]
+    item.description = @meals[5]["description"]
     ItemsDiet.create!(item_id: item.id, diet_id: 1)
     ItemsDiet.create!(item_id: item.id, diet_id: 2)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'salmon'
-    item.description = @meal_descriptions[6]
+    item.description = @meals[6]["description"]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'spaghetti'
-    item.description = @meal_descriptions[7]
+    item.description = @meals[7]["description"]
 
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
@@ -171,10 +174,10 @@ puts ''
 )
 shaynas_meal = Item.create!(
   user_id: @shayna.id,
-  name: @meals.last,
+  name: @meals.last["name"],
   status: 'available',
   item_type: 'meal',
-  description: @meal_descriptions.last,
+  description: @meals.last["description"],
   expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
 )
 
@@ -208,12 +211,14 @@ puts '------------------------Users with meals----------------------------'.ligh
   )
   meal = Item.create!(
     user_id: user.id,
-    name: @meals[@counter_from_zero],
+    name: @meals[@counter_from_zero]["name"],
     status: 'available',
     item_type: 'meal',
-    description: @meal_descriptions[@counter_from_zero],
+    description: @meals[@counter_from_zero]["description"],
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
+  meal.photos.attach(io: File.open("app/assets/images/meals/#{@meals[@counter_from_zero]["photo"]}"), filename: @meals[@counter_from_zero]["photo"])
+
   puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with a #{meal.name.cyan}(ID:#{meal.id.to_s.light_white}) meal."
   add_allergens_and_diets(meal)
   @counter_from_zero += 1
@@ -285,7 +290,6 @@ puts ''
 puts '-------Fake data for front-end styling commented out for demo-------'.light_black
 puts ''
 
-
 # puts '-------------Fake data for front-end styling (requests)-------------'.light_black
 
 # 5.times do
@@ -315,6 +319,9 @@ puts ''
 # puts "#{'✓ Requests'.light_green} created."
 # puts ''
 
+# this is how we found the way to attached the pictures to each item from the seeds:
+# my_item = item.select.first
+# my_item.attach(io: File.open("/assets/meals/pizza.jpg"), filename: "pizza.jpg")
 #---------------------------------END OF SEED-------------------------------#
 print '♡♡♡ '.light_red
 print "Finished sharing food".blink
