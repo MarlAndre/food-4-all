@@ -84,8 +84,9 @@ class ItemsController < ApplicationController
   end
 
   def my_items
-    @my_items = Item.where(user: current_user)
-    # @status = @item.status
+    @my_available_items = Item.where(user: current_user, status: "available")
+    @my_donated_items = Item.where(user: current_user, status: "donated")
+    @my_reserved_items = Item.where(user: current_user, status: "reserved")
   end
 
   private
