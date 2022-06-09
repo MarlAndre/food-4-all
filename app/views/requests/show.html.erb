@@ -14,7 +14,6 @@
         <% end %>
 
         <div class="card-product-infos">
-          <%# <h3><strong><%= @request.item.user.username.capitalize %>
           <h2><strong><%= @request.item.user.username.capitalize %></strong> is giving away <strong><%= @request.item.name.capitalize %></strong></h2>
           <span class="text-white"><%= @request.item.status.capitalize %></span>
           <p>x km away</p>
@@ -33,6 +32,7 @@
   <div class="messages" data-request-subscription-target="messages">
     <div class="special-alert-container">
       <div class="special-alert alert-success" role="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <h5 class="alert-heading text-center">Recommendations</h5>
         <li>Stay home if you are sick</li>
         <li>Sanitize your hands regularly</li>

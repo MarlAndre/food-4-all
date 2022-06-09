@@ -7,6 +7,12 @@
   .alert-success {
     background: rgba($light-green, 0.2);
     color: rgba(black, 0.9);
+    position: relative;
+    .closebtn {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+    }
     h5 {
       font-size: 16px;
     }
