@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     @distances_between_other_users = {}
 
     # Sets distance for each user that's nearby, private method below.
-    set_distance
+    set_distance unless @distances_between_other_users.present?
 
     if @current_postal_code.present?
       # Filter users if items are near (5km)
