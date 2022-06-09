@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     @distances_between_other_users = {}
 
     # Sets distance for each user that's nearby, private method below.
-    set_distance unless @distances_between_other_users.present?
+    set_distance
 
     if @current_postal_code.present?
       # Filter users if items are near (5km)
@@ -26,13 +26,13 @@ class ItemsController < ApplicationController
         @users = User.all # Maybe this should only reflect the users who's items are shown. <<<<<
         @items = Item.search_index(params[:query])
       end
-      elsif params[:query].present?
-        @users = User.all
-        @items = Item.search_index(params[:query])
-      else
-        # If no search or postal code was entered, show everything.
-        @users = User.all
-        @items = Item.all.order(id: :desc)
+    elsif params[:query].present?
+      @users = User.all
+      @items = Item.search_index(params[:query])
+    else
+      # If no search or postal code was entered, show everything.
+      @users = User.all
+      @items = Item.all.order(id: :desc)
     end
 
     # Geocoder
@@ -116,8 +116,9 @@ class ItemsController < ApplicationController
   # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<
   def set_distance
     users = User.all
+    current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
-      current_coordinates = Geocoder.coordinates(@current_postal_code)
+      current_coordinates
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
