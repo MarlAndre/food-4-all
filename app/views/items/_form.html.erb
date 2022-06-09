@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-6 shadow">
+    <div class="col-8 shadow">
       <%= simple_form_for @item do |f| %>
-        <%= f.input_field :name, placeholder: 'Name' %>
+        <%= f.input_field :name, placeholder: 'Name', class: 'form-input' %>
         <p></p>
-        <%= f.select :item_type, Type: Item::TYPES %>
+        <%= f.select :item_type, Type: Item::TYPES, class: 'form-input' %>
         <p></p>
-        <%= f.input_field :description, placeholder: 'Description' %>
+        <%= f.input_field :description, placeholder: 'Description (minimum 10 characters)', class: 'form-input' %>
         <%# a new item must be available so giver doesn't need to see it in this form %>
         <%# <%= f.input :status, collection: Item.statuses.keys %>
         <%= f.input :expiration_date, as: :date, html5: true %>
