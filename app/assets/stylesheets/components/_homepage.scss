@@ -39,7 +39,7 @@
 }
 
 .white-banner {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.65);
   width: 100%;
   padding: 12px 8px;
 }
@@ -50,39 +50,23 @@
   color: #2B3D29;
 }
 
-.spinner-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 400px;
-  .fas {
-    // display: block;
-    color: $dark-green;
-    font-size: 24px;
-  }
-}
-
 // Postal code
 .modal-popup-container {
   position: absolute;
-  bottom: 0;
+  bottom: 60px;
   width: 100vw;
   align-items: center;
   justify-content: center;
 }
 
 .modal-popup {
- padding: 16px;
   .form-control {
     display: inline-block;
+    width: 65%;
   }
 
   .btn {
     display: inline-block;
+    width: 30%;
   }
 }

@@ -18,6 +18,7 @@ export default class extends Controller {
   // Will show results when we send our location
   submitForm(event) {
     event.preventDefault()
+    window.location.href="items";
 
     fetch(`items?${new URLSearchParams({ postal_code: this.inputTarget.value })}`,{
       method: "GET",
@@ -41,22 +42,19 @@ export default class extends Controller {
               </div>
           </div>`
           cardsItems.insertAdjacentHTML("beforeend", itemCard)
-
         })
+
         const cards = document.querySelectorAll(".card-product")
         cards.forEach(card => {
           card.addEventListener("click", () =>{
             window.location.href = window.location.origin + "/items/" + card.dataset.id
           })
         })
-
       })
       .catch(e => console.log('error', e.message))
-
       .finally(() => {
         this.element.style.display='none';
       })
-    // window.location.href="items";
   }
   // show PopUp once per session
   showPopupOnLoad() {
