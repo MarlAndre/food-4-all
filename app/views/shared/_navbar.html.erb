@@ -4,9 +4,6 @@
     <%# add class container inside link, which includes icon %>
     <%# each container should be of width 20% %>
     <%# border color as bar; background %>
-    <%= active_link_to root_path, active: :exact, class: "nav-item-container" do %>
-      <i class="fas fa-map-marker-alt"></i>
-    <% end %>
     <%= active_link_to items_path, active: :exact, class: "nav-item-container" do %>
       <i class="fas fa-search"></i>
     <% end %>
@@ -15,6 +12,9 @@
     <% end %>
     <%= active_link_to requests_path, active: :exact, class: "nav-item-container" do %>
       <i class="far fa-comment"></i>
+    <% end %>
+    <%= active_link_to my_favorites_path, active: :exact, class: "nav-item-container" do %>
+      <i class="fas fa-heart"></i>
     <% end %>
     <%= active_link_to my_profile_path, active: :exact, class: "nav-item-container" do %>
       <i class="far fa-user"></i>
