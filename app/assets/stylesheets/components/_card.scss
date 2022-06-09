@@ -10,9 +10,11 @@
 }
 
 .card-product img {
-  height: 100%;
+  // height: 100%;
+  // keep images fixed at width of 120px and remove height:100% so all images align
   width: 120px;
-  object-fit: cover;
+  // change to contain looks better than cover
+  object-fit: contain;
 }
 
 .card-product h2 {

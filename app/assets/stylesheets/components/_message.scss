@@ -4,11 +4,26 @@
 // background color of the card for messages
 .messages {
   background-color: rgba($light-green, 0.15);
+  .alert-success {
+    background: rgba($light-green, 0.2);
+    color: rgba(black, 0.9);
+    position: relative;
+    .closebtn {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+    }
+    h5 {
+      font-size: 16px;
+    }
+    li {
+      font-size: 14px;
+    }
+  }
 }
 
 // To style the wrapping div
 .message-row {
-  margin-bottom: 10px;
   padding: 8px;
   animation: fadeIn;
   animation-duration: 0.8s;
@@ -19,14 +34,13 @@
   width: 70%;
   max-width: 400px;
   border-radius: 10px;
-  padding: 8px;
-  min-height: 80px;
+  padding: 10px;
   color: rgba(black, 0.9);
 }
 
 // changing the boilerplate colors to our theme colors in Figma
 .sender-style {
-  background-color: rgba(grey, 0.3);
+  background-color: rgba(grey, 0.2);
 }
 
 .receiver-style {
