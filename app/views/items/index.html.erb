@@ -5,17 +5,6 @@
       <button name="button" id="btn" type="submit">Submit</button>
  </form> %>
  <!-- KEEP THE DIV ABOVE-->
- <!-- Ask for Postal code-->
-<div class="modal-popup-container" id="popup-container" data-controller="postal-code" data-postal-code-target="popup">
-  <div class="modal-popup">
-    <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
-      <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span>
-      <label for="postal_code">Enter your postal code: </label>
-      <input type="text" id="postal_code" name="postal_code" value="<%= @current_postal_code %>" data-postal-code-target="input" placeholder="Type something">
-      <button name="button" id="btn" type="submit">Submit</button>
-    </form>
-  </div>
-</div>
 
 <!-- Navbar to switch tab -->
  <div class="navbar-container">
