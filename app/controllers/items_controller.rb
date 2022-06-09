@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
 
     # Geocoder
     @geocoded_users = User.geocoded
-    @markers = @geocoded_users.geocoded.map do |user|
+    @markers = @geocoded_users.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
