@@ -4,10 +4,10 @@
 }
 
 .tabs-underlined .tab-underlined {
-  color: black;
+  color: $dark-green;
   padding: 8px;
   margin: 8px;
-  opacity: .4;
+  opacity: .6;
   cursor: pointer;
   text-decoration: none;
   border-bottom: 4px solid transparent;
@@ -19,7 +19,6 @@
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-  /* color: #495057; */
   background-color: $ivory;
-  border-color: $ivory $ivory black;
+  border-color: $ivory $ivory $rose;
 }
