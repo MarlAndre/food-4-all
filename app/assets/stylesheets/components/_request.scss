@@ -7,7 +7,34 @@
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-
+  .text-white {
+    font-size: 13px;
+  }
+  .card-item {
+    position: relative;
+    .image {
+      .avatar-bordered {
+        position: absolute;
+        right: 5px;
+        top: 55px;
+        width: 66px;
+        height: 66px;
+      }
+    }
+  }
+  .card-product {
+    background: $light-green;
+    gap: 0;
+    margin-bottom: 28px;
+    height: 100px;
+    .card-product-infos {
+      padding: 13px;
+    }
+    h2 {
+      font-weight: normal;
+      font-size: 14px;
+    }
+  }
   h1 {
     border-bottom: 1px solid $gray-200;
     margin-bottom: 0;
@@ -17,7 +44,14 @@
   .messages {
     height: 100%;
     overflow: scroll;
-    padding: 1rem;
+    padding: 0.5rem;
+    .special-alert-container {
+      margin: 16px 8px;
+    }
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
   }
 
   #new_message {

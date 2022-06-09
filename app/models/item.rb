@@ -44,4 +44,10 @@ class Item < ApplicationRecord
     against: %i[name description],
     associated_against: { user: :username },
     using: { tsearch: { prefix: true } }
+
+  # This calculates the distance from the item's owner to the user who is using the website and entered their postal code.
+  def distance_from(current_location)
+    owner_coordinates = Geocoder.coordinates(user.address)
+    Geocoder::Calculations.distance_between(owner_coordinates, current_location)
+  end
 end
