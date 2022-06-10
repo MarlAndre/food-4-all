@@ -14,7 +14,6 @@
 .container-detail {
   border-color: 10px solid red;
   position: relative;
-  background-color: $light-green;
   padding: 0;
   width: auto;
   color: #0c5836;
@@ -22,8 +21,11 @@
 
 .card-user {
   display: flex;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   padding-bottom: 8px;
+  margin-left: 8px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  border: 0;
 }
 
 .share {
@@ -89,6 +91,10 @@
   border: 0;
   p {
     margin: 0;
+    font-size: 16px;
+  }
+  h6 {
+    font-size: 12px;
   }
 }
 

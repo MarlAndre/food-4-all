@@ -1,4 +1,3 @@
-<div class="container-fluid mb-5 pb-5 container-custom-full-width">
   <div
   class="container-carousel"
   data-controller="toggle-favorite"
@@ -66,25 +65,25 @@
         <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
       <% end %>
 
-      <div class="card-description">
-        <p class="item-name"> <%= @item.name.capitalize %></p>
-        <p class="username">From <%= @item.user.username %></p>
-      </div>
     </div>
+      <div class="card-description">
+        <p class="username"><%= @item.user.username.capitalize %> is giving away</p>
+        <p class="item-name"> <%= @item.name.capitalize %></p>
+        <h6><i class="fas fa-clock"></i>&nbsp Added on <%= @item.created_at.strftime("%b %e") %>&nbsp; &nbsp; &nbsp;<i class="fas fa-stopwatch"></i> &nbsp       Expiration date on <%= @item.expiration_date.strftime("%b %e") %></h6>
+      </div>
 
-    <ul class="details">
-      <li>Listed on: <%= @item.created_at.strftime("%b %e") %></li>
-      <li>Expiration date: <%= @item.expiration_date.strftime("%b %e") %></li>
-      <li>Description: <%= @item.description %></li>
+      <div class="details">
+        <h6><strong>Description</strong></h6>
+        <%= @item.description %>
 
-      <% @diets.each do |diet| %>
-        <li>It may contains: <%= diet.name %></li>
-      <% end %>
+        <% @diets.each do |diet| %>
+          <p><i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize %></p>
+        <% end %>
 
-      <% @allergens.each do |allergen| %>
-        <li>Allergen: <%= allergen.name %></li>
-      <% end %>
-    </ul>
+        <% @allergens.each do |allergen| %>
+          <p><i class="fas fa-ban"></i>&nbsp <%= allergen.name.capitalize %></p>
+        <% end %>
+      </div>
   </div>
 
   <div class="card-category"
@@ -123,4 +122,3 @@
   <div>
     <%= link_to "Back", items_path, class:"btn" %>
   </div>
-</div>
