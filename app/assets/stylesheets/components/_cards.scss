@@ -26,6 +26,7 @@
   margin-top: 8px;
   margin-bottom: 0;
   border: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.06);
 }
 
 .share {
@@ -101,16 +102,19 @@
 .details {
   padding-bottom: 14px;
   padding-top: 18px;
-  margin-left: -8px;
+  margin-left: 8px;
   font-size: small;
   padding-right: 4px;
+  p {
+    margin-top: 12px;
+  }
 }
 
 .availability {
-  position: absolute;
+  position: fixed;
   margin-top: -381px;
   margin-left: 690px;
-  color: white;
+  color: $rose;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
@@ -121,6 +125,23 @@
   color: #814B67;
 }
 
+.back-btn-container {
+  display: flex;
+}
+
+.back-btn {
+  color: $rose;
+  text-decoration: none;
+  margin-bottom: 8px;
+  .fas {
+    color: $rose;
+    font-size: 20px;
+    margin-right: 24px;
+  }
+  a {
+    color: $rose;
+  }
+}
 
 // commented out because there's no hover effect in mobile
 // if this is necessary, please change to other class because it's affecting all icons :(

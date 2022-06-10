@@ -76,7 +76,8 @@ class ItemsController < ApplicationController
         info_window: render_to_string(
           partial: "info_window",
           locals: { user: user }
-        )
+        ),
+        image_url: helpers.asset_url("map_icon.png")
       }
     ]
   end
