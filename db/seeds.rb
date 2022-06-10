@@ -180,6 +180,7 @@ shaynas_meal = Item.create!(
   description: @meals.last["description"],
   expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
 )
+shaynas_meal.photos.attach(io: File.open("app/assets/images/meals/#{@meals.last["photo"]}"), filename: @meals.last["photo"])
 
 puts " Demo persona: #{@shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
 add_allergens_and_diets(shaynas_meal)
@@ -223,6 +224,7 @@ puts '------------------------Users with meals----------------------------'.ligh
   add_allergens_and_diets(meal)
   @counter_from_zero += 1
 end
+
 puts "#{'✓ Users with meals '.light_green}created"
 puts ''
 puts '---------------------Users with ingredients-------------------------'.light_black
