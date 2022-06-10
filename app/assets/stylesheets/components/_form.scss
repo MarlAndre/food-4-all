@@ -12,13 +12,25 @@
       color: black;
     }
   }
+  .d-flex.type {
+    width: 70%;
+  }
   .form-check {
     padding-left: 0;
   }
   .form-check-label {
     padding-left: 5px;
   }
-  .button {
+  .submit-button {
+    background-color: rgba($rose, 1);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 8px 36px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    text-align: center;
     font-size: 1rem;
+    margin: 8px auto;
   }
 }

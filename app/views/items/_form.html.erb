@@ -5,7 +5,7 @@
   <div class="container px-4 py-4 mb-5">
     <%= simple_form_for @item do |f| %>
       <%= f.input :name, placeholder: 'Name', label: false, class: 'w-100' %>
-      <div class="d-flex justify-content-between w-100">
+      <div class="d-flex justify-content-between type">
         <%= f.input_field :item_type, as: :radio_buttons, collection: Item::TYPES %>
       </div>
       <p></p>
@@ -18,7 +18,7 @@
       <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
       <p></p>
       <div class="d-flex justify-content-center">
-        <%= f.submit 'Submit', class: 'button' %>
+        <%= f.submit 'Submit', class: 'submit-button' %>
       </div>
     <% end %>
   </div>
