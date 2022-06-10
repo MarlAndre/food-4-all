@@ -72,6 +72,8 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
+    @item.allergens = params[:item][:allergens][1...]
+    @item.diets = params[:item][:diets][1...]
     if @item.save
       redirect_to item_path(@item)
     else
@@ -96,6 +98,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, :allergen_ids, :diet_ids, photos: [])
   end
 end
