@@ -98,7 +98,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, :allergen_ids, :diet_ids, photos: [])
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, :allergens, :diets, photos: [])
   end
 
   def add_allergens?
