@@ -16,7 +16,7 @@
         <div class="card-product-infos">
           <h2><strong><%= @request.item.user.username.capitalize %></strong> is giving away <strong><%= @request.item.name.capitalize %></strong></h2>
           <span class="text-white"><%= @request.item.status.capitalize %></span>
-          <p>x km away</p>
+          <p><%= @distance %> km away</p>
         </div>
       </div>
       <div class="image">
