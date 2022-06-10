@@ -238,11 +238,12 @@ puts '---------------------Users with ingredients-------------------------'.ligh
   )
   ingredient = Item.new(
     user_id: user.id,
-    name: @ingredients[@counter_from_zero],
+    name: @ingredients[@counter_from_zero]["name"],
     status: 'available',
     item_type: 'ingredient',
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
-    )
+  )
+  ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients[@counter_from_zero]["photo"]}"), filename: @ingredients[@counter_from_zero]["photo"])
   ingredient.description = "#{@ingr_descr.sample} #{ingredient.name}"
   ingredient.save!
   puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_white})."
