@@ -42,7 +42,11 @@ class Item < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_index,
     against: %i[name description item_type status],
-    associated_against: { user: :username, allergen: :name, diet: :name },
+    associated_against: {
+      user: :username,
+      allgerns: :name,
+      diet: :name
+    },
     using: { tsearch: { prefix: true } }
 
   # This calculates the distance from the item's owner to the user who is using the website and entered their postal code.
