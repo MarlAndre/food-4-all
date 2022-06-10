@@ -14,7 +14,8 @@
   // keep images fixed at width of 120px and remove height:100% so all images align
   width: 120px;
   // change to contain looks better than cover
-  object-fit: contain;
+  object-fit: cover;
+  // changed to cover to fill the height of the picture
 }
 
 .card-product h2 {
