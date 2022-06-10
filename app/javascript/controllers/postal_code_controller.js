@@ -18,7 +18,8 @@ export default class extends Controller {
   // Will show results when we send our location
   submitForm(event) {
     event.preventDefault()
-    window.location.href="items";
+    // window.location.href="items";
+    this.popupTarget.style.display='none';
 
     fetch(`items?${new URLSearchParams({ postal_code: this.inputTarget.value })}`,{
       method: "GET",
@@ -28,35 +29,32 @@ export default class extends Controller {
       .then(response => response.json())
 
       .then((items) => {
-        const cardsItems = document.querySelector("#cards-items");
-        cardsItems.innerHTML='';
+        console.log(items)
+      //   const cardsItems = document.querySelector("#cards-items");
+      //   cardsItems.innerHTML='';
 
-        items.forEach((item) => {
-          const itemCard = `<div class="card-product" data-id="${item[0].id}">
-              <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" />
-              <div class="card-product-infos">
-                <h2>${item[0].name}</h2>
+      //   items.forEach((item) => {
+      //     const itemCard = `<div class="card-product" data-id="${item[0].id}">
+      //         <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" />
+      //         <div class="card-product-infos">
+      //           <h2>${item[0].name}</h2>
+      //           <h3>${item[0].description}</h3>
+      //           <p>${item[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+      //           <p>${item[2]} km &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
 
-                <h3>${item[0].description}</h3>
-                <p>${item[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
-                <p>${item[2]} km &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-share-alt"></i></p>
+      //         </div>
+      //     </div>`
+      //     cardsItems.insertAdjacentHTML("beforeend", itemCard)
+      //   })
 
-              </div>
-          </div>`
-          cardsItems.insertAdjacentHTML("beforeend", itemCard)
-        })
-
-        const cards = document.querySelectorAll(".card-product")
-        cards.forEach(card => {
-          card.addEventListener("click", () =>{
-            window.location.href = window.location.origin + "/items/" + card.dataset.id
-          })
-        })
+      //   const cards = document.querySelectorAll(".card-product")
+      //   cards.forEach(card => {
+      //     card.addEventListener("click", () =>{
+      //       window.location.href = window.location.origin + "/items/" + card.dataset.id
+      //     })
+      //   })
       })
       .catch(e => console.log('error', e.message))
-      .finally(() => {
-        this.element.style.display='none';
-      })
   }
   // show PopUp once per session
   showPopupOnLoad() {

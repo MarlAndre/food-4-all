@@ -34,7 +34,6 @@ class ItemsController < ApplicationController
       @users = User.all
       @items = Item.all.order(id: :desc)
     end
-
     # Geocoder
     @geocoded_users = User.geocoded
     @markers = @geocoded_users.map do |user|
@@ -53,8 +52,9 @@ class ItemsController < ApplicationController
     @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
     respond_to do |format|
       format.html { render "items/index" }
-      format.json { render json: @items_with_address }
+      format.json { render json: "@items_with_address" }
     end
+
   end
 
   def show
