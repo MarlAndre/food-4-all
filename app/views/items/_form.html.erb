@@ -1,19 +1,25 @@
-<div class="container px-4">
-  <%= simple_form_for @item do |f| %>
-    <%= f.input :name, placeholder: 'Name', label: false, class: 'w-100' %>
-    <div class="d-flex justify-content-between w-100">
-      <%= f.select :item_type, collection: Item::TYPES %>
-    </div>
-    <p></p>
-    <%= f.input :description, label: false, placeholder: 'Description (minimum 10 characters)', class: 'w-100' %>
-    <%# a new item must be available so giver doesn't need to see it in this form %>
-    <%# <%= f.input :status, collection: Item.statuses.keys %>
-    <%= f.association :allergens, label: 'Allergens (if any)' %>
-    <%= f.association :diets, label: 'Special diets (if any)' %>
-    <%= f.input :expiration_date, label: false, placeholder: 'Expiration date', as: :date, html5: true %>
-    <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
-    <p></p>
-    <%= f.submit 'Submit', class: 'button' %>
-  <% end %>
-  <%= link_to "Back", items_path %>
+<div class="new-item">
+  <div class="heading">
+    <h5>Add a new food item</h5>
+  </div>
+  <div class="container px-4 py-4 mb-5">
+    <%= simple_form_for @item do |f| %>
+      <%= f.input :name, placeholder: 'Name', label: false, class: 'w-100' %>
+      <div class="d-flex justify-content-between w-100">
+        <%= f.input_field :item_type, as: :radio_buttons, collection: Item::TYPES %>
+      </div>
+      <p></p>
+      <%= f.input :description, label: false, placeholder: 'Description (minimum 10 characters)', class: 'w-100' %>
+      <%# a new item must be available so giver doesn't need to see it in this form %>
+      <%# <%= f.input :status, collection: Item.statuses.keys %>
+      <%= f.association :allergens, label: 'Allergens (if any):', class: 'w-100' %>
+      <%= f.association :diets, label: 'Special diets (if any):', class: 'w-100' %>
+      <%= f.input :expiration_date, placeholder: 'Expiration date', as: :date, html5: true, class: 'w-100' %>
+      <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
+      <p></p>
+      <div class="d-flex justify-content-center">
+        <%= f.submit 'Submit', class: 'button' %>
+      </div>
+    <% end %>
+  </div>
 </div>
