@@ -1,28 +1,131 @@
 [
-  "artichoke",
-  "asparagus",
-  "avocado",
-  "beet",
-  "bok choy",
-  "broccoli",
-  "cabbage",
-  "carrot",
-  "cauliflower",
-  "celery",
-  "corn",
-  "cucumber",
-  "durian",
-  "eggplant",
-  "green bell pepper",
-  "jalapeno",
-  "lettuce",
-  "mustard",
-  "olive",
-  "onion",
-  "pumpkin",
-  "red bell pepper",
-  "squash",
-  "tomato",
-  "yellow bell pepper",
-  "zucchini"
+  {
+    "name": "artichoke",
+    "photo": "artichoke_two.jpg"
+  },
+
+  {
+    "name": "asparagus",
+    "photo": "asparagus_two.jpg"
+  },
+
+  {
+    "name": "avocado",
+    "photo": "avocado_two.jpg"
+  },
+
+  {
+    "name": "beet",
+    "photo": "beets.jpg"
+  },
+
+  {
+    "name": "bok choy",
+    "photo": "bok_choy.jpg"
+  },
+
+  {
+    "name": "broccoli",
+    "photo": "broccoli_two.jpg"
+  },
+
+  {
+    "name": "cabbage",
+    "photo": "cabbage.jpg"
+  },
+
+  {
+    "name": "carrot",
+    "photo": "carrots_two.jpg"
+  },
+
+  {
+    "name": "cauliflower",
+    "photo": "cauliflower_two.jpg"
+  },
+
+  {
+    "name": "celery",
+    "photo": "celery_two.jpg"
+  },
+
+  {
+    "name": "corn",
+    "photo": "corn.jpg"
+  },
+
+  {
+    "name": "cucumber",
+    "photo": "cucumber.jpg"
+  },
+
+  {
+    "name": "durian",
+    "photo": "durian.jpg"
+  },
+
+  {
+    "name": "eggplant",
+    "photo": "eggplant.jpg"
+  },
+
+  {
+    "name": "green bell pepper",
+    "photo": "green_bell_pepper_two.jpg"
+  },
+
+  {
+    "name": "jalapeno",
+    "photo": "jalapenos_two.jpg"
+  },
+
+  {
+    "name": "lettuce",
+    "photo": "lettuce.jpg"
+  },
+
+  {
+    "name": "mustard",
+    "photo": "mustard.jpg"
+  },
+
+  {
+    "name": "olive",
+    "photo": "olives.jpg"
+  },
+
+  {
+    "name": "onion",
+    "photo": "onions_two.jpg"
+  },
+
+  {
+    "name": "pumpkin",
+    "photo": "pumpkin.jpg"
+  },
+
+  {
+    "name": "red bell pepper",
+    "photo": "red_bell_pepper.jpg"
+  },
+
+  {
+    "name": "squash",
+    "photo": "squash.jpg"
+  },
+
+  {
+    "name": "tomato",
+    "photo": "tomato.jpg"
+  },
+
+  {
+    "name": "yellow bell pepper",
+    "photo": "yellow_bell_pepper.jpg"
+  },
+
+  {
+    "name": "zucchini",
+    "photo": "zucchini.jpg"
+  }
 ]
