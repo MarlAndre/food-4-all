@@ -38,16 +38,16 @@ class Item < ApplicationRecord
     donated: 2
   }
 
-  # added "pg_search" gem to filter the index by name/description
+  # added "pg_search" gem to filter the index
   include PgSearch::Model
   pg_search_scope :search_index,
-    against: %i[name description item_type status],
+    against: %i[name description item_type],
     associated_against: {
       user: :username,
-      allgerns: :name,
-      diet: :name
     },
     using: { tsearch: { prefix: true } }
+    # allergen: :name,
+    # diet: :name
 
   # This calculates the distance from the item's owner to the user who is using the website and entered their postal code.
   def distance_from(current_location)

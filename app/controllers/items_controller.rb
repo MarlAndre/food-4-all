@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     # Sets distance for each user that's nearby, private method below.
     set_distance
 
-    if @current_postal_code.present?
+    if @current_postal_code.present? && !params[:query].present?
       # Filter users if items are near (5km)
       @users = User.near(@current_postal_code, 5)
 
@@ -24,11 +24,15 @@ class ItemsController < ApplicationController
       # This condition is nested so that the cards will still have the distance from the user.
       if params[:query].present?
         @users = User.all # Maybe this should only reflect the users who's items are shown. <<<<<
-        @items = Item.search_index(params[:query])
+        # @items = Item.search_index(params[:query])
       end
     elsif params[:query].present?
       @users = User.all
-      @items = Item.search_index(params[:query])
+      sql = "Select items.id, items.user_id, items.status, items.item_type, items.description, items.expiration_date, items.created_at, items.updated_at, items.name, allergens.id allergen_id, allergens.name allergen_name from items INNER JOIN items_allergens ON items_allergens.item_id = items.id INNER JOIN allergens ON allergens.id = items_allergens.allergen_id WHERE items.name LIKE '%#{params[:query]}%'"
+      @items = ActiveRecord::Base.connection.execute(sql).to_a
+      raise
+      # pg_search
+      # @items = result.search_index(params[:query])
     else
       # If no search or postal code was entered, show everything.
       @users = User.all
@@ -49,7 +53,7 @@ class ItemsController < ApplicationController
     end
 
     # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
-    @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
+    @items_with_address = @items.map { |item| [item, User.find(item["user_id"]).address, @distances_between_other_users[item["user_id"]]] }
     respond_to do |format|
       format.html { render "items/index" }
       format.json { render json: "@items_with_address" }
