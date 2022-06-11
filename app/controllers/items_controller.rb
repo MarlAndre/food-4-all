@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
 
     if @current_postal_code.present?
       # Filter users if items are near (5km)
-      @users = User.near(@current_postal_code, 25)
+      @users = User.near(@current_postal_code, 5)
 
       # Get all of these users items
       @items = @users.map {|u| u.items}.flatten
