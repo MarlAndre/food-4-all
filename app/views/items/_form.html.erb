@@ -1,16 +1,25 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6 shadow">
-      <%= simple_form_for @item do |f| %>
-        <%= f.input :name %>
-        <%= f.select :item_type, collection: Item::TYPES %>
-        <%= f.input :status, collection: Item.statuses.keys %>
-        <%= f.input :expiration_date, as: :date, html5: true %>
-        <%= f.input :description %>
-        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-        <%= f.submit %>
-      <% end %>
-      <%= link_to "Back", items_path %>
-    </div>
+<div class="new-item">
+  <div class="heading">
+    <h5>Add a new food item</h5>
+  </div>
+  <div class="container px-4 py-4 mb-5">
+    <%= simple_form_for @item do |f| %>
+      <%= f.input :name, placeholder: 'Name', label: false, class: 'w-100' %>
+      <div class="d-flex justify-content-between type">
+        <%= f.input_field :item_type, as: :radio_buttons, collection: Item::TYPES %>
+      </div>
+      <p></p>
+      <%= f.input :description, label: false, placeholder: 'Description (minimum 10 characters)', class: 'w-100' %>
+      <%# a new item must be available so giver doesn't need to see it in this form %>
+      <%# <%= f.input :status, collection: Item.statuses.keys %>
+      <%= f.input :allergens, label: 'Allergens (if any):', class: 'w-100', collection: Allergen::NAMES, input_html: { multiple: true } %>
+      <%= f.input :diets, label: 'Special diets (if any):', class: 'w-100', collection: Diet::NAMES, input_html: { multiple: true } %>
+      <%= f.input :expiration_date, placeholder: 'Expiration date', as: :date, html5: true, class: 'w-100' %>
+      <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
+      <p></p>
+      <div class="d-flex justify-content-center">
+        <%= f.submit 'Submit', class: 'submit-button' %>
+      </div>
+    <% end %>
   </div>
 </div>

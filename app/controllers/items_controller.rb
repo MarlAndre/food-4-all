@@ -90,6 +90,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
     if @item.save
+      add_allergens?
+      add_diets?
       redirect_to item_path(@item)
     else
       render :new
@@ -118,7 +120,27 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, :allergens, :diets, photos: [])
+  end
+
+  def add_allergens?
+    params[:item][:allergens][1...].each do |allergen|
+      if Allergen.find_by(name: allergen)
+        ItemsAllergen.create!(item: @item, allergen: Allergen.find_by(name: allergen))
+      else
+        ItemsAllergen.create!(item: @item, allergen: Allergen.create!(name: allergen))
+      end
+    end
+  end
+
+  def add_diets?
+    params[:item][:diets][1...].each do |diet|
+      if Diet.find_by(name: diet)
+        ItemsDiet.create!(item: @item, diet: Diet.find_by(name: diet))
+      else
+        ItemsDiet.create!(item: @item, diet: Diet.create!(name: diet))
+      end
+    end
   end
 
   # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<
