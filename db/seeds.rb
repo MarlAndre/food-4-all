@@ -196,7 +196,7 @@ puts '------------------------Users with meals----------------------------'.ligh
 
 # Creates users, each user will have a meal to give.
 @counter_from_zero = 0
-7.times do
+8.times do
   user = User.create!(
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
@@ -225,7 +225,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
 
 # Creates users, each user will have an ingredient to give.
 @counter_from_zero = 0
-25.times do
+26.times do
   user = User.create!(
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
