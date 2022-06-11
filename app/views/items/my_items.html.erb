@@ -13,88 +13,114 @@
 
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <% if @my_available_items %>
-
-        <div class="cards items" id="cards-items">
-
-          <% @my_available_items.each do |item| %>
-            <%= link_to item_path(item), class: "text-decoration-none" do%>
-
-              <div class="card-product">
-                <% if item.photos.attached? %>
-                  <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                <% else %>
-                  <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                <% end %>
-
-                <div class="card-product-infos">
-                  <h2><%= item.name.capitalize %></h2>
-                  <h3><%= truncate(item.description, :length => 93) %></h3>
-                  <p><i class=“fas fa-map-marker-alt”></i>&nbsp<%= item.user.address %></p>
-                </div>
-              </div>
+    <% if @my_available_items %>
+      <div class="cards items" id="cards-items">
+        <% @my_available_items.each do |item| %>
+          <div class="card-product">
+            <% if item.photos.attached? %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
+              <% end %>
+            <% else %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-      <% else %>
-        "You haven't donate yet"
-      <% end %>
+
+            <div class="card-product-infos">
+              <h2><%= item.name.capitalize %></h2>
+              <h3><%= truncate(item.description, :length => 93) %></h3>
+              <%# removed the address because all my items have the same address (unimportant) %>
+              <%# <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= item.user.address %>
+              <%# added button here to change status %>
+              <div class="status-form mt-2">
+                <%= simple_form_for item do |f| %>
+                  <%= f.select :status, Status: Item.statuses.keys %>
+                  <%= f.submit 'Update', class: 'button' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
+    <% else %>
+      <em>You don't have any available items.</em>
+    <% end %>
+  </div>
 
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <% if @my_reserved_items %>
+    <% if @my_reserved_items %>
 
-        <div class="cards items" id="cards-items">
+      <div class="cards items" id="cards-items">
 
-          <% @my_reserved_items.each do |item| %>
-            <%= link_to item_path(item), class: "text-decoration-none" do%>
-
-              <div class="card-product">
-                <% if item.photos.attached? %>
-                  <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                <% else %>
-                  <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                <% end %>
-
-                <div class="card-product-infos">
-                  <h2><%= item.name.capitalize %></h2>
-                  <h3><%= truncate(item.description, :length => 93) %></h3>
-                  <p><i class=“fas fa-map-marker-alt”></i>&nbsp<%= item.user.address %></p>
-                </div>
-              </div>
+        <% @my_reserved_items.each do |item| %>
+          <div class="card-product">
+            <% if item.photos.attached? %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
+              <% end %>
+            <% else %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-      <% else %>
-        "You haven't donate yet"
-      <% end %>
+
+            <div class="card-product-infos">
+              <h2><%= item.name.capitalize %></h2>
+              <h3><%= truncate(item.description, :length => 93) %></h3>
+              <%# removed the address because all my items have the same address (unimportant) %>
+              <%# <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= item.user.address %>
+              <%# added button here to change status %>
+              <div class="status-form mt-2">
+                <%= simple_form_for item do |f| %>
+                  <%= f.select :status, Status: Item.statuses.keys %>
+                  <%= f.submit 'Update', class: 'button' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
+    <% else %>
+      <em>You don't have any reserved items.</em>
+    <% end %>
+  </div>
+
   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-          <% if @my_donated_items %>
+    <% if @my_donated_items %>
 
-        <div class="cards items" id="cards-items">
+      <div class="cards items" id="cards-items">
 
-          <% @my_donated_items.each do |item| %>
-            <%= link_to item_path(item), class: "text-decoration-none" do%>
-
-              <div class="card-product">
-                <% if item.photos.attached? %>
-                  <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                <% else %>
-                  <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                <% end %>
-
-                <div class="card-product-infos">
-                  <h2><%= item.name.capitalize %></h2>
-                  <h3><%= truncate(item.description, :length => 93) %></h3>
-                  <p><i class=“fas fa-map-marker-alt”></i>&nbsp<%= item.user.address %></p>
-                </div>
-              </div>
+        <% @my_donated_items.each do |item| %>
+          <div class="card-product">
+            <% if item.photos.attached? %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
+              <% end %>
+            <% else %>
+              <%= link_to item_path(item), class: "text-decoration-none" do %>
+                <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-      <% else %>
-        "You haven't donate yet"
-      <% end %>
+
+            <div class="card-product-infos">
+              <h2><%= item.name.capitalize %></h2>
+              <h3><%= truncate(item.description, :length => 93) %></h3>
+              <%# removed the address because all my items have the same address (unimportant) %>
+              <%# <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= item.user.address %>
+              <%# added button here to change status %>
+              <div class="status-form mt-2">
+                <%= simple_form_for item do |f| %>
+                  <%= f.select :status, Status: Item.statuses.keys %>
+                  <%= f.submit 'Update', class: 'button' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
+    <% else %>
+      <em>You don't have any donated items.</em>
+    <% end %>
+  </div>
 </div>

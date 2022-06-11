@@ -21,7 +21,8 @@
     <%# app-container just for Requests#index page %>
     <%# Page heading needs 100% width %>
       <% if params[:controller] == "requests" && params[:action] == "index" ||
-      params[:controller] == "pages" && params[:action] == "my_favorites"
+      params[:controller] == "pages" && params[:action] == "my_favorites" ||
+      params[:controller] == "items" && params[:action] == "my_items" ||
       %>
         <div class="app-container requests">
           <%= render '/shared/navbar' %>

@@ -66,7 +66,7 @@
         <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
       <% end %>
 
-      <div class="card-description">
+      <div class="card-description flex-grow-1">
         <p class="item-name"> <%= @item.name.capitalize %></p>
         <p class="username">From <%= @item.user.username %></p>
       </div>
@@ -77,12 +77,16 @@
       <li>Expiration date: <%= @item.expiration_date.strftime("%b %e") %></li>
       <li>Description: <%= @item.description %></li>
 
-      <% @diets.each do |diet| %>
-        <li>It may contains: <%= diet.name %></li>
+      <% unless @diets.nil? %>
+        <% @diets.each do |diet| %>
+          <li>It may contains: <%= diet.name %></li>
+        <% end %>
       <% end %>
 
-      <% @allergens.each do |allergen| %>
-        <li>Allergen: <%= allergen.name %></li>
+      <% unless @diets.nil? %>
+        <% @allergens.each do |allergen| %>
+          <li>Allergen: <%= allergen.name %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

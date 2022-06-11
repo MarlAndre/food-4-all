@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # a user doesn't have to log in to visit the index and show pages
   skip_before_action :authenticate_user!, only: :index
   # a user has to log in to like an item
-  before_action :find_item, only: %i[show toggle_favorite]
+  before_action :find_item, only: %i[show update toggle_favorite]
 
   def index
     # Gets current user coordinates, currently using static postal code until we fix the Js issue.
@@ -79,6 +79,15 @@ class ItemsController < ApplicationController
         )
       }
     ]
+  end
+
+  def update
+    @item.update(item_params)
+    if @item.save
+      redirect_to my_items_path
+    else
+      render 'items/my_items'
+    end
   end
 
   def new
