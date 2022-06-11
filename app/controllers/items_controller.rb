@@ -6,34 +6,44 @@ class ItemsController < ApplicationController
 
   def index
     # Gets current user coordinates, currently using static postal code until we fix the Js issue.
-    @current_postal_code = 'H2T 1X3'
+    @current_postal_code = "5333 rue casgrain"
 
     # Distance between current user and other users (for index cards).
     @distances_between_other_users = {}
 
     # Sets distance for each user that's nearby, private method below.
-    set_distance
+    # set_distance
+    @users = User.all
+    @items = Item.all.order(id: :desc)
 
-    if @current_postal_code.present?
-      # Filter users if items are near (5km)
-      @users = User.near(@current_postal_code, 5)
-
-      # Get all of these users items
-      @items = @users.map {|u| u.items}.flatten
-
-      # This condition is nested so that the cards will still have the distance from the user.
-      if params[:query].present?
-        @users = User.all # Maybe this should only reflect the users who's items are shown. <<<<<
-        @items = Item.search_index(params[:query])
-      end
-    elsif params[:query].present?
-      @users = User.all
-      @items = Item.search_index(params[:query])
-    else
-      # If no search or postal code was entered, show everything.
-      @users = User.all
-      @items = Item.all.order(id: :desc)
+    current_coordinates = Geocoder.coordinates(@current_postal_code)
+    @users.each do |user|
+      total_distance = user.distance_from(current_coordinates).round(1)
+      @distances_between_other_users[user.id] = total_distance
     end
+
+    # if true
+    #   # Filter users if items are near (5km)
+    #   @users = User.near("X2H 42P", 5)
+
+    #   # Get all of these users items
+    #   @items = @users.map {|u| u.items}.flatten
+
+    #   # This condition is nested so that the cards will still have the distance from the user.
+    #   if params[:query].present?
+    #     @users = User.all # Maybe this should only reflect the users who's items are shown. <<<<<
+    #     @items = Item.search_index(params[:query])
+    #   end
+
+    # elsif params[:query].present?
+    #   @users = User.all
+    #   @items = Item.search_index(params[:query])
+    # else
+    # # If no search or postal code was entered, show everything.
+    #   @users = User.all
+    #   @items = Item.all.order(id: :desc)
+    # end
+
     # Geocoder
     @geocoded_users = User.geocoded
     @markers = @geocoded_users.map do |user|
@@ -49,12 +59,18 @@ class ItemsController < ApplicationController
     end
 
     # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
-    @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
+    # @items_with_address = @items.map do |item|
+    #   [
+    #     item:
+    #     item.user.address,
+    #     # @distances_between_other_users[item.user.id]
+    #   ]
+    # end
+
     respond_to do |format|
       format.html { render "items/index" }
-      format.json { render json: "@items_with_address" }
+      format.json { render json: @items }
     end
-
   end
 
   def show
@@ -149,7 +165,6 @@ class ItemsController < ApplicationController
     users = User.all
     current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
-      current_coordinates
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
