@@ -24,7 +24,7 @@ class Item < ApplicationRecord
 
   # Validations
   validates_presence_of :user_id, :photos, :description, :expiration_date, :item_type, :status, :name
-  validates :description, length: { minimum: 10 }
+  validates :description, length: { minimum: 7 }
 
   TYPES = %w[meal ingredient]
   validates :item_type, inclusion: { in: TYPES }
