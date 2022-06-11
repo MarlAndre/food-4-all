@@ -70,6 +70,8 @@
 .distance {
   margin-top: -1222px;
   margin-left: 43px;
+
+
 }
 
 // .fa-thumbs-up {
@@ -110,12 +112,12 @@
 }
 
 .availability {
-  position: fixed;
-  margin-top: -381px;
-  margin-left: 690px;
-  color: $rose;
+  position: absolute;
+  margin-top: -399px;
+  margin-left: 8px;
+  color: white;
   font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 .btn:hover {
@@ -175,4 +177,13 @@
   .button {
     font-size: 13px;
   }
+}
+
+.expand {
+  object-fit: cover;
+}
+
+.item-name {
+  padding-bottom: 8px;
+  padding-top: 4px;
 }
