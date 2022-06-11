@@ -83,16 +83,16 @@
         <%= @item.description %>
 
       <% unless @diets.nil? %>
+        <% @allergens.each do |allergen| %>
+          <p><i class="fas fa-ban"></i>&nbsp<%= allergen.name.capitalize %></li></p>
+        <% end %>
+      <% end %>
+      <% unless @diets.nil? %>
         <% @diets.each do |diet| %>
-          <li>It may contains: <%= diet.name %></li>
+         <p><i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize %></li></p>
         <% end %>
       <% end %>
 
-      <% unless @diets.nil? %>
-        <% @allergens.each do |allergen| %>
-          <li>Allergen: <%= allergen.name %></li>
-        <% end %>
-      <% end %>
     </ul>
   </div>
 
