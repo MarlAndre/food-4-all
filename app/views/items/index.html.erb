@@ -12,14 +12,12 @@
       </div>
     </div>
 
-    <div class="modal-popup-container input-group mb-3" id="popup-container">
-      <form name="postal_form" data-remote="true" data-postal-code-target="submit">
+   <div class="modal-popup-container input-group mb-3" id="popup-container">
+      <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
         <%# <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span> %>
         <label for="postal_code"></label>
         <input class="form-control" type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Enter your zip code...">
-        <div class="d-flex justify-content-center">
-          <button name="button" data-action="click->postal-code#submitForm" id="btn" type="button" class="btn btn-flat">Let's start !</button>
-        </div>
+        <button name="button" id="btn" type="submit" class="btn btn-flat">Submit</button>
       </form>
     </div>
   </div>
