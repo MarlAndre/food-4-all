@@ -1,6 +1,3 @@
-
-# my_item.photos.attach(io: File.open("app/assets/images/meals/pizza.jpg"), filename: "pizza.jpg")
-
 #############################################################################
 #------------------------------PARSING JSON---------------------------------#
 #############################################################################
@@ -19,11 +16,6 @@ locations_file = File.read(locations_file_path)
 meals_file_path = File.join(Rails.root, 'app', 'assets', 'meals.json')
 meals_file = File.read(meals_file_path)
 @meals = JSON.parse(meals_file)
-
-# List of meals descriptions.
-# meal_descriptions_file_path = File.join(Rails.root, 'app', 'assets', 'meal_dessn').description
-# meal_descriptions_file = File.read(meal_descriptions_file_path)
-# @meal_descriptions = JSON.parse(meal_descriptions_file)
 
 # List of ingredients.
 ingredients_file_path = File.join(Rails.root, 'app', 'assets', 'ingredients.json')
@@ -78,7 +70,6 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'spaghetti'
     item.description = @meals[7]["description"]
-
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
   else
