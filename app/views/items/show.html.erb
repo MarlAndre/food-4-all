@@ -82,17 +82,18 @@
         <h6><strong>Description</strong></h6>
         <%= @item.description %>
 
-        <br>
-
+      <% unless @diets.nil? %>
         <% @diets.each do |diet| %>
-          <p><i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize %></p>
+          <li>It may contains: <%= diet.name %></li>
         <% end %>
+      <% end %>
 
+      <% unless @diets.nil? %>
         <% @allergens.each do |allergen| %>
-          <p><i class="fas fa-ban"></i>&nbsp <%= allergen.name.capitalize %></p>
+          <li>Allergen: <%= allergen.name %></li>
         <% end %>
-      </div>
-    </div>
+      <% end %>
+    </ul>
   </div>
 
   <div class="card-category"
