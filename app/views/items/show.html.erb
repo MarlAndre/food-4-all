@@ -77,12 +77,16 @@
       <li>Expiration date: <%= @item.expiration_date.strftime("%b %e") %></li>
       <li>Description: <%= @item.description %></li>
 
-      <% @diets.each do |diet| %>
-        <li>It may contains: <%= diet.name %></li>
+      <% unless @diets.nil? %>
+        <% @diets.each do |diet| %>
+          <li>It may contains: <%= diet.name %></li>
+        <% end %>
       <% end %>
 
-      <% @allergens.each do |allergen| %>
-        <li>Allergen: <%= allergen.name %></li>
+      <% unless @diets.nil? %>
+        <% @allergens.each do |allergen| %>
+          <li>Allergen: <%= allergen.name %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

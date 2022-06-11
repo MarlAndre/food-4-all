@@ -141,3 +141,12 @@
 .carousel-item > img {
   object-fit: cover;
 }
+
+.my-items {
+  .heading {
+    border-bottom: 1.5px $light-green solid;
+  }
+  .button {
+    font-size: 13px;
+  }
+}
