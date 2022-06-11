@@ -172,7 +172,7 @@ puts ''
   password: '123456',
   address: '5057 rue de bullion, montreal'
 )
-shaynas_meal = Item.create!(
+shaynas_meal = Item.new(
   user_id: @shayna.id,
   name: @meals.last["name"],
   status: 'available',
@@ -181,6 +181,8 @@ shaynas_meal = Item.create!(
   expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
 )
 shaynas_meal.photos.attach(io: File.open("app/assets/images/meals/#{@meals.last["photo"]}"), filename: @meals.last["photo"])
+shaynas_meal.save!
+
 
 puts " Demo persona: #{@shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
 add_allergens_and_diets(shaynas_meal)
@@ -210,7 +212,7 @@ puts '------------------------Users with meals----------------------------'.ligh
     password: '123456',
     address: @locations.sample
   )
-  meal = Item.create!(
+  meal = Item.new(
     user_id: user.id,
     name: @meals[@counter_from_zero]["name"],
     status: 'available',
@@ -219,8 +221,9 @@ puts '------------------------Users with meals----------------------------'.ligh
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
   meal.photos.attach(io: File.open("app/assets/images/meals/#{@meals[@counter_from_zero]["photo"]}"), filename: @meals[@counter_from_zero]["photo"])
+  meal.save!
 
-  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with a #{meal.name.cyan}(ID:#{meal.id.to_s.light_white}) meal."
+  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_yellow}) has been created with a #{meal.name.cyan}(ID:#{meal.id.to_s.light_yellow}) meal."
   add_allergens_and_diets(meal)
   @counter_from_zero += 1
 end
@@ -248,7 +251,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
   ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients[@counter_from_zero]["photo"]}"), filename: @ingredients[@counter_from_zero]["photo"])
   ingredient.description = "#{@ingr_descr.sample} #{ingredient.name}"
   ingredient.save!
-  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_white}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_white})."
+  puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_yellow}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_yellow})."
   @counter_from_zero += 1
 end
 puts "#{'✓ Users with ingredients '.light_green}created"

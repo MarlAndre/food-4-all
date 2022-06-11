@@ -13,5 +13,6 @@ class Diet < ApplicationRecord
   has_many :items, through: :items_diets
 
   # Validations
-  validates :name, presence: true
+  NAMES = ['vegan', 'vegetarian', 'pescatarian', 'lactose free', 'gluten free']
+  validates :name, presence: true, inclusion: { in: NAMES }
 end

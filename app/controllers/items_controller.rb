@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # a user doesn't have to log in to visit the index and show pages
   skip_before_action :authenticate_user!, only: :index
   # a user has to log in to like an item
-  before_action :find_item, only: %i[show toggle_favorite]
+  before_action :find_item, only: %i[show update toggle_favorite]
 
   def index
     # Gets current user coordinates, currently using static postal code until we fix the Js issue.
@@ -34,7 +34,6 @@ class ItemsController < ApplicationController
       @users = User.all
       @items = Item.all.order(id: :desc)
     end
-
     # Geocoder
     @geocoded_users = User.geocoded
     @markers = @geocoded_users.map do |user|
@@ -53,8 +52,9 @@ class ItemsController < ApplicationController
     @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
     respond_to do |format|
       format.html { render "items/index" }
-      format.json { render json: @items_with_address }
+      format.json { render json: "@items_with_address" }
     end
+
   end
 
   def show
@@ -76,10 +76,12 @@ class ItemsController < ApplicationController
         info_window: render_to_string(
           partial: "info_window",
           locals: { user: user }
-        )
+        ),
+        image_url: helpers.asset_url("map_icon.png")
       }
     ]
   end
+
 
   def new
     @item = Item.new
@@ -89,6 +91,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
     if @item.save
+      add_allergens?
+      add_diets?
       redirect_to item_path(@item)
     else
       render :new
@@ -105,6 +109,11 @@ class ItemsController < ApplicationController
     @my_reserved_items = Item.where(user: current_user, status: "reserved")
   end
 
+  def update
+    @item.update(item_params)
+    redirect_to my_items_path
+  end
+
   private
 
   def find_item
@@ -112,7 +121,27 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, photos: [])
+    params.require(:item).permit(:name, :description, :expiration_date, :status, :item_type, :allergens, :diets, photos: [])
+  end
+
+  def add_allergens?
+    params[:item][:allergens][1...].each do |allergen|
+      if Allergen.find_by(name: allergen)
+        ItemsAllergen.create!(item: @item, allergen: Allergen.find_by(name: allergen))
+      else
+        ItemsAllergen.create!(item: @item, allergen: Allergen.create!(name: allergen))
+      end
+    end
+  end
+
+  def add_diets?
+    params[:item][:diets][1...].each do |diet|
+      if Diet.find_by(name: diet)
+        ItemsDiet.create!(item: @item, diet: Diet.find_by(name: diet))
+      else
+        ItemsDiet.create!(item: @item, diet: Diet.create!(name: diet))
+      end
+    end
   end
 
   # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<

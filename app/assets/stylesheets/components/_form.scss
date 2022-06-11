@@ -1,0 +1,36 @@
+.new-item {
+  .heading {
+    border-bottom: 1.5px $light-green solid;
+    h5 {
+      width: 100%;
+      font-size: 17px;
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: black;
+    }
+  }
+  .d-flex.type {
+    width: 70%;
+  }
+  .form-check {
+    padding-left: 0;
+  }
+  .form-check-label {
+    padding-left: 5px;
+  }
+  .submit-button {
+    background-color: rgba($rose, 1);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 8px 36px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    font-size: 1rem;
+    margin: 8px auto;
+  }
+}

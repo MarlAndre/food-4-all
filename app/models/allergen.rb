@@ -13,5 +13,6 @@ class Allergen < ApplicationRecord
   has_many :items, through: :items_allergens
 
   # Validations
-  validates :name, presence: true
+  NAMES = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
+  validates :name, presence: true, inclusion: { in: NAMES }
 end

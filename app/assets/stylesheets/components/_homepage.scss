@@ -1,7 +1,3 @@
-.banner-container {
-  position: relative;
-}
-
 .image-banner {
   position: absolute;
   background-image: url(landingpage.png);
@@ -10,7 +6,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  opacity: 0.8;
+  // opacity: 0.8;
   height: 100vh;
   padding-top: 24px;
 }
@@ -52,14 +48,12 @@
 
 // Postal code
 .modal-popup-container {
-  position: absolute;
+  position: fixed;
   bottom: 60px;
   width: 100vw;
   align-items: center;
   justify-content: center;
-}
-
-.modal-popup {
+  z-index: 1032;
   .form-control {
     display: inline-block;
     width: 65%;
