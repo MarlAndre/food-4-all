@@ -141,19 +141,3 @@
 .carousel-item > img {
   object-fit: cover;
 }
-
-.my-items {
-  .heading {
-    border-bottom: 1.5px $light-green solid;
-    h5 {
-      width: 100%;
-      font-size: 17px;
-      display: flex;
-      justify-content: center;
-      margin-top: 48px;
-      font-weight: 900;
-      margin-bottom: 12px;
-      color: black;
-    }
-  }
-}
