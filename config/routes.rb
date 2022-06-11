@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "items#index"
 
   # CRUD actions / routes for items
   resources :items do

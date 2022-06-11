@@ -23,3 +23,16 @@ margin-bottom: 0;
 .container-fluid {
   margin-bottom: 0 !important;
 }
+
+.items-page-container {
+  position: relative;
+
+}
+
+.initial-screen {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 1031;
+  display: none;
+}
