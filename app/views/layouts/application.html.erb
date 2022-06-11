@@ -26,6 +26,33 @@
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
           <%= yield %>
+    <% unless current_page?(root_path) %>
+    <%# app-container just for Requests#index page %>
+    <%# Page heading needs 100% width %>
+      <% if params[:controller] == "requests" && params[:action] == "index" ||
+      params[:controller] == "pages" && params[:action] == "my_favorites" ||
+      params[:controller] == "items" && params[:action] == "new"
+      %>
+        <div class="app-container requests">
+          <%= render '/shared/navbar' %>
+          <div class="page-content">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+        <%# normal app-container for all other pages %>
+        <div class="app-container">
+          <%= render '/shared/navbar' %>
+          <div class="page-content">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+
+            <%= yield %>
+          </div>
+        </div>
+      <% end %>
         </div>
       </div>
     <% else %>
