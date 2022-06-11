@@ -17,15 +17,6 @@
   </head>
 
   <body>
-    <% if params[:controller] == "requests" && params[:action] == "index" ||
-    params[:controller] == "pages" && params[:action] == "my_favorites"
-    %>
-      <div class="app-container requests">
-        <%= render '/shared/navbar' %>
-        <div class="page-content">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
-          <%= yield %>
     <% unless current_page?(root_path) %>
     <%# app-container just for Requests#index page %>
     <%# Page heading needs 100% width %>
