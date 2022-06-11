@@ -12,15 +12,15 @@ class ProfilesController < ApplicationController
     @items = Item.joins(:requests).where(requests: {receiver_id: current_user.id })
 
     # All users where the request receiver is the current user
-    @users = User.joins(:requests_as_receiver).where(requests_as_receiver: { receiver_id: current_user.id })
-    # Sets distance for each user that's nearby, private method below.
-    set_distance(@users)
-  end
+    @users = User.joins(:requests_as_giver).where(requests_as_giver: { receiver_id: current_user.id })
 
+    # Sets distance for each user that's nearby, private method below.
+    get_distance(@users)
+  end
   private
 
   # Sets distance for each user that's nearby.
-  def set_distance(users)
+  def get_distance(users)
     # users = User.all
     current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
