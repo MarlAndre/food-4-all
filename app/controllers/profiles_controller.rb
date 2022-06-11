@@ -7,9 +7,10 @@ class ProfilesController < ApplicationController
     @distances_between_other_users = {}
 
     @profile = User.find(current_user.id)
-    @requests = Request.where(receiver: current_user).or(Request.where(giver: current_user))
-    # This makes items an activeRecord_relation object, not an object.
-    @items = Item.joins(:requests).where(requests: {receiver_id: current_user.id})
+
+    # Items that the current user has requested.
+    @items = Item.joins(:requests).where(requests: {receiver_id: current_user.id })
+
     # All users where the request receiver is the current user
     @users = User.joins(:requests_as_receiver).where(requests_as_receiver: { receiver_id: current_user.id })
     # Sets distance for each user that's nearby, private method below.
