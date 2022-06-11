@@ -81,14 +81,6 @@ class ItemsController < ApplicationController
     ]
   end
 
-  def update
-    @item.update(item_params)
-    if @item.save
-      redirect_to my_items_path
-    else
-      render 'items/my_items'
-    end
-  end
 
   def new
     @item = Item.new
@@ -112,6 +104,11 @@ class ItemsController < ApplicationController
     @my_available_items = Item.where(user: current_user, status: "available")
     @my_donated_items = Item.where(user: current_user, status: "donated")
     @my_reserved_items = Item.where(user: current_user, status: "reserved")
+  end
+
+  def update
+    @item.update(item_params)
+    redirect_to my_items_path
   end
 
   private
