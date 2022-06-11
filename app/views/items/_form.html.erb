@@ -9,7 +9,7 @@
         <%= f.input_field :item_type, as: :radio_buttons, collection: Item::TYPES %>
       </div>
       <p></p>
-      <%= f.input :description, label: false, placeholder: 'Description (minimum 10 characters)', class: 'w-100' %>
+      <%= f.input :description, label: false, placeholder: 'Description (minimum 7 characters)', class: 'w-100' %>
       <%# a new item must be available so giver doesn't need to see it in this form %>
       <%# <%= f.input :status, collection: Item.statuses.keys %>
       <%= f.input :allergens, label: 'Allergens (if any):', class: 'w-100', collection: Allergen::NAMES, input_html: { multiple: true } %>
@@ -18,7 +18,7 @@
       <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
       <p></p>
       <div class="d-flex justify-content-center">
-        <%= f.submit 'Submit', class: 'submit-button' %>
+        <%= f.submit 'Create an offer', class: 'submit-button' %>
       </div>
     <% end %>
   </div>
