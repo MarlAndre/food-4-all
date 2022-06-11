@@ -78,7 +78,7 @@
 
     <div class="details">
         <h6><strong>Description</strong></h6>
-        <%= @item.description %>
+        <%= @item.description.capitalize %>
 
       <% unless @diets.nil? %>
         <% @allergens.each do |allergen| %>
