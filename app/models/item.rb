@@ -41,7 +41,7 @@ class Item < ApplicationRecord
   # added "pg_search" gem to filter the index by name/description
   include PgSearch::Model
   pg_search_scope :search_index,
-    against: %i[name description],
+    against: %i[name description item_type],
     associated_against: { user: :username },
     using: { tsearch: { prefix: true } }
 
