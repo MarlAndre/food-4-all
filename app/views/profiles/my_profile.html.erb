@@ -4,9 +4,55 @@
     <%= link_to "Edit", "#", class: 'edit-link' %>
   <%# </div> %>
   <div class="buttons my-5">
-    <div><%= link_to "Add an item", new_item_path, class: "button" %></div>
     <div><%= link_to "My items", my_items_path, class: "button" %></div>
-    <div><%= link_to "My favorites", my_favorites_path, class: "button" %></div>
+  </div>
+  <div class="container my-4">
+    <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
+    <% if @requests.nil? || @requests.all? { |r| r.messages.last.nil? } %>
+      <em>You don't have any requests to date.</em>
+    <% else %>
+      <% @requests.each do |request| %>
+        <% unless request.messages.last.nil? %>
+          <%= link_to request_path(request) do %>
+            <%# each request is a flex card %>
+            <div class="ripple shadow request-card <%= request.item.donated? ? 'donated' : '' %>">
+              <%# image is the first div %>
+              <%# To insert dynamic images for all items %>
+              <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
+              <%# details is the second div %>
+              <div class="details">
+                <% if current_user == request.receiver %>
+                  <span><%= request.giver.username %></span>
+                <% elsif current_user == request.giver %>
+                  <span><%= request.receiver.username %></span>
+                <% end %>
+                <strong><%= request.item.name %></strong>
+                <% if request.item.status == 'donated' %>
+                  <em>This item was donated.</em>
+                <% else %>
+                  <%# only part of the message is previewed if it's too long %>
+                  <% if current_user == request.messages.last.user %>
+                    <em>You: <%= truncate(request.messages.last.content, length: 24) %></em>
+                  <% else %>
+                    <em><%= truncate(request.messages.last.content, length: 28) %></em>
+                  <% end %>
+                <% end %>
+              </div>
+              <%# last message's received time is the third div %>
+              <div class="message-time">
+                <% if request.messages.last.created_at > 6.days.from_now %>
+                  <%= request.messages.last.created_at.strftime("%D") %>
+                <% elsif request.messages.last.created_at > 1.day.from_now %>
+                  <%= request.messages.last.created_at.strftime("%a") %>
+                <% else %>
+                  Today
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
   <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "logout" %>
 </div>
