@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   has_many_attached :photos
 
   # Validations
-  validates_presence_of :user_id, :description, :expiration_date, :item_type, :status, :name
+  validates_presence_of :user_id, :photos, :description, :expiration_date, :item_type, :status, :name
   validates :description, length: { minimum: 10 }
 
   TYPES = %w[meal ingredient]
