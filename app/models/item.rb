@@ -23,10 +23,10 @@ class Item < ApplicationRecord
   has_many_attached :photos
 
   # Validations
-  validates_presence_of :user_id, :description, :expiration_date, :item_type, :status, :name
+  validates_presence_of :user_id, :photos, :description, :expiration_date, :item_type, :status, :name
   validates :description, length: { minimum: 10 }
 
-  TYPES = %w[Meal Ingredient]
+  TYPES = %w[meal ingredient]
   validates :item_type, inclusion: { in: TYPES }
 
   # has_many_attached :photos, :maximum => 5 # cloudinary to be installed
