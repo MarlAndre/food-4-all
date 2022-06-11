@@ -8,19 +8,16 @@ class ProfilesController < ApplicationController
 
     @profile = User.find(current_user.id)
     @requests = Request.where(receiver: current_user).or(Request.where(giver: current_user))
-    @items = @requests.map do |request|
-      Item.where(user_id: request.giver_id)
-    end
+    # This makes items an activeRecord_relation object, not an object.
+    @items = Item.joins(:requests).where(requests: {receiver_id: current_user.id})
     # All users where the request receiver is the current user
-    @users = User.joins(:requests).where(requests: { receiver_id: current_user.id })
-    # All booking requests where the pokemon of the booking request's owner id equals mine
-    @booking_requests_received = Booking.joins(:pokemons).where(pokemons: { user_id: current_user.id })
-    raise
+    @users = User.joins(:requests_as_receiver).where(requests_as_receiver: { receiver_id: current_user.id })
     # Sets distance for each user that's nearby, private method below.
     set_distance(@users)
   end
 
   private
+
   # Sets distance for each user that's nearby.
   def set_distance(users)
     # users = User.all
