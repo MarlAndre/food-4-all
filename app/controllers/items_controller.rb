@@ -144,12 +144,12 @@ class ItemsController < ApplicationController
     end
   end
 
-  # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<
+  # Sets distance for each user that's nearby.
   def set_distance
     users = User.all
     current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
-      current_coordinates
+      # Why does this work when it's an Item method?
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end

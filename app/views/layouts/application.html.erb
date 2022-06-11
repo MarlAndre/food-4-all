@@ -23,7 +23,8 @@
       <% if params[:controller] == "requests" && params[:action] == "index" ||
       params[:controller] == "pages" && params[:action] == "my_favorites" ||
       params[:controller] == "items" && params[:action] == "my_items" ||
-      params[:controller] == "items" && params[:action] == "new"
+      params[:controller] == "items" && params[:action] == "new" ||
+      params[:controller] == "profiles" && params[:action] == "my_profile"
       %>
         <div class="app-container requests">
           <%= render '/shared/navbar' %>
