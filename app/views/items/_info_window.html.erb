@@ -1,6 +1,7 @@
 <h6><%= user.username %> is giving away</h6>
 <% user.items.each do |item|%>
   <p><%= link_to (item.name.capitalize), item_path(item) %></p>
+  <%= cl_image_tag item.photos.first.key, width: "100%", height: 100 %>
   <% item.allergens.each do |allergen|  %>
     <i class="fas fa-ban"></i>&nbsp<%= allergen.name.capitalize%>
   <% end %>
