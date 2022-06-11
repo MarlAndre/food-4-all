@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
           partial: "info_window",
           locals: { user: user }
         ),
-        image_url: helpers.asg_url("map_icon.png")
+        image_url: helpers.asset_url("map_icon.png")
       }
     end
 
