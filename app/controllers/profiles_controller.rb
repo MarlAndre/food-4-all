@@ -17,6 +17,7 @@ class ProfilesController < ApplicationController
     # Sets distance for each user that's nearby, private method below.
     get_distance(@users)
   end
+
   private
 
   # Sets distance for each user that's nearby.
