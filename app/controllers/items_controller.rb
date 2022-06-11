@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     @distances_between_other_users = {}
 
     # Sets distance for each user that's nearby, private method below.
-    set_distance
+    get_distance
 
     if @current_postal_code.present?
       # Filter users if items are near (5km)
@@ -54,7 +54,6 @@ class ItemsController < ApplicationController
       format.html { render "items/index" }
       format.json { render json: "@items_with_address" }
     end
-
   end
 
   def show
@@ -144,12 +143,11 @@ class ItemsController < ApplicationController
     end
   end
 
-  # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<
-  def set_distance
+  # Sets distance for each user that's nearby.
+  def get_distance
     users = User.all
     current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
-      current_coordinates
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
