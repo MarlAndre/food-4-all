@@ -19,10 +19,10 @@ class PagesController < ApplicationController
   private
 
   # Sets distance for all users.
-  def get_distance(users)
+  def get_distance
     current_coordinates = Geocoder.coordinates(@current_postal_code)
+    users = User.all
     users.each do |user|
-      @users = User.all
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
