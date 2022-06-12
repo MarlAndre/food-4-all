@@ -11,7 +11,7 @@
         <% unless request.messages.last.nil? %>
           <%= link_to request_path(request) do %>
             <%# each request is a flex card %>
-            <div class="ripple shadow request-card <%= request.item.donated? ? 'donated' : '' %>">
+            <div class="ripple shadow request-card <%= 'donated' if (request.item.donated? || request.item.reserved?) %>">
               <%# image is the first div %>
               <%# To insert dynamic images for all items %>
               <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
@@ -23,8 +23,10 @@
                   <span><%= request.receiver.username %></span>
                 <% end %>
                 <strong><%= request.item.name %></strong>
-                <% if request.item.status == 'donated' %>
+                <% if request.item.donated? %>
                   <em>This item was donated.</em>
+                <% elsif request.item.reserved? %>
+                  <em>This item is reserved.</em>
                 <% else %>
                   <%# only part of the message is previewed if it's too long %>
                   <% if current_user == request.messages.last.user %>
