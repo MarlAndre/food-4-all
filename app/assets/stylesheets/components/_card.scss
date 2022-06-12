@@ -7,6 +7,9 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
+  &.gray {
+    background: rgba(128, 128, 128, 0.4);
+  }
 }
 
 .card-product img {
