@@ -4,12 +4,8 @@ import ContextExclusionPlugin from "webpack/lib/ContextExclusionPlugin";
 export default class extends Controller {
   static targets = [ "icon" ]
 
-  connect() {
-    this.inputTarget.value = ''
-  }
-
-  red(event) {
-    this.iconTarget.querySelector('i').classList.toggle('red')
+  rose(event) {
+    this.iconTarget.querySelector('i').classList.toggle('rose')
   }
 
   //Like button effects
