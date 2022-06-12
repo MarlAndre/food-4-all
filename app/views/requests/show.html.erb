@@ -20,10 +20,12 @@
         </div>
       </div>
       <div class="image">
-        <% if @request.item.user.username == "Shayna" || "shayna" %>
+        <% if @request.item.user.username == "Shayna" %>
           <%= image_tag "giver_shayna.png", class: "avatar-bordered" %>
-        <% else %>
+        <% elsif @request.item.user == User.first %>
           <%= image_tag "demo_user.png", class: "avatar-bordered" %>
+        <% else %>
+          <%= image_tag "landingpage.png", class: "avatar-bordered" %>
         <% end %>
       </div>
     <% end %>
