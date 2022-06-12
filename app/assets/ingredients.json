@@ -138,12 +138,6 @@
   },
 
   {
-    "name": "sugar",
-    "description": "A cup of sugar, it's not much but I hope it helps.",
-    "photo": "sugar.jpg"
-  },
-
-  {
     "name": "tomato",
     "description": "Red, round, firm tomatoes. Bought them from the local grocery store but don't need all of em.",
     "photo": "tomato.jpg"
@@ -159,5 +153,11 @@
     "name": "zucchini",
     "description": "I bought these for barbequing but ran out of propane. Don't want them anymore.",
     "photo": "zucchini.jpg"
+  },
+
+  {
+    "name": "sugar",
+    "description": "A cup of sugar, it's not much but I hope it helps.",
+    "photo": "sugar.jpg"
   }
 ]
