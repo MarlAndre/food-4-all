@@ -6,7 +6,7 @@
 #  content    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  request_id :bigint
+#  request_id :bigint           not null
 #  user_id    :bigint           not null
 #
 class Message < ApplicationRecord
