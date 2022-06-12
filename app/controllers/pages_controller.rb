@@ -10,11 +10,10 @@ class PagesController < ApplicationController
     # Distance between current user and other users (for index cards).
     @distances_between_other_users = {}
 
-    @users = User.all
-    get_distance(@users)
+    # Currently calculating the distance for ALL users each time, would like to reduce this in the future for performance.
+    get_distance
 
     @my_favorites = current_user.all_favorites
-    # raise
   end
 
   private
@@ -23,6 +22,7 @@ class PagesController < ApplicationController
   def get_distance(users)
     current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
+      @users = User.all
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
