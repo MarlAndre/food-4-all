@@ -11,7 +11,7 @@
           <% item = Item.find(fav.favoritable_id) %>
           <%= link_to item_path(item), class: "text-decoration-none" do%>
 
-            <div class="card-product">
+            <div class="card-product <%= 'gray' if (item.donated? || item.reserved?) %>">
                 <%# hardcoded image for item %>
                   <% if item.photos.attached? %>
                     <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
@@ -21,7 +21,13 @@
 
               <div class="card-product-infos">
                 <h2><%= item.name.capitalize %></h2>
-                <h3><%= truncate(item.description, :length => 93) %></h3>
+                <% if item.donated? %>
+                  <h3>This item was donated.</h3>
+                <% elsif item.reserved? %>
+                  <h3>This item is reserved by a receiver.</h3>
+                <% else %>
+                  <h3><%= truncate(item.description, :length => 93) %></h3>
+                <% end %>
                 <p><i class="fas fa-map-marker-alt"></i> <%= item.user.address %></p>
               </div>
             </div>
