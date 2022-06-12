@@ -24,7 +24,7 @@
                 <% if item.donated? %>
                   <h3>This item was donated.</h3>
                 <% elsif item.reserved? %>
-                  <h3>This item is reserved by a receiver.</h3>
+                  <h3>This item is reserved.</h3>
                 <% else %>
                   <h3><%= truncate(item.description, :length => 93) %></h3>
                 <% end %>

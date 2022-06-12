@@ -26,7 +26,7 @@
                 <% if request.item.donated? %>
                   <em>This item was donated.</em>
                 <% elsif request.item.reserved? %>
-                  <em>This item is reserved by a receiver.</em>
+                  <em>This item is reserved.</em>
                 <% else %>
                   <%# only part of the message is previewed if it's too long %>
                   <% if current_user == request.messages.last.user %>
