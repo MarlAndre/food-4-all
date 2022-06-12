@@ -38,7 +38,7 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'chicken'
     item.description = @meals[1]["description"]
-  when 'mac and cheese with ham'
+  when 'mac & cheese + ham'
     item.description = @meals[2]["description"]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 1)
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
@@ -69,7 +69,7 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'spaghetti'
-    item.description = @meals[7]["description"]
+    # Shayna's meal, description already set
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
   else
@@ -87,11 +87,6 @@ end
 @allergens_list = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
 @diets_list = ['vegan', 'vegetarian', 'pescatarian', 'lactose free', 'gluten free']
 @true_or_false = [true, false]
-# Random simply ingredient descriptions
-@ingr_descr = [
-  'fresh', 'free', 'extra', 'yummy', 'raw', 'healthy', 'clean', 'delicious', 'fresh picked', 'good for you',
-  'hearty', 'locally-grown', 'wholesome', 'ready to be picked up', 'good'
-]
 #---------------------------------------------------------------------------#
 
 # Clears screen and wipes database
@@ -143,7 +138,7 @@ puts "#{'✓ Diets '.light_green}created"
 puts ''
 
 #############################################################################
-#----------------------------DEMO PERSONAS-----------------------------------#
+#----------------------------DEMO PERSONAS----------------------------------#
 #############################################################################
 puts '----------------------------Personas--------------------------------'.light_black
 
@@ -196,7 +191,7 @@ puts '------------------------Users with meals----------------------------'.ligh
 
 # Creates users, each user will have a meal to give.
 @counter_from_zero = 0
-8.times do
+7.times do
   user = User.create!(
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
@@ -235,12 +230,12 @@ puts '---------------------Users with ingredients-------------------------'.ligh
   ingredient = Item.new(
     user_id: user.id,
     name: @ingredients[@counter_from_zero]["name"],
+    description: @ingredients[@counter_from_zero]["description"],
     status: 'available',
     item_type: 'ingredient',
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
   ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients[@counter_from_zero]["photo"]}"), filename: @ingredients[@counter_from_zero]["photo"])
-  ingredient.description = "#{@ingr_descr.sample} #{ingredient.name}"
   ingredient.save!
   puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_yellow}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_yellow})."
   @counter_from_zero += 1
@@ -251,40 +246,41 @@ puts ''
 #############################################################################
 #---------------------------SEED DB WITH FEEDBACK---------------------------#
 #############################################################################
-puts '------------------------------Feedback------------------------------'.light_black
+puts '------------------FEEDBACKS COMMENTED OUT FOR DEMO------------------'.light_black
+# puts '------------------------------Feedback------------------------------'.light_black
 
-5.times do
-  # Creates feedback for a user
-  feedback = Feedback.create!(
-  user_id: @shayna.id,
-  punctual: @true_or_false.sample,
-  friendly: true,
-  communication: true,
-  recommended: true
-  )
-end
-puts "#{@shayna.username.light_cyan} has received some feedback."
+# 5.times do
+#   # Creates feedback for a user
+#   feedback = Feedback.create!(
+#   user_id: @shayna.id,
+#   punctual: @true_or_false.sample,
+#   friendly: true,
+#   communication: true,
+#   recommended: true
+#   )
+# end
+# puts "#{@shayna.username.light_cyan} has received some feedback."
 
-5.times do
-  # Creates feedback for a user
-  feedback = Feedback.create!(
-  user_id: @williams.id,
-  punctual: true,
-  friendly: true,
-  communication: @true_or_false.sample,
-  recommended: true
-  )
-end
-puts "#{@williams.username.light_cyan} has received some feedback."
+# 5.times do
+#   # Creates feedback for a user
+#   feedback = Feedback.create!(
+#   user_id: @williams.id,
+#   punctual: true,
+#   friendly: true,
+#   communication: @true_or_false.sample,
+#   recommended: true
+#   )
+# end
+# puts "#{@williams.username.light_cyan} has received some feedback."
 
-puts "#{'✓ Feedback'.light_green} created."
-puts ''
+# puts "#{'✓ Feedback'.light_green} created."
+# puts ''
 
 #############################################################################
 #---------------------------SEED DB WITH REQUESTS---------------------------#
 #------Comment this out during live demo, this code shouldn't be seen-------#
 #############################################################################
-puts '-------Fake data for front-end styling commented out for demo-------'.light_black
+puts '----------------FAKE REQUESTS COMMENTED OUT FOR DEMO----------------'.light_black
 puts ''
 
 # puts '-------------Fake data for front-end styling (requests)-------------'.light_black

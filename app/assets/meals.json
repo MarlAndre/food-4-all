@@ -12,7 +12,7 @@
   },
 
   {
-    "name": "mac and cheese with ham",
+    "name": "mac & cheese + ham",
     "description": "Cheesy mac and cheese with ham. There should be enough for 4 portions, but it's very fattening so I would eat it as a treat and maybe freeze the rest.",
     "photo": "mac_and_cheese_with_ham.jpg"
   },
@@ -22,7 +22,6 @@
     "description": "Extra domino's cheese pizza with green peppers. Barely touched the pizza, ended up buying way too much. There are 6 slices left, first come first served.",
     "photo": "pizza.jpg"
   },
-
 
   {
     "name":"plantain",
@@ -44,7 +43,7 @@
 
   {
     "name": "spaghetti",
-    "description": "Homecooked spaghetti for two, please bring your own container and message me to discuss the pickup details",
+    "description": "Homecooked spaghetti with vegan cheese for two, please bring your own container and message me to discuss the pickup details",
     "photo": "spaghetti.jpg"
   }
 ]

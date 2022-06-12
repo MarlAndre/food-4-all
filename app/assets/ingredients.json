@@ -1,136 +1,163 @@
 [
   {
     "name": "artichoke",
+    "description": "Raw, healthy artichokes to take home.",
     "photo": "artichoke_two.jpg"
   },
 
   {
     "name": "asparagus",
+    "description": "Have some extra asparagus to share if you're willing to pick it up.",
     "photo": "asparagus_two.jpg"
   },
 
   {
     "name": "avocado",
+    "description": "We have some leftover avocadoes, great for making guacamole!",
     "photo": "avocado_two.jpg"
   },
 
   {
     "name": "beet",
+    "description": "Fresh beets out of the garden, throw it in a salad and enjoy :) !",
     "photo": "beets.jpg"
   },
 
   {
     "name": "bok choy",
+    "description": "bok choy to give.",
     "photo": "bok_choy.jpg"
   },
 
   {
     "name": "broccoli",
+    "description": "Leafy broccoli, yummy with some vege dip.",
     "photo": "broccoli_two.jpg"
   },
 
   {
     "name": "cabbage",
+    "description": "Large cabbage, bought too many. Welcome to have some if you come get it.",
     "photo": "cabbage.jpg"
   },
 
   {
     "name": "carrot",
+    "description": "Bought carrots on sale in bulk, have plenty extra to share.",
     "photo": "carrots_two.jpg"
   },
 
   {
     "name": "cauliflower",
+    "description": "Giving away some chopped cauliflower, enough for a salad or soup.",
     "photo": "cauliflower_two.jpg"
   },
 
   {
     "name": "celery",
-    "photo": "celery_two.jpg"
+    "description": "Container of healthy celery to sneak into the kid's lunches.",
+    "photo": "celery.jpg"
   },
 
   {
     "name": "corn",
+    "description": "Free jars of sweet peaches and cream corn, you can keep the mason jar!",
     "photo": "corn.jpg"
   },
 
   {
     "name": "cucumber",
+    "description": "We have too many cucumbers, don't want them to end up in the garbage.",
     "photo": "cucumber.jpg"
   },
 
   {
     "name": "durian",
+    "description": "Smells bad but tastes great, we have extra to share so please don't be shy.",
     "photo": "durian.jpg"
   },
 
   {
     "name": "eggplant",
+    "description": "Been in the fridge for a few days but still good, use it within 3 days please to be safe.",
     "photo": "eggplant.jpg"
   },
 
   {
     "name": "green bell pepper",
+    "description": "Freshly picked home grown green peppers, I'd love to share some.",
     "photo": "green_bell_pepper_two.jpg"
   },
 
   {
     "name": "jalapeno",
+    "description": "Sliced jalapenos, extra leftover from making homemade salsa.",
     "photo": "jalapenos_two.jpg"
   },
 
   {
     "name": "lettuce",
+    "description": "Bought a container of chopped lettuce, only used half.",
     "photo": "lettuce.jpg"
   },
 
   {
     "name": "mustard",
+    "description": "We have a bunch of mustard bottles in the pantry, my husband likes to hoard them.",
     "photo": "mustard.jpg"
   },
 
   {
     "name": "olive",
+    "description": "Made a big batch of olive oil, don't need the rest of the olives.",
     "photo": "olives.jpg"
   },
 
   {
     "name": "onion",
+    "description": "Mixed bag of onions, bought some extra to give.",
     "photo": "onions_two.jpg"
   },
 
   {
     "name": "pumpkin",
+    "description": "Use these in stews or soups for a nice dinner. I already chopped it for you!",
     "photo": "pumpkin.jpg"
   },
 
   {
     "name": "red bell pepper",
+    "description": "Straight from the garden, big, juicy and fresh!!",
     "photo": "red_bell_pepper.jpg"
   },
 
   {
     "name": "squash",
+    "description": "I bought this by mistake thinking it was pumpkin...",
     "photo": "squash.jpg"
   },
 
   {
     "name": "sugar",
+    "description": "A cup of sugar, it's not much but I hope it helps.",
     "photo": "sugar.jpg"
   },
 
   {
     "name": "tomato",
+    "description": "Red, round, firm tomatoes. Bought them from the local grocery store but don't need all of em.",
     "photo": "tomato.jpg"
   },
 
   {
     "name": "yellow bell pepper",
+    "description": "Free yellow peppers, message me to pick them up.",
     "photo": "yellow_bell_pepper.jpg"
   },
 
   {
     "name": "zucchini",
+    "description": "I bought these for barbequing but ran out of propane. Don't want them anymore.",
     "photo": "zucchini.jpg"
   }
 ]
