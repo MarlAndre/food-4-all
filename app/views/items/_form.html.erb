@@ -4,7 +4,7 @@
   </div>
   <div class="container px-4 py-4 mb-5">
     <%= simple_form_for @item do |f| %>
-      <%= f.input :name, placeholder: 'Name', label: false, class: 'w-100' %>
+      <%= f.input :name, placeholder: 'Name (minimum 3 characters)', label: false, class: 'w-100' %>
       <div class="d-flex justify-content-between type">
         <%= f.input_field :item_type, as: :radio_buttons, collection: Item::TYPES %>
       </div>
