@@ -29,7 +29,7 @@
                     <% elsif item.reserved? %>
                       <h3>This item is reserved.</h3>
                     <% else %>
-                      <h3><%= truncate(item.description, :length => 85) %></h3>
+                      <h3><%= truncate(item.description, :length => 61) %></h3>
                     <% end %>
                     <h3><%= "#{@distances_between_other_users[item.user.id]} km" %></h3>
                     <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= item.user.address %></p>
