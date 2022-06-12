@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     # For calculating distance between current user and favorited users
     @current_postal_code = 'H2T 1X3'
 
-    # Distance between current user and other users (for index cards).
+    # Distance between current user and other users.
     @distances_between_other_users = {}
 
     # Currently calculating the distance for ALL users each time, would like to reduce this in the future for performance.
@@ -18,7 +18,7 @@ class PagesController < ApplicationController
 
   private
 
-  # Sets distance for each user that's nearby.
+  # Sets distance for all users.
   def get_distance(users)
     current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
