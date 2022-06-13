@@ -13,6 +13,7 @@
 #  user_id         :bigint           not null
 #
 class Item < ApplicationRecord
+  # Associations
   acts_as_favoritable
   belongs_to :user
   has_many :items_diets, dependent: :destroy
@@ -25,11 +26,15 @@ class Item < ApplicationRecord
   # Validations
   validates_presence_of :user_id, :photos, :description, :expiration_date, :item_type, :status, :name
   validates :description, length: { minimum: 7 }
+  validates :name, length: { minimum: 3 }
+  validate :expiration_date_cannot_be_in_the_past
+
+  def expiration_date_cannot_be_in_the_past
+    errors.add(:expiration_date, "can't be in the past.") if expiration_date.present? && expiration_date < Date.today
+  end
 
   TYPES = %w[meal ingredient]
   validates :item_type, inclusion: { in: TYPES }
-
-  # has_many_attached :photos, :maximum => 5 # cloudinary to be installed
 
   # Ex: READ instance using `item.reserved?`(boolean) and WRITE using `item.donated!`
   enum status: {
