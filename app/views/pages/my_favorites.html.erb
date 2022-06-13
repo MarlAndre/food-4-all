@@ -28,7 +28,7 @@
                   <h3>This item is reserved.</h3>
                   <h3><%= @distances_between_other_users[item.user.id] %> km</h3>
                 <% else %>
-                  <h3><%= truncate(item.description, :length => 93) %></h3>
+                  <h3><%= truncate(item.description, :length => 61) %></h3>
                   <h3><%= @distances_between_other_users[item.user.id] %> km</h3>
                 <% end %>
                 <p><i class="fas fa-map-marker-alt"></i> <%= item.user.address %></p>
