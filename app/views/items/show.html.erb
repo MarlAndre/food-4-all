@@ -66,8 +66,10 @@
     <div class="card-user">
       <% if @item.user == User.first %>
         <%= image_tag "demo_user.png", class: "avatar" %>
+      <% elsif @item.user.username == 'Shayna' %>
+        <%= image_tag "giver_shayna.png", class: "avatar" %>
       <% else %>
-        <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+        <%= image_tag "landingpage.png", class: "avatar" %>
       <% end %>
       <div class="card-description">
         <p class="username"><%= @item.user.username.capitalize %> is giving away</p>
