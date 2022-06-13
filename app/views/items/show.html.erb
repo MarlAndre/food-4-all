@@ -116,13 +116,13 @@
   <% else %>
     <%# button to link to request; using our own .button class %>
     <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
-      <div class="button reserve">
+      <div class="button reserve my-4">
         <%= link_to "Back to chat", request_path(@request) %>
       </div>
     <% else %>
       <%= simple_form_for @request do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit "Send message", class: "button reserve" %>
+        <%= f.submit "Send message", class: "button reserve my-4" %>
       <% end %>
     <% end %>
   <% end %>
