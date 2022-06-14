@@ -74,7 +74,7 @@
       <div class="card-description">
         <p class="username"><%= @item.user.username.capitalize %> is giving away</p>
         <p class="item-name"> <strong><%= @item.name.capitalize %></strong></p>
-        <h6><i class="fas fa-clock"></i>&nbsp Added on <%= @item.created_at.strftime("%b %e") %>&nbsp; &nbsp; &nbsp;<i class="fas fa-stopwatch"></i> Best before <%= @item.expiration_date.strftime("%b %e") %></h6>
+        <h6><i class="fas fa-clock"></i>&nbsp Added on <%= @item.created_at.strftime("%b %e") %>&nbsp; &nbsp; &nbsp;<i class="fas fa-stopwatch"></i> Expired on <%= @item.expiration_date.strftime("%b %e") %></h6>
       </div>
     </div>
 
