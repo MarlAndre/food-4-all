@@ -6,13 +6,13 @@ class ItemsController < ApplicationController
 
   def index
     # Get postal code from params (default to 'H2T 1X3')
-    postal_code = params[:item] ? params[:item][:postal_code] : 'H2T 1X3'
+    @postal_code = params[:item] ? params[:item][:postal_code] : 'H2T 1X3'
 
     # Get all users who have at least one item
     users_with_items = User.all.select {|u| u.items.count > 0}
 
     # Get all users near the postal_code
-    @users = User.where(id: users_with_items.map(&:id)).near(postal_code, 50)
+    @users = User.where(id: users_with_items.map(&:id)).near(@postal_code, 5)
    
     # Get the list of all items of these users
     @items = @users.map {|u| u.items}.flatten
@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
     # Geocoder
     @markers = []
     @distances_between_other_users = {}
+    get_distance
     @geocoded_users = User.geocoded
     @markers = @geocoded_users.map do |user|
       {
@@ -40,7 +41,6 @@ class ItemsController < ApplicationController
 
     # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
     @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
-
   end
 
   def show
@@ -133,7 +133,7 @@ class ItemsController < ApplicationController
   # Sets distance for each user that's nearby.
   def get_distance
     users = User.all
-    current_coordinates = Geocoder.coordinates(@current_postal_code)
+    current_coordinates = Geocoder.coordinates(@postal_code)
     users.each do |user|
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
