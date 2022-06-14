@@ -161,7 +161,7 @@ puts ''
   email: 'shayna@foodfor.all',
   username: 'Shayna',
   password: '123456',
-  address: '5057 rue de bullion, montreal'
+  address: 'Montreal, 3579 Rue Durocher'
 )
 shaynas_meal = Item.new(
   user_id: @shayna.id,
@@ -201,7 +201,7 @@ puts '------------------------Users with meals----------------------------'.ligh
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
-    address: @far_locations.sample
+    address: @far_locations[@counter_from_zero]
   )
   meal = Item.new(
     user_id: user.id,
@@ -230,7 +230,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
-    address: @close_locations.sample
+    address: @close_locations[@counter_from_zero]
   )
   ingredient = Item.new(
     user_id: user.id,

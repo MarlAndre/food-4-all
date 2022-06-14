@@ -146,8 +146,8 @@ class ItemsController < ApplicationController
   # Sets distance for each user that's nearby.
   def get_distance
     users = User.all
-    current_coordinates = Geocoder.coordinates(@current_postal_code)
     users.each do |user|
+      current_coordinates = Geocoder.coordinates(@current_postal_code)
       total_distance = user.distance_from(current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
