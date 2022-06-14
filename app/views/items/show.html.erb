@@ -80,21 +80,21 @@
 
     <div class="details">
         <h6><strong>Description</strong></h6>
-        <%= @item.description %>
-      <ul>
-        <% unless @diets.nil? %>
-          <% @diets.each do |diet| %>
-            <li>It may contains: <%= diet.name %></li>
-          <% end %>
-        <% end %>
+        <%= @item.description.capitalize %>
 
-        <% unless @diets.nil? %>
-          <% @allergens.each do |allergen| %>
-            <li>Allergen: <%= allergen.name %></li>
-          <% end %>
+      <% unless @diets.nil? %>
+        <% @allergens.each do |allergen| %>
+          <p><i class="fas fa-exclamation-triangle"></i></i>&nbsp<%= allergen.name.capitalize %></li></p>
         <% end %>
-      </ul>
-    </div>
+      <% end %>
+      <% unless @diets.nil? %>
+        <% @diets.each do |diet| %>
+         <p><i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize %></li></p>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </div>
 
     <div class="card-category"
         id="map"
