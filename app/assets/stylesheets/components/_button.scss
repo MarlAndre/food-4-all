@@ -47,6 +47,10 @@
   display: flex;
   margin-bottom: 36px;
   margin-top: 36px;
+  &.show {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
   p {
     color: $dark-green;
     font-weight: 600;
