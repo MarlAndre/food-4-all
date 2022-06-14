@@ -105,23 +105,21 @@
 </div>
 
 
-</div>
+<div class="my-5">
   <%# owner cannot request for his/her own items. %>
   <% if @item.user == current_user %>
     <em>You cannot book your own items.</em>
   <% else %>
     <%# button to link to request; using our own .button class %>
     <% if Request.find_by(item_id: @item.id, receiver_id: current_user.id, giver_id: @item.user.id) %>
-      <div class="button reserve my-4">
+      <div class="button reserve">
         <%= link_to "Back to chat", request_path(@request) %>
       </div>
     <% else %>
       <%= simple_form_for @request do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit "Send message", class: "button reserve my-4" %>
+        <%= f.submit "Send message", class: "button reserve" %>
       <% end %>
     <% end %>
   <% end %>
-  <br>
-  <br>
 </div>
