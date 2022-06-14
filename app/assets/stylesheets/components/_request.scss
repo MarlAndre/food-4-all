@@ -85,17 +85,22 @@
     display: flex;
     align-items: center;
     height: 104px;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
     &.donated {
       background: rgba(128, 128, 128, 0.4);
     }
-    .img {
-      padding: 0 10px;
-      height: 88%;
-      display: contain;
-      border-radius: 50%;
+    .image {
+      width: 120px;
+      .img {
+        padding: 8px;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
     .details {
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       margin-left: 10px;
