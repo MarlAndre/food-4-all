@@ -17,14 +17,10 @@
           <div class="cards items pb-4" id="cards-items">
             <% @my_available_items.each do |item| %>
               <div class="card-product">
-                <% if item.photos.attached? %>
-                  <%= link_to item_path(item), class: "text-decoration-none" do %>
-                    <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                  <% end %>
-                <% else %>
-                  <%= link_to item_path(item), class: "text-decoration-none" do %>
-                    <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                  <% end %>
+                <%= link_to item_path(item), class: "text-decoration-none" do %>
+                  <div class="image">
+                    <%= cl_image_tag item.photos.first.key, class: "img" %>
+                  </div>
                 <% end %>
 
                 <div class="card-product-infos">
@@ -54,14 +50,10 @@
 
             <% @my_reserved_items.each do |item| %>
               <div class="card-product">
-                <% if item.photos.attached? %>
-                  <%= link_to item_path(item), class: "text-decoration-none" do %>
-                    <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                  <% end %>
-                <% else %>
-                  <%= link_to item_path(item), class: "text-decoration-none" do %>
-                    <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                  <% end %>
+                <%= link_to item_path(item), class: "text-decoration-none" do %>
+                  <div class="image">
+                    <%= cl_image_tag item.photos.first.key, class: "img" %>
+                  </div>
                 <% end %>
 
                 <div class="card-product-infos">
@@ -91,14 +83,10 @@
 
             <% @my_donated_items.each do |item| %>
               <div class="card-product">
-                <% if item.photos.attached? %>
-                  <%= link_to item_path(item), class: "text-decoration-none" do %>
-                    <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                  <% end %>
-                <% else %>
-                  <%= link_to item_path(item), class: "text-decoration-none" do %>
-                    <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                  <% end %>
+                <%= link_to item_path(item), class: "text-decoration-none" do %>
+                  <div class="image">
+                    <%= cl_image_tag item.photos.first.key, class: "img" %>
+                  </div>
                 <% end %>
 
                 <div class="card-product-infos">

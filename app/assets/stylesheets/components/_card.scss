@@ -10,15 +10,18 @@
   &.gray {
     background: rgba(128, 128, 128, 0.4);
   }
-}
-
-.card-product img {
-  height: 100%;
-  // keep images fixed at width of 120px and remove height:100% so all images align
-  width: 35%;
-  // change to contain looks better than cover
-  object-fit: cover;
-  // changed to cover to fill the height of the picture
+  .image {
+    width: 120px;
+    img {
+      width: 120px;
+      height: 120px;
+      // keep images fixed at width of 120px and remove height:100% so all images align
+      // width: 35%;
+      // change to contain looks better than cover
+      object-fit: cover;
+      // changed to cover to fill the height of the picture
+    }
+  }
 }
 
 .card-product h2 {
