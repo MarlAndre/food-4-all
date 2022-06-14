@@ -54,12 +54,6 @@
   },
 
   {
-    "name": "celery",
-    "description": "Container of healthy celery to sneak into the kid's lunches.",
-    "photo": "celery.jpg"
-  },
-
-  {
     "name": "corn",
     "description": "Free jars of sweet peaches and cream corn, you can keep the mason jar!",
     "photo": "corn.jpg"
@@ -150,14 +144,20 @@
   },
 
   {
+    "name": "sugar",
+    "description": "A cup of sugar, it's not much but I hope it helps.",
+    "photo": "sugar.jpg"
+  },
+
+  {
     "name": "zucchini",
     "description": "I bought these for barbequing but ran out of propane. Don't want them anymore.",
     "photo": "zucchini.jpg"
   },
 
   {
-    "name": "sugar",
-    "description": "A cup of sugar, it's not much but I hope it helps.",
-    "photo": "sugar.jpg"
+    "name": "celery",
+    "description": "Container of healthy celery to sneak into the kids' lunches.",
+    "photo": "celery.jpg"
   }
 ]

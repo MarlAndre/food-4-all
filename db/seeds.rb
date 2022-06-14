@@ -7,10 +7,15 @@
 # file = File.read(file_path)
 # list = JSON.parse(file)
 
-# List of local addresses.
-locations_file_path = File.join(Rails.root, 'app', 'assets', 'locations.json')
-locations_file = File.read(locations_file_path)
-@locations = JSON.parse(locations_file)
+# List of close addresses.
+close_locations_file_path = File.join(Rails.root, 'app', 'assets', 'close_locations.json')
+close_locations_file = File.read(close_locations_file_path)
+@close_locations = JSON.parse(close_locations_file)
+
+# List of far addresses.
+far_locations_file_path = File.join(Rails.root, 'app', 'assets', 'far_locations.json')
+far_locations_file = File.read(far_locations_file_path)
+@far_locations = JSON.parse(far_locations_file)
 
 # List of meals.
 meals_file_path = File.join(Rails.root, 'app', 'assets', 'meals.json')
@@ -196,7 +201,7 @@ puts '------------------------Users with meals----------------------------'.ligh
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
-    address: @locations.sample
+    address: @far_locations.sample
   )
   meal = Item.new(
     user_id: user.id,
@@ -225,7 +230,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
-    address: @locations.sample
+    address: @close_locations.sample
   )
   ingredient = Item.new(
     user_id: user.id,
