@@ -1,9 +1,10 @@
+
 <div class="items-page-container" data-controller="postal-code">
   <!-- Landing page popup -->
   <div class="initial-screen" data-postal-code-target="popup">
     <div class="image-banner"></div>
     <div class="title-banner">
-        <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
+      <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
     </div>
 
     <div class="white-banner-container">
@@ -12,18 +13,15 @@
       </div>
     </div>
 
-   <div class="modal-popup-container input-group mb-3" id="popup-container">
-      <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
-        <%# <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span> %>
-        <label for="postal_code"></label>
-        <input class="form-control" type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Enter your zip code...">
-
-        <div class="d-flex justify-content-center">
-          <button name="button" id="btn" type="submit" class="btn btn-flat">Let's start</button>
-        </div>
-      </form>
+    <div class="modal-popup-container input-group mb-3" id="popup-container">
+      <%= form_for :item, html: { method: 'GET' }, url: '/' do |f| %>
+        <%= f.text_field :postal_code, placeholder:"Enter your zip code...", id:"postal_code", class:"form-control", html: {data: { target: "input" }} %>
+        <%= f.submit "Let's start", class:"btn btn-flat", data: { action: "click->postal-code#remove" } %>
+       <% end %>
     </div>
   </div>
+
+
 
 
   <!-- PLEASE DONT DELETE THIS DIV-->
