@@ -1,5 +1,5 @@
 <div class="back-btn-container">
-  <div class="back-btn">
+  <div class="back-btn-show">
     <%= link_to items_path do %>
       <i class="fas fa-long-arrow-alt-left" aria-hidden="true" target="_blank"></i>
     <% end %>
@@ -10,7 +10,6 @@
 
 <div class="container-carousel" >
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
       <div class="carousel-inner">
         <% @item.photos.each_with_index do |photo, index| %>
         <% if index == 0 %>
@@ -36,12 +35,13 @@
       </button>
     </div>
 
-    <div class="d-flex">
+    <div class="d-flex justify-content-between image-container">
       <%# <p class="distance"># km away</p> %>
-
+      <div class="availability">
+        <%= @item.status.capitalize %>
+      </div>
       <div class="social-media" data-controller="toggle-favorite">
         <p class="distance"># km away</p>
-        <div class="d-flex">
           <div data-action="click->toggle-favorite#rose" data-toggle-favorite-target="icon">
             <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post do %>
               <i class="fas fa-heart like <%= 'rose' if current_user.favorited?(@item) %>"></i>
@@ -49,13 +49,9 @@
           </div>
           <%# commented out 'share' button because we don't have the share function (yet) %>
           <%# <a href="#"><i class="fas fa-share-alt"></i></a> %>
-        </div>
       </div>
     </div>
 
-    <div class="availability">
-      <%= @item.status.capitalize %>
-    </div>
 </div>
 
 <br>
@@ -74,27 +70,27 @@
       <div class="card-description">
         <p class="username"><%= @item.user.username.capitalize %> is giving away</p>
         <p class="item-name"> <strong><%= @item.name.capitalize %></strong></p>
-        <h6><i class="fas fa-clock"></i>&nbsp Added on <%= @item.created_at.strftime("%b %e") %>&nbsp; &nbsp; &nbsp;<i class="fas fa-stopwatch"></i> Best before <%= @item.expiration_date.strftime("%b %e") %></h6>
+        <h6><i class="fas fa-clock"></i>&nbsp Added on <%= @item.created_at.strftime("%b %e") %>&nbsp; &nbsp; &nbsp;<i class="fas fa-stopwatch"></i> Expired on <%= @item.expiration_date.strftime("%b %e") %></h6>
       </div>
     </div>
 
     <div class="details">
         <h6><strong>Description</strong></h6>
-        <%= @item.description %>
-      <ul>
-        <% unless @diets.nil? %>
-          <% @diets.each do |diet| %>
-            <li>It may contains: <%= diet.name %></li>
-          <% end %>
-        <% end %>
+        <%= @item.description.capitalize %>
 
-        <% unless @diets.nil? %>
-          <% @allergens.each do |allergen| %>
-            <li>Allergen: <%= allergen.name %></li>
-          <% end %>
+      <% unless @diets.nil? %>
+        <% @allergens.each do |allergen| %>
+          <p><i class="fas fa-exclamation-triangle"></i></i>&nbsp<%= allergen.name.capitalize %></li></p>
         <% end %>
-      </ul>
-    </div>
+      <% end %>
+      <% unless @diets.nil? %>
+        <% @diets.each do |diet| %>
+         <p><i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize %></li></p>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </div>
 
     <div class="card-category"
         id="map"
