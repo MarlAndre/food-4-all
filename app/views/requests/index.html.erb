@@ -9,7 +9,7 @@
 
 <div class="requests">
   <div class="heading">
-    <h5>My messages</h5>
+    <h5>My Messages</h5>
   </div>
   <div class="container my-4">
     <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
@@ -22,8 +22,9 @@
             <%# each request is a flex card %>
             <div class="ripple shadow request-card <%= 'donated' if (request.item.donated? || request.item.reserved?) %>">
               <%# image is the first div %>
-              <%# To insert dynamic images for all items %>
-              <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
+              <div class="image">
+                <%= cl_image_tag request.item.photos.first.key, class: "img" %>
+              </div>
               <%# details is the second div %>
               <div class="details">
                 <% if current_user == request.receiver %>
@@ -31,7 +32,7 @@
                 <% elsif current_user == request.giver %>
                   <span><%= request.receiver.username %></span>
                 <% end %>
-                <strong><%= request.item.name %></strong>
+                <strong><%= request.item.name.capitalize %></strong>
                 <% if request.item.donated? %>
                   <em>This item was donated.</em>
                 <% elsif request.item.reserved? %>
