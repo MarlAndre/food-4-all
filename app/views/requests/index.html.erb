@@ -1,6 +1,15 @@
+<div class="back-btn-container">
+  <div class="back-btn">
+    <%= link_to items_path do %>
+      <i class="fas fa-long-arrow-alt-left" aria-hidden="true" target="_blank"></i>
+    <% end %>
+  </div>
+  <p>Back to listing</p>
+</div>
+
 <div class="requests">
   <div class="heading">
-    <h5>Messages</h5>
+    <h5>My messages</h5>
   </div>
   <div class="container my-4">
     <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
