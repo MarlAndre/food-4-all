@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 
     # Get all users near the postal_code
     @users = User.where(id: users_with_items.map(&:id)).near(@postal_code, 5)
-   
+
     # Get the list of all items of these users
     @items = @users.map {|u| u.items}.flatten
 
