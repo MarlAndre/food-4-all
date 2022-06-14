@@ -82,7 +82,7 @@
 
       <% unless @diets.nil? %>
         <% @allergens.each do |allergen| %>
-          <p><i class="fas fa-ban"></i>&nbsp<%= allergen.name.capitalize %></li></p>
+          <p><i class="fas fa-exclamation-triangle"></i></i>&nbsp<%= allergen.name.capitalize %></li></p>
         <% end %>
       <% end %>
       <% unless @diets.nil? %>
