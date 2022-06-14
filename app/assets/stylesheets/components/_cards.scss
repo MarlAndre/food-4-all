@@ -40,30 +40,30 @@
   border: 0;
 }
 
-.social-media {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .container-carousel {
   position: relative;
 }
 
 .social-media {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
   color: white;
-  margin-right: 8px;
-  margin-left: 8px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  margin: 0 auto;
+  z-index: 1;
+  padding-top: 8px;
   // nested in .social-media so .fas won't affect other icons
   .fas {
     color: white;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     font-size: 1.5rem;
+    margin-right: 12px;
   }
 }
 
@@ -112,12 +112,12 @@
 }
 
 .availability {
-  position: absolute;
-  margin-top: -399px;
-  margin-left: 8px;
+  text-align: center;
+  // line-height: 60px;
+  margin-left: 12px;
   color: white;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  z-index: 1030;
+  line-height: 3.0;
 }
 
 

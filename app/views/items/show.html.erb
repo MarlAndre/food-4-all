@@ -10,7 +10,6 @@
 
 <div class="container-carousel" >
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
       <div class="carousel-inner">
         <% @item.photos.each_with_index do |photo, index| %>
         <% if index == 0 %>
@@ -36,12 +35,13 @@
       </button>
     </div>
 
-    <div class="d-flex">
+    <div class="d-flex justify-content-between image-container">
       <%# <p class="distance"># km away</p> %>
-
+      <div class="availability">
+        <%= @item.status.capitalize %>
+      </div>
       <div class="social-media" data-controller="toggle-favorite">
         <p class="distance"># km away</p>
-        <div class="d-flex">
           <div data-action="click->toggle-favorite#rose" data-toggle-favorite-target="icon">
             <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post do %>
               <i class="fas fa-heart like <%= 'rose' if current_user.favorited?(@item) %>"></i>
@@ -49,13 +49,9 @@
           </div>
           <%# commented out 'share' button because we don't have the share function (yet) %>
           <%# <a href="#"><i class="fas fa-share-alt"></i></a> %>
-        </div>
       </div>
     </div>
 
-    <div class="availability">
-      <%= @item.status.capitalize %>
-    </div>
 </div>
 
 <br>
