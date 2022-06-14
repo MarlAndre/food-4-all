@@ -1,5 +1,4 @@
 .profile {
-  position: relative;
   .edit-link {
     color: rgba(black, 0.6);
     &:active {
@@ -12,14 +11,13 @@
     width: 100%;
     margin: 20px auto;
     .button {
-      padding: 10px 16px;
+      padding: 10px 24px;
       font-size: 14px;
     }
   }
   .logout {
-    position: absolute;
-    bottom: -250px;
     text-decoration: underline;
     color: gray;
+    margin-bottom: 50px;
   }
 }
