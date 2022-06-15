@@ -45,11 +45,11 @@
 
 .back-btn-container {
   display: flex;
-  margin-bottom: 36px;
+  margin-bottom: 16px;
   margin-top: 36px;
   &.show {
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
   p {
     color: $dark-green;
