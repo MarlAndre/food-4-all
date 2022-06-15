@@ -6,13 +6,14 @@ class ItemsController < ApplicationController
 
   def index
     # Get postal code from params (default to 'H2T 1X3')
-    @postal_code = params[:item] ? params[:item][:postal_code] : 'H2T 1X3'
+    # @postal_code = params[:item] ? params[:item][:postal_code] : 'H2T 1X3'
+    @postal_code = 'H2T 1X3'
 
     # Get all users who have at least one item
     users_with_items = User.all.select {|u| u.items.count > 0}
 
     # Get all users near the postal_code
-    @users = User.where(id: users_with_items.map(&:id)).near(@postal_code, 5)
+    @users = User.where(id: users_with_items.map(&:id)).near(@postal_code, 50)
 
     # Get the list of all items of these users
     @items = @users.map {|u| u.items}.flatten
