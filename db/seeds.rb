@@ -156,6 +156,7 @@ puts '----------------------------Personas--------------------------------'.ligh
 )
 puts " Demo persona: #{@justin.username.light_cyan} has been created."
 puts ''
+
 # Demo user Shayna will be the GIVER that justin receives a meal from.
 @shayna = User.create!(
   email: 'shayna@foodfor.all',
@@ -174,7 +175,6 @@ shaynas_meal = Item.new(
 shaynas_meal.photos.attach(io: File.open("app/assets/images/meals/#{@meals.last["photo"]}"), filename: @meals.last["photo"])
 shaynas_meal.save!
 
-
 puts " Demo persona: #{@shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
 add_allergens_and_diets(shaynas_meal)
 
@@ -188,6 +188,26 @@ add_allergens_and_diets(shaynas_meal)
 puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #{@shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
 puts "#{'✓ Personas '.light_green}created"
 puts ''
+
+# Demo user JF will be the GIVER whose item is favorited by Justin.
+@jf = User.create!(
+  email: 'jf@foodfor.all',
+  username: 'J-F',
+  password: '123456',
+  address: '5110 drolet st, montreal'
+)
+jfs_ingredient = Item.new(
+  user_id: @jf.id,
+  name: @ingredients.last["name"],
+  status: 'available',
+  item_type: 'ingredient',
+  description: @ingredients.last["description"],
+  expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+)
+jfs_ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients.last["photo"]}"), filename: @ingredients.last["photo"])
+jfs_ingredient.save!
+
+puts " Demo persona: #{@jf.username.light_cyan} has been created with a #{jfs_ingredient.name.cyan} ingredient"
 
 #############################################################################
 #----------------------------SEED DB WITH USERS-----------------------------#
