@@ -88,7 +88,7 @@
           <div class="cards items" id="cards-items" data-postal-code-target="items">
             <% @items.each do |item| %>
               <%= link_to item_path(item), class: "text-decoration-none" do%>
-                <div class="card-product <%= 'gray' if (item.donated? || item.reserved?) %>">
+                <div class="card-product <%= ('donated' if item.donated?) || ('reserved' if item.reserved?) %>">
                   <div class="image">
                     <%= cl_image_tag item.photos.first.key, class: "img" %>
                   </div>
@@ -102,10 +102,10 @@
                     <% else %>
                       <h3><%= truncate(item.description, :length => 61) %></h3>
                     <% end %>
-                      <div class="d-flex justify-content-between card-location">
-                        <strong><p><%= "#{@distances_between_other_users[item.user.id]} km" %></p></strong>
-                        <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= truncate(item.user.address, :length => 30) %></p>
-                      </div>
+                    <div class="d-flex justify-content-between card-location">
+                      <strong><p><%= "#{@distances_between_other_users[item.user.id]} km" %></p></strong>
+                      <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= truncate(item.user.address, :length => 30) %></p>
+                    </div>
                   </div>
                 </div>
               <% end %>

@@ -181,8 +181,6 @@ add_allergens_and_diets(shaynas_meal)
   address: '5305 drolet st, montreal'
 )
 puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #{@shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
-puts "#{'✓ Personas '.light_green}created"
-puts ''
 
 # Demo user JF will be the GIVER whose item is favorited by Justin.
 @jf = User.create!(
@@ -202,8 +200,12 @@ jfs_ingredient = Item.new(
 jfs_ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients.last["photo"]}"), filename: @ingredients.last["photo"])
 jfs_ingredient.save!
 
-puts " Demo persona: #{@jf.username.light_cyan} has been created with a #{jfs_ingredient.name.cyan} ingredient"
+# Add J-F's ingredient to Justin's list of favorites.
+@justin.favorite(jfs_ingredient)
 
+puts " Demo persona: #{@jf.username.light_cyan} has been created with a #{jfs_ingredient.name.cyan} ingredient"
+puts "#{'✓ Personas '.light_green}created"
+puts ''
 #############################################################################
 #----------------------------SEED DB WITH USERS-----------------------------#
 #############################################################################
