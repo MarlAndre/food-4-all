@@ -18,14 +18,12 @@
 
   <body>
 <br>
-  <div class="logo-container">
-    <%= image_tag "map_icon.png", width: "30", height: "30"%>
-    <p>Food4All</p>
+  <div class="logo-container d-flex justify-content-center align-items-center">
+    <%= image_tag "map_icon.png", width: "30", height: "30"%><p>Food4All</p>
   </div>
 
     <% unless current_page?(root_path) %>
-    <%# app-container just for Requests#index page %>
-    <%# Page heading needs 100% width %>
+      <%# Page heading needs 100% width %>
       <% if params[:controller] == "requests" && params[:action] == "index" ||
       params[:controller] == "pages" && params[:action] == "my_favorites" ||
       params[:controller] == "items" && params[:action] == "my_items" ||
@@ -60,7 +58,6 @@
         <div class="page-content">
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
-
           <%= yield %>
         </div>
       </div>
