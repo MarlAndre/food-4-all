@@ -20,7 +20,7 @@
         <% unless request.messages.last.nil? %>
           <%= link_to request_path(request) do %>
             <%# each request is a flex card %>
-            <div class="ripple shadow request-card <%= ('donated' if item.donated?) || ('reserved' if item.reserved?) %>">
+            <div class="ripple shadow request-card <%= ('donated' if request.item.donated?) || ('reserved' if request.item.reserved?) %>">
               <%# image is the first div %>
               <div class="image">
                 <%= cl_image_tag request.item.photos.first.key, class: "img" %>
