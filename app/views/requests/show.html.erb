@@ -1,3 +1,12 @@
+<div class="back-btn-container">
+  <div class="back-btn">
+    <%= link_to requests_path do %>
+      <i class="fas fa-long-arrow-alt-left" aria-hidden="true" target="_blank"></i>
+    <% end %>
+  </div>
+  <p>Back to messages</p>
+</div>
+
 <div class="container request"
   data-controller="request-subscription"
   data-request-subscription-request-id-value="<%= @request.id %>"
