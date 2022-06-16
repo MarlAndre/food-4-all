@@ -192,7 +192,7 @@ puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #
   email: 'jf@foodfor.all',
   username: 'J-F',
   password: '123456',
-  address: 'Montreal, rue bourgeoys'
+  address: 'Montreal, rue drummond'
 )
 jfs_ingredient = Item.new(
   user_id: @jf.id,
