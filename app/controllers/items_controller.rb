@@ -19,8 +19,24 @@ class ItemsController < ApplicationController
     @items = @users.map(&:items).flatten.select { |item| item.available? || item.reserved? }
 
     # Filter items if there is a search query
+    # search by (case insensitive):
+    # item: name/description/type, allergen: name, diet: name (refer to models)
     if params[:query].present?
-      @items = Item.where(id: @items.map(&:id)).search_index(params[:query]).select { |item| item.available? || item.reserved? }
+      results = PgSearch.multisearch(params[:query])
+      unless results.empty?
+        @searched_items = []
+        results.map do |result|
+          case result[:searchable_type]
+          when "Item" then @searched_items << Item.find(result[:searchable_id])
+          when "User" then @searched_items += User.find(result[:searchable_id]).items
+          when "Allergen" then @searched_items += Allergen.find(result[:searchable_id]).items
+          when "Diet" then @searched_items += Diet.find(result[:searchable_id]).items
+          end
+        end
+      end
+
+      # items mapped by postal code + status
+      @items = Item.where(id: @items.map(&:id)).select { |item| @searched_items.include?(item) }
     end
 
     # Geocoder

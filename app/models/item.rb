@@ -45,8 +45,10 @@ class Item < ApplicationRecord
 
   # added "pg_search" gem to filter the index
   include PgSearch::Model
-  pg_search_scope :search_index,
-    against: %i[name description item_type],
-    associated_against: { user: :username },
-    using: { tsearch: { prefix: true } }
+  multisearchable against: %i[name description item_type]
+
+  # pg_search_scope :search_index,
+  #   against: %i[name description item_type],
+  #   associated_against: { user: :username },
+  #   using: { tsearch: { prefix: true } }
 end
