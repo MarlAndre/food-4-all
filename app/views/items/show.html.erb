@@ -75,7 +75,7 @@
       <h6><strong>Description</strong></h6>
       <%= @item.description.capitalize %>
       <p></p>
-      <% unless @diets.empty? %>
+      <% unless @allergens.empty? %>
         <i class="fas fa-exclamation-triangle"></i>
         <%= @allergens.map { |allergen| allergen.name.capitalize }.join(", ") %>
       <% end %>
