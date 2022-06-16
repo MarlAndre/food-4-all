@@ -122,7 +122,7 @@ allergen_counter = 0
   print "#{allergen.id}. "
   puts allergen.name.light_blue
 end
-puts "#{'✓ Allergens '.light_green}created"
+puts "#{'✓ Allergens created'.light_green}"
 puts ''
 
 #############################################################################
@@ -139,7 +139,7 @@ diet_counter = 0
   print "#{diet.id}. "
   puts diet.name.light_blue
 end
-puts "#{'✓ Diets '.light_green}created"
+puts "#{'✓ Diets created'.light_green}"
 puts ''
 
 #############################################################################
@@ -209,7 +209,7 @@ jfs_ingredient.save!
 @justin.favorite(jfs_ingredient)
 
 puts " Demo persona: #{@jf.username.light_cyan} has been created with a #{jfs_ingredient.name.cyan} ingredient"
-puts "#{'✓ Personas '.light_green}created"
+puts "#{'✓ Personas created'.light_green}"
 puts ''
 #############################################################################
 #----------------------------SEED DB WITH USERS-----------------------------#
@@ -241,7 +241,7 @@ puts '------------------------Users with meals----------------------------'.ligh
   @counter_from_zero += 1
 end
 
-puts "#{'✓ Users with meals '.light_green}created"
+puts "#{'✓ Users with meals created'.light_green}"
 puts ''
 puts '---------------------Users with ingredients-------------------------'.light_black
 
@@ -267,7 +267,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
   puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_yellow}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_yellow})."
   @counter_from_zero += 1
 end
-puts "#{'✓ Users with ingredients '.light_green}created"
+puts "#{'✓ Users with ingredients created'.light_green}"
 puts ''
 
 #############################################################################
@@ -307,7 +307,7 @@ Message.create!(
   content: 'Hey, is this available?'
 )
 puts " #{@justin.username.light_cyan}'s past message to #{past_message_user.username.light_cyan} for #{past_message_ingredient.name.cyan} has been created."
-puts "#{'✓ Past messages created'.light_green}created"
+puts "#{'✓ Past messages created'.light_green}"
 puts ''
 
 #############################################################################
