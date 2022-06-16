@@ -18,7 +18,7 @@
       <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
       <p></p>
       <div class="d-flex justify-content-center">
-        <%= f.submit 'Share it!', class: 'submit-button' %>
+        <%= f.submit 'Share it!', class: 'submit-button', data: { disable_with: "Sharing..." } %>
       </div>
     <% end %>
   </div>
