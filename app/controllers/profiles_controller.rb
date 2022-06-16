@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   def my_profile
     # Gets current user coordinates, currently using static postal code until we fix the Js issue.
-    @current_postal_code = 'H2T 1X3'
+    @current_postal_code = 'Montreal, Av. casgrain'
 
     # Distance between current user and other users (for index cards).
     @distances_between_other_users = {}

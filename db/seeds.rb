@@ -152,7 +152,7 @@ puts '----------------------------Personas--------------------------------'.ligh
   email: 'justin@foodfor.all',
   username: 'Justin',
   password: '123456',
-  address: '5333 Av. Casgrain, montreal'
+  address: 'Montreal, Av. Casgrain'
 )
 puts " Demo persona: #{@justin.username.light_cyan} has been created."
 puts ''
@@ -162,7 +162,7 @@ puts ''
   email: 'shayna@foodfor.all',
   username: 'Shayna',
   password: '123456',
-  address: 'Montreal, 3579 Rue Durocher'
+  address: 'Montreal, rue durocher'
 )
 shaynas_meal = Item.new(
   user_id: @shayna.id,
@@ -183,7 +183,7 @@ add_allergens_and_diets(shaynas_meal)
   email: 'williams@foodfor.all',
   username: 'Williams',
   password: '123456',
-  address: '5305 drolet st, montreal'
+  address: 'Montreal, rue drolet'
 )
 puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #{@shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
 
@@ -192,12 +192,12 @@ puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #
   email: 'jf@foodfor.all',
   username: 'J-F',
   password: '123456',
-  address: '5110 drolet st, montreal'
+  address: 'Montreal, rue bourgeoys'
 )
 jfs_ingredient = Item.new(
   user_id: @jf.id,
   name: @ingredients.last["name"],
-  status: 'available',
+  status: 'donated',
   item_type: 'ingredient',
   description: @ingredients.last["description"],
   expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
@@ -247,7 +247,7 @@ puts '---------------------Users with ingredients-------------------------'.ligh
 
 # Creates users, each user will have an ingredient to give.
 @counter_from_zero = 0
-26.times do
+25.times do
   user = User.create!(
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
@@ -268,6 +268,46 @@ puts '---------------------Users with ingredients-------------------------'.ligh
   @counter_from_zero += 1
 end
 puts "#{'✓ Users with ingredients '.light_green}created"
+puts ''
+
+#############################################################################
+#----------------------SEED JUSTIN WITH PAST MESSAGE------------------------#
+#############################################################################
+puts '--------------------Past messages for justin------------------------'.light_black
+
+# Creates user with an ingredient that justin requested in the past
+past_message_user = User.create!(
+  email: 'rubenrails@foodfor.all',
+  username: 'Ruben',
+  password: '123456',
+  address: @close_locations[@counter_from_zero] # Might need to be far
+)
+# Ingredient is celery
+past_message_ingredient = Item.new(
+  user_id: past_message_user.id,
+  name: @ingredients[@counter_from_zero]["name"],
+  description: @ingredients[@counter_from_zero]["description"],
+  status: 'donated',
+  item_type: 'ingredient',
+  expiration_date: Faker::Date.between(from: 7.days.from_now, to: 1.days.from_now)
+)
+past_message_ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients[@counter_from_zero]["photo"]}"), filename: @ingredients[@counter_from_zero]["photo"])
+past_message_ingredient.save!
+puts " #{past_message_user.username.light_cyan}(ID:#{past_message_user.id.to_s.light_yellow}) has been created with ingredient #{past_message_ingredient.name.cyan}(ID:#{past_message_ingredient.id.to_s.light_yellow})."
+
+past_message_request = Request.create!(
+  giver_id: past_message_user.id,
+  receiver_id: @justin.id,
+  item_id: past_message_ingredient.id
+)
+
+Message.create!(
+  request_id: past_message_request.id,
+  user_id: @justin.id,
+  content: 'Hey, is this available?'
+)
+puts " #{@justin.username.light_cyan}'s past message to #{past_message_user.username.light_cyan} for #{past_message_ingredient.name.cyan} has been created."
+puts "#{'✓ Past messages created'.light_green}created"
 puts ''
 
 #############################################################################

@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   def my_favorites
     # For calculating distance between current user and favorited users
-    @current_postal_code = 'H2T 1X3'
+    @current_postal_code = 'Montreal, Av. casgrain'
 
     # Distance between current user and other users.
     @distances_between_other_users = {}
