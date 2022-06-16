@@ -102,9 +102,9 @@
                     <% else %>
                       <h3><%= truncate(item.description, :length => 61) %></h3>
                     <% end %>
-                    <div class="d-flex justify-content-between card-location">
+                    <div class="d-flex card-location">
                       <strong><p><%= "#{@distances_between_other_users[item.user.id]} km" %></p></strong>
-                      <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= truncate(item.user.address, :length => 30) %></p>
+                      <p><i class="fas fa-map-marker-alt ms-3"></i>&nbsp<%= truncate(item.user.address, :length => 28) %></p>
                     </div>
                   </div>
                 </div>
