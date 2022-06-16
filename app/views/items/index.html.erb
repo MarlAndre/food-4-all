@@ -1,9 +1,10 @@
+
 <div class="items-page-container" data-controller="postal-code">
   <!-- Landing page popup -->
-  <div class="initial-screen" data-postal-code-target="popup">
+  <div class="initial-screen d-none" data-postal-code-target="popup">
     <div class="image-banner"></div>
     <div class="title-banner">
-        <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
+      <h1 style="color:#814B67">Food4<span><strong>All</strong></span></h1>
     </div>
 
     <div class="white-banner-container">
@@ -13,14 +14,14 @@
     </div>
 
     <div class="modal-popup-container input-group mb-3" id="popup-container">
-      <form name="postal_form" data-remote="true" data-action="submit->postal-code#submitForm" data-postal-code-target="submit">
-        <%# <span class="closebtnpopup" data-action="click->postal-code#closeBtnPopup">&times;</span> %>
-        <label for="postal_code"></label>
-        <input class="form-control" type="text" id="postal_code" name="postal_code" value="<%= params[:postal_code] %>" data-postal-code-target="input" placeholder="Enter your zip code...">
-        <button name="button" id="btn" type="submit" class="btn btn-flat">Submit</button>
-      </form>
+      <%= form_for :item, html: { method: 'GET' }, url: '/' do |f| %>
+        <%= f.text_field :postal_code, placeholder:"Enter your zip code...", id:"postal_code", class:"form-control", html: {data: { target: "input" }} %>
+        <%= f.submit "Let's start", class:"btn btn-flat", data: { action: "click->postal-code#remove" } %>
+       <% end %>
     </div>
   </div>
+
+
 
 
   <!-- PLEASE DONT DELETE THIS DIV-->
@@ -35,8 +36,8 @@
   <div class="navbar-container">
     <nav>
       <div class="nav nav-tabs tabs-underlined" id="nav-tab" role="tablist">
-        <button class="nav-link tab-underlined active" id="nav-see-items-tab" data-bs-toggle="tab" data-bs-target="#nav-see-items" type="button" role="tab" aria-controls="nav-see-items" aria-selected="true">See list items</button>
-        <button class="nav-link tab-underlined" id="nav-see-map-tab" data-bs-toggle="tab" data-bs-target="#nav-see-map" type="button" role="tab" aria-controls="nav-see-map" aria-selected="false">See items on map</button>
+        <button class="nav-link tab-underlined active" id="nav-see-items-tab" data-bs-toggle="tab" data-bs-target="#nav-see-items" type="button" role="tab" aria-controls="nav-see-items" aria-selected="true">List food</button>
+        <button class="nav-link tab-underlined" id="nav-see-map-tab" data-bs-toggle="tab" data-bs-target="#nav-see-map" type="button" role="tab" aria-controls="nav-see-map" aria-selected="false">Items on map</button>
       </div>
     </nav>
   </div>
@@ -71,7 +72,7 @@
         <div class="tab-pane fade show active" id="nav-see-map" role="tabpanel" aria-labelledby="nav-see-map-tab">
         <br>
           <!-- Geocoder-->
-          <div id="map" style="width: 100%; height: 600px;"
+          <div id="map" style="width: 100%; height: 300px;"
             data-controller="mapbox"
             data-mapbox-markers-value="<%= @markers.to_json %>"
             data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
@@ -84,23 +85,27 @@
         <div class="tab-pane fade show active" id="nav-see-items" role="tabpanel" aria-labelledby="nav-see-items-tab">
         <br>
           <!-- Cards-->
-          <div class="cards items" id="cards-items">
-            <% @items.each do |i| %>
-            <% item = Item.find(i["id"]) %>
-              <%= link_to items_path(item), class: "text-decoration-none" do%>
-                <div class="card-product">
-                  <%# hardcoded image for item %>
-                  <% if item.photos.attached? %>
-                    <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                  <% else %>
-                    <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="" width = 100% height = 400>
-                  <% end %>
+          <div class="cards items" id="cards-items" data-postal-code-target="items">
+            <% @items.each do |item| %>
+              <%= link_to item_path(item), class: "text-decoration-none" do%>
+                <div class="card-product <%= ('donated' if item.donated?) || ('reserved' if item.reserved?) %>">
+                  <div class="image">
+                    <%= cl_image_tag item.photos.first.key, class: "img" %>
+                  </div>
 
                   <div class="card-product-infos">
                     <h2><%= item.name.capitalize %></h2>
-                    <h3><%= truncate(item.description, :length => 93) %></h3>
-                    <h3><%= "#{@distances_between_other_users[item.user.id]} km" %></h3>
-                    <p><i class="fas fa-map-marker-alt"></i>&nbsp<%= item.user.address %></p>
+                    <% if item.donated? %>
+                      <h3>This item was donated.</h3>
+                    <% elsif item.reserved? %>
+                      <h3>This item is reserved.</h3>
+                    <% else %>
+                      <h3><%= truncate(item.description, :length => 61) %></h3>
+                    <% end %>
+                    <div class="d-flex card-location">
+                      <strong><p><%= "#{@distances_between_other_users[item.user.id]} km" %></p></strong>
+                      <p><i class="fas fa-map-marker-alt ms-3"></i>&nbsp<%= truncate(item.user.address, :length => 28) %></p>
+                    </div>
                   </div>
                 </div>
               <% end %>

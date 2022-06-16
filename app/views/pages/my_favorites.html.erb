@@ -1,6 +1,15 @@
+<div class="back-btn-container">
+  <div class="back-btn">
+    <%= link_to items_path do %>
+      <i class="fas fa-long-arrow-alt-left" aria-hidden="true" target="_blank"></i>
+    <% end %>
+  </div>
+  <p>Back to listing</p>
+</div>
+
 <div class="my-favorites">
   <div class="heading">
-    <h5>My Favorites</h5>
+    <h5>My favorites</h5>
   </div>
   <div class="container my-4">
     <div class="cards items" id="cards-items">
@@ -11,21 +20,26 @@
           <% item = Item.find(fav.favoritable_id) %>
           <%= link_to item_path(item), class: "text-decoration-none" do%>
 
-            <div class="card-product">
-                <%# hardcoded image for item %>
-                  <% if item.photos.attached? %>
-                    <%= cl_image_tag item.photos.first.key, width: "100%", height: 400 %>
-                  <% else %>
-                    <img src="https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
-                  <% end %>
+            <div class="card-product <%= ('donated' if item.donated?) || ('reserved' if item.reserved?) %>">
+                <div class="image">
+                  <%= cl_image_tag item.photos.first.key, class: "img" %>
+                </div>
 
               <div class="card-product-infos">
                 <h2><%= item.name.capitalize %></h2>
-                <h3><%= truncate(item.description, :length => 93) %></h3>
-                <p><i class="fas fa-map-marker-alt"></i> <%= item.user.address %></p>
+                <% if item.donated? %>
+                  <h3>This item was donated.</h3>
+                <% elsif item.reserved? %>
+                  <h3>This item is reserved.</h3>
+                <% else %>
+                  <h3><%= truncate(item.description, :length => 61) %></h3>
+                <% end %>
+                <div class="d-flex card-location">
+                  <strong><p><%= "#{@distances_between_other_users[item.user.id]} km" %></p></strong>
+                  <p><i class="fas fa-map-marker-alt ms-3"></i>&nbsp<%= truncate(item.user.address, :length => 30) %></p>
+                </div>
               </div>
             </div>
-
           <% end %>
         <% end %>
       <% end %>

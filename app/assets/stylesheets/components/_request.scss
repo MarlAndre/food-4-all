@@ -1,17 +1,18 @@
 // --------------------------------------------Requests#show
 .request {
-  background: white;
-  margin-top: 9px;
-  height: calc(100vh - 75px);
+  margin-top: 35px;
+  height: calc(100vh - 88px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 580px;
   flex-grow: 1;
   .text-white {
     font-size: 13px;
   }
   .card-item {
     position: relative;
+    margin-top: 24px;
     .image {
       .avatar-bordered {
         position: absolute;
@@ -42,9 +43,9 @@
   }
 
   .messages {
-    height: 100%;
     overflow: scroll;
     padding: 0.5rem;
+    flex-grow: 1;
     .special-alert-container {
       margin: 16px 8px;
     }
@@ -85,17 +86,25 @@
     display: flex;
     align-items: center;
     height: 104px;
-    margin-bottom: 5px;
-    &.donated {
-      background: rgba(128, 128, 128, 0.4);
+    margin-bottom: 12px;
+    &.reserved {
+      background: rgba(128, 128, 128, 0.3);
     }
-    .img {
-      padding: 0 10px;
-      height: 88%;
-      display: contain;
-      border-radius: 50%;
+    &.donated {
+      background: rgba(128, 128, 128, 0.8);
+    }
+    .image {
+      width: 120px;
+      .img {
+        padding: 8px;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
     .details {
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       margin-left: 10px;

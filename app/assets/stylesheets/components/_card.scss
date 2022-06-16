@@ -7,15 +7,24 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
-}
-
-.card-product img {
-  // height: 100%;
-  // keep images fixed at width of 120px and remove height:100% so all images align
-  width: 120px;
-  // change to contain looks better than cover
-  object-fit: cover;
-  // changed to cover to fill the height of the picture
+  &.reserved {
+    background: rgba(128, 128, 128, 0.3);
+  }
+  &.donated {
+    background: rgba(128, 128, 128, 0.8);
+  }
+  .image {
+    width: 120px;
+    img {
+      width: 120px;
+      height: 120px;
+      // keep images fixed at width of 120px and remove height:100% so all images align
+      // width: 35%;
+      // change to contain looks better than cover
+      object-fit: cover;
+      // changed to cover to fill the height of the picture
+    }
+  }
 }
 
 .card-product h2 {
@@ -41,12 +50,16 @@
   color: black;
 }
 
+.card-location {
+  margin-top: 12px;
+}
+
 .text-decoration-none {
   text-decoration: none;
 }
 
 .card-product .card-product-infos {
-  padding: 16px;
+  margin-right: 8px;
 }
 
 // Smallest device

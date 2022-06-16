@@ -2,11 +2,38 @@ body {
   background-color: $ivory !important;
 }
 
+.logo-container {
+  display: flex;
+  color: $ivory;
+  background-color: $rose;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  height: 48px;
+  p {
+    font-size: 24px;
+    font-weight: 600;
+    margin: auto 8px;
+  }
+}
+
+.image-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+}
+
 .app-container {
   max-width: 800px;
   margin: 0 auto; // center the container
   padding: 0 12px;
   background-color: $ivory;
+  padding-bottom: 30px;
+  padding-top: 40px;
 
   // app-container just for Requests#index page
   &.requests {
@@ -16,8 +43,8 @@ body {
 }
 
 .container-custom-full-width {
- padding: 0 !important;
-margin-bottom: 0;
+  padding: 0 !important;
+  margin-bottom: 0;
 }
 
 .container-fluid {
@@ -26,13 +53,15 @@ margin-bottom: 0;
 
 .items-page-container {
   position: relative;
-
 }
 
 .initial-screen {
   position: fixed;
-  left: 0px;
+  left: 0.4px;
   top: 0px;
   z-index: 1031;
-  display: none;
+}
+
+.container-request {
+  margin-top: -66px;
 }

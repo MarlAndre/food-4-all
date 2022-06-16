@@ -1,6 +1,6 @@
 .search-form-control {
   position: relative;
-  margin-bottom: 32px;
+  margin-bottom: -2px;
 }
 
 .search-form-control .btn {
@@ -38,6 +38,9 @@
   font-size: 12px;
   border-radius: 12px;
   background: $ivory;
+  img {
+object-fit: cover;
+  }
   a {
     font-size: 16px;
     color: $rose;

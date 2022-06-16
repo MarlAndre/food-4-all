@@ -1,11 +1,14 @@
-<h6><%= user.username %> is giving away</h6>
+<h6><%= user.username.capitalize %> is giving away</h6>
 <% user.items.each do |item|%>
   <p><%= link_to (item.name.capitalize), item_path(item) %></p>
-  <% item.allergens.each do |allergen|  %>
-    <i class="fas fa-ban"></i>&nbsp<%= allergen.name.capitalize%>
+  <%= cl_image_tag item.photos.first.key, width: "100%", height: 100 %>
+  <% unless item.allergens.empty? %>
+    <i class="fas fa-exclamation-triangle"></i>
+    <%= item.allergens.map { |allergen| allergen.name.capitalize }.join(", ") %>
   <% end %>
-  <br>
-   <% item.diets.each do |diet|  %>
-    <i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize%>
+  <p></p>
+  <% unless item.diets.empty? %>
+    <i class="fab fa-envira"></i>
+    <%= item.diets.map { |diet| diet.name.capitalize }.join(", ") %>
   <% end %>
 <% end %>

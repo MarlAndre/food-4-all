@@ -5,40 +5,28 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show update toggle_favorite]
 
   def index
-    # Gets current user coordinates, currently using static postal code until we fix the Js issue.
-    @current_postal_code = 'H2T 1X3'
+    # Get postal code from params (default to 'H2T 1X3')
+    # @postal_code = params[:item] ? params[:item][:postal_code] : 'H2T 1X3'
+    @postal_code = 'H2T 1X3'
 
-    # Distance between current user and other users (for index cards).
-    @distances_between_other_users = {}
+    # Get all users who have at least one item
+    users_with_items = User.all.select {|u| u.items.count > 0}
 
-    # Sets distance for each user that's nearby, private method below.
-    set_distance
+    # Get all users near the postal_code
+    @users = User.where(id: users_with_items.map(&:id)).near(@postal_code, 50)
 
-    if @current_postal_code.present? && !params[:query].present?
-      # Filter users if items are near (5km)
-      @users = User.near(@current_postal_code, 5)
+    # Get the list of all available/reserved items of these users
+    @items = @users.map(&:items).flatten.select { |item| item.available? || item.reserved? }
 
-      # Get all of these users items
-      @items = @users.map {|u| u.items}.flatten
-
-      # This condition is nested so that the cards will still have the distance from the user.
-      if params[:query].present?
-        @users = User.all # Maybe this should only reflect the users who's items are shown. <<<<<
-        # @items = Item.search_index(params[:query])
-      end
-    elsif params[:query].present?
-      @users = User.all
-      sql = "Select items.id, items.user_id, items.status, items.item_type, items.description, items.expiration_date, items.created_at, items.updated_at, items.name, allergens.id allergen_id, allergens.name allergen_name from items INNER JOIN items_allergens ON items_allergens.item_id = items.id INNER JOIN allergens ON allergens.id = items_allergens.allergen_id WHERE items.name LIKE '%#{params[:query]}%'"
-      @items = ActiveRecord::Base.connection.execute(sql).to_a
-      raise
-      # pg_search
-      # @items = result.search_index(params[:query])
-    else
-      # If no search or postal code was entered, show everything.
-      @users = User.all
-      @items = Item.all.order(id: :desc)
+    # Filter items if there is a search query
+    if params[:query].present?
+      @items = Item.where(id: @items.map(&:id)).search_index(params[:query]).select { |item| item.available? || item.reserved? }
     end
+
     # Geocoder
+    @markers = []
+    @distances_between_other_users = {}
+    get_distance
     @geocoded_users = User.geocoded
     @markers = @geocoded_users.map do |user|
       {
@@ -53,12 +41,7 @@ class ItemsController < ApplicationController
     end
 
     # Stimulus controller (MUST be below Geocoder, otherwise markers won't show)
-    @items_with_address = @items.map { |item| [item, User.find(item["user_id"]).address, @distances_between_other_users[item["user_id"]]] }
-    respond_to do |format|
-      format.html { render "items/index" }
-      format.json { render json: "@items_with_address" }
-    end
-
+    @items_with_address = @items.map { |item| [item, item.user.address, @distances_between_other_users[item.user.id]] }
   end
 
   def show
@@ -148,13 +131,11 @@ class ItemsController < ApplicationController
     end
   end
 
-  # Sets distance for each user that's nearby. CAUSING HUGE DELAY AGAIN <<<<<
-  def set_distance
-    users = User.all
-    current_coordinates = Geocoder.coordinates(@current_postal_code)
-    users.each do |user|
-      current_coordinates
-      total_distance = user.distance_from(current_coordinates).round(1)
+  # Sets distance for each user that's nearby.
+  def get_distance
+    @current_coordinates = Geocoder.coordinates(@postal_code)
+    @users.each do |user|
+      total_distance = user.distance_from(@current_coordinates).round(1)
       @distances_between_other_users[user.id] = total_distance
     end
   end

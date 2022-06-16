@@ -13,7 +13,7 @@
 
 .title-banner h1 {
   position: absolute;
-  color: #814B67;
+  color: #814b67;
   font-size: 84px;
   text-align: center;
 }
@@ -43,24 +43,32 @@
 .white-banner p {
   font-size: 36px;
   text-align: center;
-  color: #2B3D29;
+  color: #2b3d29;
 }
 
 // Postal code
 .modal-popup-container {
   position: fixed;
   bottom: 60px;
+  bottom: 120px;
   width: 100vw;
   align-items: center;
   justify-content: center;
   z-index: 1032;
+
   .form-control {
-    display: inline-block;
     width: 65%;
+    width: 275px;
   }
 
   .btn {
     display: inline-block;
     width: 30%;
+    margin-top: 16px;
+    width: 125px;
+  }
+
+  form {
+    text-align: center;
   }
 }

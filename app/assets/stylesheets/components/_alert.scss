@@ -7,12 +7,18 @@
 
 /* The alert message box COVID */
 .special-alert-container {
-  margin-top: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
+  margin-top: 12px;
 }
 
 .special-alert {
   padding: 8px;
+  .alert-heading {
+    font-size: 16px;
+  }
+  ul{
+    font-size: 12px;
+  }
 }
 .alert-sucess {
   padding: 20px;
@@ -22,7 +28,7 @@
 /* The close button */
 .closebtn {
   margin-left: 15px;
-  color: white;
+  color: $dark-green;
   font-weight: bold;
   float: right;
   font-size: 22px;

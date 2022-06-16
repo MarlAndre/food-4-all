@@ -1,6 +1,3 @@
-
-# my_item.photos.attach(io: File.open("app/assets/images/meals/pizza.jpg"), filename: "pizza.jpg")
-
 #############################################################################
 #------------------------------PARSING JSON---------------------------------#
 #############################################################################
@@ -10,20 +7,20 @@
 # file = File.read(file_path)
 # list = JSON.parse(file)
 
-# List of local addresses.
-locations_file_path = File.join(Rails.root, 'app', 'assets', 'locations.json')
-locations_file = File.read(locations_file_path)
-@locations = JSON.parse(locations_file)
+# List of close addresses.
+close_locations_file_path = File.join(Rails.root, 'app', 'assets', 'close_locations.json')
+close_locations_file = File.read(close_locations_file_path)
+@close_locations = JSON.parse(close_locations_file)
+
+# List of far addresses.
+far_locations_file_path = File.join(Rails.root, 'app', 'assets', 'far_locations.json')
+far_locations_file = File.read(far_locations_file_path)
+@far_locations = JSON.parse(far_locations_file)
 
 # List of meals.
 meals_file_path = File.join(Rails.root, 'app', 'assets', 'meals.json')
 meals_file = File.read(meals_file_path)
 @meals = JSON.parse(meals_file)
-
-# List of meals descriptions.
-# meal_descriptions_file_path = File.join(Rails.root, 'app', 'assets', 'meal_dessn').description
-# meal_descriptions_file = File.read(meal_descriptions_file_path)
-# @meal_descriptions = JSON.parse(meal_descriptions_file)
 
 # List of ingredients.
 ingredients_file_path = File.join(Rails.root, 'app', 'assets', 'ingredients.json')
@@ -46,7 +43,7 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'chicken'
     item.description = @meals[1]["description"]
-  when 'mac and cheese with ham'
+  when 'mac & cheese + ham'
     item.description = @meals[2]["description"]
     ItemsAllergen.create!(item_id: item.id, allergen_id: 1)
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
@@ -77,8 +74,7 @@ def add_allergens_and_diets(item)
     ItemsDiet.create!(item_id: item.id, diet_id: 3)
     ItemsDiet.create!(item_id: item.id, diet_id: 5)
   when 'spaghetti'
-    item.description = @meals[7]["description"]
-
+    # Shayna's meal, description already set
     ItemsAllergen.create!(item_id: item.id, allergen_id: 7)
     ItemsDiet.create!(item_id: item.id, diet_id: 4)
   else
@@ -96,11 +92,6 @@ end
 @allergens_list = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
 @diets_list = ['vegan', 'vegetarian', 'pescatarian', 'lactose free', 'gluten free']
 @true_or_false = [true, false]
-# Random simply ingredient descriptions
-@ingr_descr = [
-  'fresh', 'free', 'extra', 'yummy', 'raw', 'healthy', 'clean', 'delicious', 'fresh picked', 'good for you',
-  'hearty', 'locally-grown', 'wholesome', 'ready to be picked up', 'good'
-]
 #---------------------------------------------------------------------------#
 
 # Clears screen and wipes database
@@ -152,7 +143,7 @@ puts "#{'✓ Diets '.light_green}created"
 puts ''
 
 #############################################################################
-#----------------------------DEMO PERSONAS-----------------------------------#
+#----------------------------DEMO PERSONAS----------------------------------#
 #############################################################################
 puts '----------------------------Personas--------------------------------'.light_black
 
@@ -165,12 +156,13 @@ puts '----------------------------Personas--------------------------------'.ligh
 )
 puts " Demo persona: #{@justin.username.light_cyan} has been created."
 puts ''
+
 # Demo user Shayna will be the GIVER that justin receives a meal from.
 @shayna = User.create!(
   email: 'shayna@foodfor.all',
   username: 'Shayna',
   password: '123456',
-  address: '5057 rue de bullion, montreal'
+  address: 'Montreal, 3579 Rue Durocher'
 )
 shaynas_meal = Item.new(
   user_id: @shayna.id,
@@ -183,7 +175,6 @@ shaynas_meal = Item.new(
 shaynas_meal.photos.attach(io: File.open("app/assets/images/meals/#{@meals.last["photo"]}"), filename: @meals.last["photo"])
 shaynas_meal.save!
 
-
 puts " Demo persona: #{@shayna.username.light_cyan} has been created with a #{shaynas_meal.name.cyan} meal"
 add_allergens_and_diets(shaynas_meal)
 
@@ -195,9 +186,31 @@ add_allergens_and_diets(shaynas_meal)
   address: '5305 drolet st, montreal'
 )
 puts " Demo persona: #{@williams.username.light_cyan} has been created to rent #{@shayna.username.light_cyan}'s #{shaynas_meal.name.cyan} meal"
+
+# Demo user JF will be the GIVER whose item is favorited by Justin.
+@jf = User.create!(
+  email: 'jf@foodfor.all',
+  username: 'J-F',
+  password: '123456',
+  address: '5110 drolet st, montreal'
+)
+jfs_ingredient = Item.new(
+  user_id: @jf.id,
+  name: @ingredients.last["name"],
+  status: 'available',
+  item_type: 'ingredient',
+  description: @ingredients.last["description"],
+  expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
+)
+jfs_ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients.last["photo"]}"), filename: @ingredients.last["photo"])
+jfs_ingredient.save!
+
+# Add J-F's ingredient to Justin's list of favorites.
+@justin.favorite(jfs_ingredient)
+
+puts " Demo persona: #{@jf.username.light_cyan} has been created with a #{jfs_ingredient.name.cyan} ingredient"
 puts "#{'✓ Personas '.light_green}created"
 puts ''
-
 #############################################################################
 #----------------------------SEED DB WITH USERS-----------------------------#
 #############################################################################
@@ -210,7 +223,7 @@ puts '------------------------Users with meals----------------------------'.ligh
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
-    address: @locations.sample
+    address: @far_locations[@counter_from_zero]
   )
   meal = Item.new(
     user_id: user.id,
@@ -234,22 +247,22 @@ puts '---------------------Users with ingredients-------------------------'.ligh
 
 # Creates users, each user will have an ingredient to give.
 @counter_from_zero = 0
-25.times do
+26.times do
   user = User.create!(
     email: Faker::Internet.email,
     username: "#{Faker::Name.first_name.capitalize} #{Faker::Name.last_name.capitalize}",
     password: '123456',
-    address: @locations.sample
+    address: @close_locations[@counter_from_zero]
   )
   ingredient = Item.new(
     user_id: user.id,
     name: @ingredients[@counter_from_zero]["name"],
+    description: @ingredients[@counter_from_zero]["description"],
     status: 'available',
     item_type: 'ingredient',
     expiration_date: Faker::Date.between(from: 2.days.from_now, to: 5.days.from_now)
   )
   ingredient.photos.attach(io: File.open("app/assets/images/ingredients/#{@ingredients[@counter_from_zero]["photo"]}"), filename: @ingredients[@counter_from_zero]["photo"])
-  ingredient.description = "#{@ingr_descr.sample} #{ingredient.name}"
   ingredient.save!
   puts " #{user.username.light_cyan}(ID:#{user.id.to_s.light_yellow}) has been created with ingredient #{ingredient.name.cyan}(ID:#{ingredient.id.to_s.light_yellow})."
   @counter_from_zero += 1
@@ -260,40 +273,41 @@ puts ''
 #############################################################################
 #---------------------------SEED DB WITH FEEDBACK---------------------------#
 #############################################################################
-puts '------------------------------Feedback------------------------------'.light_black
+puts '------------------FEEDBACKS COMMENTED OUT FOR DEMO------------------'.light_black
+# puts '------------------------------Feedback------------------------------'.light_black
 
-5.times do
-  # Creates feedback for a user
-  feedback = Feedback.create!(
-  user_id: @shayna.id,
-  punctual: @true_or_false.sample,
-  friendly: true,
-  communication: true,
-  recommended: true
-  )
-end
-puts "#{@shayna.username.light_cyan} has received some feedback."
+# 5.times do
+#   # Creates feedback for a user
+#   feedback = Feedback.create!(
+#   user_id: @shayna.id,
+#   punctual: @true_or_false.sample,
+#   friendly: true,
+#   communication: true,
+#   recommended: true
+#   )
+# end
+# puts "#{@shayna.username.light_cyan} has received some feedback."
 
-5.times do
-  # Creates feedback for a user
-  feedback = Feedback.create!(
-  user_id: @williams.id,
-  punctual: true,
-  friendly: true,
-  communication: @true_or_false.sample,
-  recommended: true
-  )
-end
-puts "#{@williams.username.light_cyan} has received some feedback."
+# 5.times do
+#   # Creates feedback for a user
+#   feedback = Feedback.create!(
+#   user_id: @williams.id,
+#   punctual: true,
+#   friendly: true,
+#   communication: @true_or_false.sample,
+#   recommended: true
+#   )
+# end
+# puts "#{@williams.username.light_cyan} has received some feedback."
 
-puts "#{'✓ Feedback'.light_green} created."
-puts ''
+# puts "#{'✓ Feedback'.light_green} created."
+# puts ''
 
 #############################################################################
 #---------------------------SEED DB WITH REQUESTS---------------------------#
 #------Comment this out during live demo, this code shouldn't be seen-------#
 #############################################################################
-puts '-------Fake data for front-end styling commented out for demo-------'.light_black
+puts '----------------FAKE REQUESTS COMMENTED OUT FOR DEMO----------------'.light_black
 puts ''
 
 # puts '-------------Fake data for front-end styling (requests)-------------'.light_black

@@ -1,6 +1,15 @@
+<div class="back-btn-container">
+  <div class="back-btn">
+    <%= link_to items_path do %>
+      <i class="fas fa-long-arrow-alt-left" aria-hidden="true" target="_blank"></i>
+    <% end %>
+  </div>
+  <p>Back to listing</p>
+</div>
+
 <div class="requests">
   <div class="heading">
-    <h5>Messages</h5>
+    <h5>My Messages</h5>
   </div>
   <div class="container my-4">
     <%# if @requests is empty, "You don't have any requests." Show the requests otherwise. %>
@@ -11,10 +20,11 @@
         <% unless request.messages.last.nil? %>
           <%= link_to request_path(request) do %>
             <%# each request is a flex card %>
-            <div class="ripple shadow request-card <%= request.item.donated? ? 'donated' : '' %>">
+            <div class="ripple shadow request-card <%= ('donated' if request.item.donated?) || ('reserved' if request.item.reserved?) %>">
               <%# image is the first div %>
-              <%# To insert dynamic images for all items %>
-              <%= image_tag "ingredients/cucumber_two.jpg", class: "img" %>
+              <div class="image">
+                <%= cl_image_tag request.item.photos.first.key, class: "img" %>
+              </div>
               <%# details is the second div %>
               <div class="details">
                 <% if current_user == request.receiver %>
@@ -22,9 +32,11 @@
                 <% elsif current_user == request.giver %>
                   <span><%= request.receiver.username %></span>
                 <% end %>
-                <strong><%= request.item.name %></strong>
-                <% if request.item.status == 'donated' %>
+                <strong><%= request.item.name.capitalize %></strong>
+                <% if request.item.donated? %>
                   <em>This item was donated.</em>
+                <% elsif request.item.reserved? %>
+                  <em>This item is reserved.</em>
                 <% else %>
                   <%# only part of the message is previewed if it's too long %>
                   <% if current_user == request.messages.last.user %>
