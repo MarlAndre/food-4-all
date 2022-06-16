@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
 
   def index
     # current user can only view the chats where s/he is a receiver/giver.
-    @requests = Request.where(receiver: current_user).or(Request.where(giver: current_user))
+    @requests = Request.where(receiver: current_user).or(Request.where(giver: current_user)).order(id: :desc)
   end
 
   # make sure only the current users can access the page, otherwise redirect to Requests#index page.
