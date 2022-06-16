@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     @users = User.where(id: users_with_items.map(&:id)).near(@postal_code, 50)
 
     # Get the list of all available/reserved items of these users
-    @items = @users.map(&:items).flatten
+    @items = @users.map(&:items).flatten.select { |item| item.available? || item.reserved? }
 
     # Filter items if there is a search query
     if params[:query].present?
