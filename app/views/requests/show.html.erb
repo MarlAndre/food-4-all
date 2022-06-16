@@ -7,69 +7,71 @@
   <p>Back to messages</p>
 </div>
 
-<div class="container request"
-  data-controller="request-subscription"
-  data-request-subscription-request-id-value="<%= @request.id %>"
-  data-request-subscription-current-user-id-value="<%= current_user.id %>"
->
-  <div class="card-item">
-    <%= link_to item_path(@request.item), class: "text-decoration-none" do%>
-      <div class="card-product">
+<div class="container-request">
+  <div class="container request"
+    data-controller="request-subscription"
+    data-request-subscription-request-id-value="<%= @request.id %>"
+    data-request-subscription-current-user-id-value="<%= current_user.id %>"
+  >
+    <div class="card-item">
+      <%= link_to item_path(@request.item), class: "text-decoration-none" do%>
+        <div class="card-product">
+          <div class="image">
+            <%= cl_image_tag @request.item.photos.first.key, class: "img" %>
+          </div>
+
+          <div class="card-product-infos">
+            <h2><strong><%= @request.item.user.username.capitalize %></strong> is giving away <strong><%= @request.item.name.capitalize %></strong></h2>
+            <span class="text-white"><%= @request.item.status.capitalize %></span>
+            <p><%= @distance %> km away</p>
+          </div>
+        </div>
         <div class="image">
-          <%= cl_image_tag @request.item.photos.first.key, class: "img" %>
+          <% if @request.item.user.username == "Shayna" %>
+            <%= image_tag "giver_shayna.png", class: "avatar-bordered" %>
+          <% elsif @request.item.user == User.first %>
+            <%= image_tag "demo_user.png", class: "avatar-bordered" %>
+          <% else %>
+            <%= image_tag "landingpage.png", class: "avatar-bordered" %>
+          <% end %>
         </div>
-
-        <div class="card-product-infos">
-          <h2><strong><%= @request.item.user.username.capitalize %></strong> is giving away <strong><%= @request.item.name.capitalize %></strong></h2>
-          <span class="text-white"><%= @request.item.status.capitalize %></span>
-          <p><%= @distance %> km away</p>
-        </div>
-      </div>
-      <div class="image">
-        <% if @request.item.user.username == "Shayna" %>
-          <%= image_tag "giver_shayna.png", class: "avatar-bordered" %>
-        <% elsif @request.item.user == User.first %>
-          <%= image_tag "demo_user.png", class: "avatar-bordered" %>
-        <% else %>
-          <%= image_tag "landingpage.png", class: "avatar-bordered" %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="messages" data-request-subscription-target="messages">
-    <div class="special-alert-container">
-      <div class="special-alert alert-success" role="alert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <h5 class="alert-heading text-center">Recommendations</h5>
-        <li>Stay home if you are sick</li>
-        <li>Sanitize your hands regularly</li>
-        <li>Be polite :)</li>
-        <li>Say when you can pick up</li>
-      </ul></p>
-      </div>
+      <% end %>
     </div>
-    <% @request.messages.each do |message| %>
-      <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-        <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-          <%= render "messages/message", message: message %>
+
+    <div class="messages" data-request-subscription-target="messages">
+      <div class="special-alert-container">
+        <div class="special-alert alert-success" role="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <h5 class="alert-heading text-center">Recommendations</h5>
+          <li>Stay home if you are sick</li>
+          <li>Sanitize your hands regularly</li>
+          <li>Be polite :)</li>
+          <li>Say when you can pick up</li>
+        </ul></p>
         </div>
       </div>
-    <% end %>
-  </div>
+      <% @request.messages.each do |message| %>
+        <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+          <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+            <%= render "messages/message", message: message %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-  <div class="send-messages">
-    <%= simple_form_for [@request, @message],
-    remote: true,
-    html: {data: {action: "ajax:success->request-subscription#resetForm" }, class: "d-flex"} do |f|
-    %>
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <%= f.input :content,
-        label: false,
-        placeholder: "Type here...",
-        wrapper_html: {class: "flex-grow-1"}
+    <div class="send-messages">
+      <%= simple_form_for [@request, @message],
+      remote: true,
+      html: {data: {action: "ajax:success->request-subscription#resetForm" }, class: "d-flex"} do |f|
       %>
-      <%= f.submit "Send", class: "button" %>
-    <% end %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= f.input :content,
+          label: false,
+          placeholder: "Type here...",
+          wrapper_html: {class: "flex-grow-1"}
+        %>
+        <%= f.submit "Send", class: "button" %>
+      <% end %>
+    </div>
   </div>
 </div>

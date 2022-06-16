@@ -1,6 +1,5 @@
 // --------------------------------------------Requests#show
 .request {
-  background: white;
   margin-top: 35px;
   height: calc(100vh - 88px);
   display: flex;
@@ -13,6 +12,7 @@
   }
   .card-item {
     position: relative;
+    margin-top: 24px;
     .image {
       .avatar-bordered {
         position: absolute;
