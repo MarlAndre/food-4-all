@@ -1,0 +1,5 @@
+meta_product_name: "Food4All"
+meta_title: "Food4All - Too much food? Share it."
+meta_description: "Helping connect people with free homecooked meal"
+meta_image: "cover.png" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards

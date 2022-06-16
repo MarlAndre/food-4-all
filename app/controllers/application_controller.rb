@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
   def switch_time_zone(&block)
     Time.use_zone(current_user.time_zone, &block)
   end
+
+  def default_url_options
+    { host: ENV["DOMAIN"] || "localhost:3000" }
+  end
 end
