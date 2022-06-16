@@ -23,7 +23,10 @@ class ItemsController < ApplicationController
     # item: name/description/type, allergen: name, diet: name (refer to models)
     if params[:query].present?
       results = PgSearch.multisearch(params[:query])
-      unless results.empty?
+      if results.empty?
+        # items mapped by postal code + status
+        @items = []
+      else
         @searched_items = []
         results.map do |result|
           case result[:searchable_type]
@@ -33,10 +36,8 @@ class ItemsController < ApplicationController
           when "Diet" then @searched_items += Diet.find(result[:searchable_id]).items
           end
         end
+        @items = Item.where(id: @items.map(&:id)).select { |item| @searched_items.include?(item) }
       end
-
-      # items mapped by postal code + status
-      @items = Item.where(id: @items.map(&:id)).select { |item| @searched_items.include?(item) }
     end
 
     # Geocoder
