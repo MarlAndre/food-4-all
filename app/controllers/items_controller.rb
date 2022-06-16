@@ -5,9 +5,9 @@ class ItemsController < ApplicationController
   before_action :find_item, only: %i[show update toggle_favorite]
 
   def index
-    # Get postal code from params (default to 'H2T 1X3')
-    # @postal_code = params[:item] ? params[:item][:postal_code] : 'H2T 1X3'
-    @postal_code = 'H2T 1X3'
+    # Get postal code from params (default to 'Montreal, Av. casgrain')
+    # @postal_code = params[:item] ? params[:item][:postal_code] : 'Montreal, Av. casgrain'
+    @postal_code = 'Montreal, Av. casgrain'
 
     # Get all users who have at least one item
     users_with_items = User.all.select {|u| u.items.count > 0}

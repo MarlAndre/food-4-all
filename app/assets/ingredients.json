@@ -61,7 +61,7 @@
 
   {
     "name": "cucumber",
-    "description": "We have too many cucumbers, don't want them to end up in the garbage.",
+    "description": "Made a big a salad, ended up with an extra cucumber to spare. Slice it up for a quick healthy snack!",
     "photo": "cucumber.jpg"
   },
 
@@ -156,8 +156,8 @@
   },
 
   {
-    "name": "sugar",
-    "description": "A cup of sugar, it's not much but I hope it helps.",
+    "name": "cup of sugar",
+    "description": "I know it's not much, but I hope it helps.",
     "photo": "sugar.jpg"
   }
 ]
