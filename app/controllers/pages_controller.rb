@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     # Currently calculating the distance for ALL users each time, would like to reduce this in the future for performance.
     get_distance
 
-    @my_favorites = current_user.all_favorites
+    @my_favorites = current_user.all_favorites.order(id: :desc)
 
   end
 
