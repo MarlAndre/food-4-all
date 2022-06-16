@@ -16,7 +16,7 @@
     <div class="modal-popup-container input-group mb-3" id="popup-container">
       <%= form_for :item, html: { method: 'GET' }, url: '/' do |f| %>
         <%= f.text_field :postal_code, placeholder:"Enter your zip code...", id:"postal_code", class:"form-control", html: {data: { target: "input" }} %>
-        <%= f.submit "Let's start", class:"btn btn-flat", data: { action: "click->postal-code#remove" } %>
+        <%= f.submit "Let's start", class:"btn btn-flat", data: { action: "click->postal-code#remove", disable_with: "Searching..." } %>
        <% end %>
     </div>
   </div>
