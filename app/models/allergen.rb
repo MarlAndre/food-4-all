@@ -15,4 +15,8 @@ class Allergen < ApplicationRecord
   # Validations
   NAMES = ['milk', 'eggs', 'fish', 'shellfish', 'tree nuts', 'peanuts', 'wheat', 'soybeans']
   validates :name, presence: true, inclusion: { in: NAMES }
+
+  # added "pg_search" gem to filter the index
+  include PgSearch::Model
+  multisearchable against: [:name]
 end

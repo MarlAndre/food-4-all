@@ -15,4 +15,8 @@ class Diet < ApplicationRecord
   # Validations
   NAMES = ['vegan', 'vegetarian', 'pescatarian', 'lactose free', 'gluten free']
   validates :name, presence: true, inclusion: { in: NAMES }
+
+  # added "pg_search" gem to filter the index
+  include PgSearch::Model
+  multisearchable against: [:name]
 end

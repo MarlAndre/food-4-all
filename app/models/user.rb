@@ -42,4 +42,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :email, :username
   after_validation :geocode
   after_validation :geocode, if: :will_save_change_to_address?
+
+  # added "pg_search" gem to filter the index
+  include PgSearch::Model
+  multisearchable against: [:username]
 end
