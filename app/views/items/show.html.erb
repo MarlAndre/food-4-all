@@ -11,16 +11,16 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <% @item.photos.each_with_index do |photo, index| %>
-        <% if index == 0 %>
-        <div class="carousel-item active">
-            <%= cl_image_tag photo.key, class:"expand", height: 400, width: "100%" %>
-        </div>
-        <% else %>
-        <div class="carousel-item">
-            <%= cl_image_tag photo.key, class:"expand", height: 400, width: "100%"  %>
-        </div>
-          <% end  %>
-        <% end  %>
+          <% if index == 0 %>
+            <div class="carousel-item active">
+              <%= cl_image_tag photo.key, class:"expand", height: 400, width: "100%" %>
+            </div>
+          <% else %>
+            <div class="carousel-item">
+              <%= cl_image_tag photo.key, class:"expand", height: 400, width: "100%" %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -41,13 +41,11 @@
       </div>
       <div class="social-media" data-controller="toggle-favorite">
         <p class="distance"># km away</p>
-          <div data-action="click->toggle-favorite#rose" data-toggle-favorite-target="icon">
-            <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post do %>
-              <i class="fas fa-heart like <%= 'rose' if current_user.favorited?(@item) %>"></i>
-            <% end %>
-          </div>
-          <%# commented out 'share' button because we don't have the share function (yet) %>
-          <%# <a href="#"><i class="fas fa-share-alt"></i></a> %>
+        <div data-action="click->toggle-favorite#rose" data-toggle-favorite-target="icon">
+          <%= link_to toggle_favorite_item_path(@item), remote: true, method: :post do %>
+            <i class="fas fa-heart like <%= 'rose' if current_user.favorited?(@item) %>"></i>
+          <% end %>
+        </div>
       </div>
     </div>
 
@@ -74,35 +72,31 @@
     </div>
 
     <div class="details">
-        <h6><strong>Description</strong></h6>
-        <%= @item.description.capitalize %>
-
-      <% unless @diets.nil? %>
-        <% @allergens.each do |allergen| %>
-          <p><i class="fas fa-exclamation-triangle"></i></i>&nbsp<%= allergen.name.capitalize %></li></p>
-        <% end %>
+      <h6><strong>Description</strong></h6>
+      <%= @item.description.capitalize %>
+      <p></p>
+      <% unless @allergens.empty? %>
+        <i class="fas fa-exclamation-triangle"></i>
+        <%= @allergens.map { |allergen| allergen.name.capitalize }.join(", ") %>
       <% end %>
-      <% unless @diets.nil? %>
-        <% @diets.each do |diet| %>
-         <p><i class="fab fa-envira"></i>&nbsp<%= diet.name.capitalize %></li></p>
-        <% end %>
+      <p></p>
+      <% unless @diets.empty? %>
+        <i class="fab fa-envira"></i>
+        <%= @diets.map { |diet| diet.name.capitalize }.join(", ") %>
       <% end %>
-
-    </ul>
+    </div>
   </div>
 
-    <div class="card-category"
-        id="map"
-        style="width: 100%;
-        height: 400px;"
-        data-controller="mapbox"
-        data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-        >
-    </div>
-
+  <div class="card-category"
+    id="map"
+    style="width: 100%;
+    height: 400px;"
+    data-controller="mapbox"
+    data-mapbox-markers-value="<%= @markers.to_json %>"
+    data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+    >
+  </div>
 </div>
-
 
 <div class="my-5">
   <%# owner cannot request for his/her own items. %>
