@@ -1,4 +1,5 @@
 .profile {
+  margin-top: -24px;
   .edit-link {
     color: rgba(black, 0.6);
     &:active {
@@ -14,10 +15,17 @@
       padding: 10px 24px;
       font-size: 14px;
     }
+    .btn-flat {
+      margin-top: -24px;
+    }
   }
   .logout {
     text-decoration: underline;
     color: gray;
     margin-bottom: 50px;
   }
+}
+
+.item-profile {
+  margin-top: -30px;
 }
