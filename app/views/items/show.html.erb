@@ -13,11 +13,11 @@
         <% @item.photos.each_with_index do |photo, index| %>
           <% if index == 0 %>
             <div class="carousel-item active">
-              <%= cl_image_tag photo.key, class:"expand", height: 400, width: "100%" %>
+              <%= cl_image_tag photo.key, class:"expand", height: 312, width: "100%" %>
             </div>
           <% else %>
             <div class="carousel-item">
-              <%= cl_image_tag photo.key, class:"expand", height: 400, width: "100%" %>
+              <%= cl_image_tag photo.key, class:"expand", height: 312, width: "100%" %>
             </div>
           <% end %>
         <% end %>
