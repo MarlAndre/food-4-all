@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
     @profile = User.find(current_user.id)
 
     # Items that the current user has requested.
-    @items = Item.joins(:requests).where(requests: {receiver_id: current_user.id }).order(id: :desc)
+    @items = Item.joins(:requests).where(requests: {receiver_id: current_user.id }).order(:status)
 
     # All users where the request receiver is the current user
     @users = User.joins(:requests_as_giver).where(requests_as_giver: { receiver_id: current_user.id })
