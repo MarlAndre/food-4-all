@@ -4,63 +4,155 @@
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.tv-error-404-tm {
+  background-color:#000;
+  max-height:100%;
+  min-height:100%;
+  position:relative;
+  padding:50px 0;
+}
+.tv-dark-background-tm {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.6);
+  top:0;
+  left:0;
+}
+.tv-error-content-tm {
+  position:relative;
+  top:100px;
+  color:#fff;
+}
+.tv-error-content-tm h1 {
+  font-size:102px;
+  text-align:center;
+  font-weight:400;
+}
+.tv-error-content-tm h3 {
+  font-size:32px;
+  font-weight:300;
+  text-align:center;
+}
+.tv-error-links-tm {
+  width:100%;
+  margin-top:20%;
+  text-align:center;
+}
+.tv-error-content-tm a {
+  color:#fff !important;
+  padding:5px 30px;
+  border:2px solid #fff;
+  font-size:22px;
+  margin-right:30px;
+  border-radius:5px;
+}
+.tv-error-content-tm a:hover,.tv-error-content-tm a:active,.tv-error-content-tm a:visited,.tv-error-content-tm a:focus {
+  color:#fff !important;
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+}
+@media (max-width: 992px)  {
+    .tv-error-content-tm h1 {
+      font-size:62px;
+      text-align:center;
+      font-weight:400;
+    }
+    .tv-error-content-tm h3 {
+      font-size:26px;
+      font-weight:300;
+      text-align:center;
+    }
+    .tv-error-content-tm a {
+      color:#fff !important;
+      padding:5px 30px;
+      border:2px solid #fff;
+      font-size:22px;
+      margin-right:30px;
+      border-radius:5px;
+    }
+}
+@media (max-width: 425px)  {
+    .tv-error-content-tm h1 {
+        font-size: 49px;
+        text-align: center;
+        font-weight: 400;
+    }
+    .tv-error-content-tm h3 {
+      font-size:26px;
+      font-weight:300;
+      text-align:center;
+    }
+    .tv-error-content-tm a {
+        color: #fff !important;
+        padding: 5px 30px;
+        border: 2px solid #fff;
+        font-size: 19px;
+        margin-right: 10px;
+        border-radius: 5px;
+    }
+}
+@media (max-width: 375px)  {
+   .tv-error-content-tm h1 {
+        font-size: 42px;
+        text-align: center;
+        font-weight: 400;
+    }
+    .tv-error-content-tm h3 {
+        font-size: 22px;
+        font-weight: 300;
+        text-align: center;
+    }
+    .tv-error-content-tm a {
+        color: #fff !important;
+        padding: 5px 30px;
+        border: 2px solid #fff;
+        font-size: 18px;
+        margin-right: 0;
+        border-radius: 5px;
+    }
+}
+@media (max-width: 320px)  {
+    .tv-error-content-tm h1 {
+      font-size:34px;
+      text-align:center;
+      font-weight:400;
+    }
+    .tv-error-content-tm h3 {
+      font-size:18px;
+      font-weight:300;
+      text-align:center;
+    }
+    .tv-error-content-tm a {
+        color: #fff !important;
+        padding: 5px 30px;
+        border: 2px solid #fff;
+        font-size: 18px;
+        margin-right: 0;
+        border-radius: 5px;
+    }
+}
   </style>
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
+  <section class="tv-error-404-tm" style="background-image: url(https://images.unsplash.com/photo-1554136383-fa88b2d86aaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80); background-position:top center; background-size:cover; height:550px;">
+    <div class="tv-dark-background-tm"></div>
+    <div class="container tv-error-content-tm">
+      <div class="col-md-12">
+        <h1>We'sorry, but something went wrong.</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <div class="dialog">
     <div>
       <h1>We're sorry, but something went wrong.</h1>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+  </div> -->
 </body>
 </html>
