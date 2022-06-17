@@ -14,7 +14,7 @@
       <%# <%= f.input :status, collection: Item.statuses.keys %>
       <%= f.input :allergens, label: 'Allergens (if any):', class: 'w-100', collection: Allergen::NAMES, input_html: { multiple: true } %>
       <%= f.input :diets, label: 'Special diets (if any):', class: 'w-100', collection: Diet::NAMES, input_html: { multiple: true } %>
-      <%= f.input :expiration_date, placeholder: 'Expiration date', as: :date, html5: true, class: 'w-100' %>
+      <%= f.input :expiration_date, placeholder: 'Expiration date', as: :date, class: 'w-100' %>
       <%= f.input :photos, label: false, as: :file, input_html: { multiple: true }, class: 'w-100' %>
       <p></p>
       <div class="d-flex justify-content-center">
