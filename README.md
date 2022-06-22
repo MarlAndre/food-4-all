@@ -13,4 +13,11 @@ In addition to the human aspect, our application also helps to fight food waste.
 <p><strong>Password:</strong> 123456 </p>
 
 
-<p>This app is meant to be used as a mobile app. Go in your inspector and change the view to iPhone 6/7/8 </p>
+<p>This app is meant to be used as a mobile app. Go in your inspector... </p>
+
+![inspector](https://user-images.githubusercontent.com/15382972/175033603-9a8f8c28-9419-47f0-9d98-42ac4787000a.PNG)
+
+<p>... And change the view to iPhone 6/7/8 </p>
+
+![dimension](https://user-images.githubusercontent.com/15382972/175033112-ddfbc654-e199-47be-aba9-f2f1d53e1025.PNG)
+
