@@ -6,3 +6,11 @@ My team and I have been working on a food sharing app, <a href="https://www.food
 
 In addition to the human aspect, our application also helps to fight food waste. With the inflation of grocery prices that we are seeing at the moment, this kind of application is really important to have around.</p>
 
+<h1>Curious about the app? </h1>
+
+<p>Curious about Food4All? Use these credentials to log in as a demo user:<p>
+ <strong>Username:</strong> justin@foodfor.all
+<p><strong>Password:</strong> 123456 </p>
+
+
+<p>This app is meant to be used as a mobile app. Go in your inspector and change the view to iPhone 6/7/8 </p>
